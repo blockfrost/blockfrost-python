@@ -26,7 +26,7 @@ def object_request_wrapper(func) -> json:
         if request_response.status_code != 200:
             raise ApiError(request_response)
         else:
-            return request_response
+            return request_response.json()
 
     return error_wrapper
 

@@ -1,5 +1,4 @@
-from blockfrost import BlockFrostApi
-from blockfrost.api import ApiError
+from blockfrost import BlockFrostApi, ApiError
 
 
 def test_root(requests_mock):
