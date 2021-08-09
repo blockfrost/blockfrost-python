@@ -1,6 +1,8 @@
-from blockfrost.config import DEFAULT_PAGINATION_PAGE_ITEMS_COUNT
-from requests import Response
+import os
 import json
+
+from .config import ApiUrls, DEFAULT_API_VERSION, DEFAULT_PAGINATION_PAGE_ITEMS_COUNT
+from requests import Response
 
 
 class ApiError(Exception):
@@ -9,7 +11,7 @@ class ApiError(Exception):
         try:
             # assume Response json
             response_json = response.json()
-            super().__init__(response)
+            super().__init__(response_json)
             self.status_code = response_json['status_code']
             self.error = response_json['error']
             self.message = response_json['message']
@@ -36,7 +38,6 @@ def list_request_wrapper(func) -> json:
         def recursive_append(json_list, *args, **kwargs):
             request_response: Response = func(*args, **kwargs)
             if request_response.status_code != 200:
-                print(request_response.json())
                 raise ApiError(request_response)
             json_list.extend(request_response.json())
             if 'count' not in kwargs:
@@ -51,6 +52,7 @@ def list_request_wrapper(func) -> json:
                 recursive_append(json_list, *args, **kwargs)
             else:
                 return json_list
+
         if 'gather_pages' in kwargs and kwargs['gather_pages'] is True:
             json_list = []
             recursive_append(json_list, *args, **kwargs)
@@ -63,3 +65,52 @@ def list_request_wrapper(func) -> json:
         return request_json
 
     return pagination
+
+
+class Api:
+
+    def __init__(
+            self,
+            project_id: str = None,
+            base_url: str = None,
+            api_version: str = None,
+    ):
+        self.project_id = project_id if project_id else os.environ.get('BLOCKFROST_PROJECT_ID')
+        self.api_version = api_version if api_version else os.environ.get('BLOCKFROST_API_VERSION',
+                                                                          default=DEFAULT_API_VERSION)
+        self.base_url = base_url
+
+    @property
+    def url(self):
+        return f"{self.base_url}/{self.api_version}"
+
+    @property
+    def authentication_header(self):
+        return {
+            'project_id': self.project_id
+        }
+
+    @staticmethod
+    def query_parameters(kwargs: dict):
+        """
+        count
+        integer <= 100
+        Default: 100
+        The number of results displayed on one page.
+
+        page
+        integer
+        Default: 1
+        The page number for listing the results.
+
+        order
+        string
+        Default: "asc"
+        Enum: "asc" "desc"
+        The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+        """
+        return {
+            "count": kwargs.get('count', None),
+            "page": kwargs.get('page', None),
+            "order": kwargs.get('order', None),
+        }

@@ -1,4 +1,4 @@
-from ..utils import object_request_wrapper, list_request_wrapper
+from blockfrost.utils import object_request_wrapper, list_request_wrapper
 import requests
 
 
