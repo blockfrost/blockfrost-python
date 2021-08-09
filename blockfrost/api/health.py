@@ -1,19 +1,28 @@
-from blockfrost.utils import api_request_wrapper
+from ..utils import object_request_wrapper
 import requests
 from requests import Response
 
-@api_request_wrapper
+
+@object_request_wrapper
 def health(self) -> Response:
-    """https://cardano-mainnet.blockfrost.io/api/v0/health"""
+    """
+    Return backend status as a boolean. Your application should handle situations when backend for the given chain is unavailable.
+
+    https://docs.blockfrost.io/#tag/Health/paths/~1health/get
+    """
     return requests.get(
         url=f"{self.url}/health",
         headers=self.authentication_header
     )
 
 
-@api_request_wrapper
+@object_request_wrapper
 def clock(self) -> Response:
-    """https://cardano-mainnet.blockfrost.io/api/v0/health"""
+    """
+    This endpoint provides the current UNIX time. Your application might use this to verify if the client clock is not out of sync.
+
+    https://cardano-mainnet.blockfrost.io/api/v0/health
+    """
     return requests.get(
         url=f"{self.url}/health/clock",
         headers=self.authentication_header

@@ -2,23 +2,36 @@ import os
 import json
 from enum import Enum
 
-from blockfrost.utils import ApiError, api_request_wrapper
-from blockfrost.api.health import health, clock
+from ..config import ApiUrls, DEFAULT_API_VERSION
+from ..utils import object_request_wrapper
+from .health import health, clock
+from ..cardano import accounts, \
+    account_rewards, \
+    account_history, \
+    account_delegations, \
+    account_registrations, \
+    account_withdrawals, \
+    account_mirs, \
+    account_addresses, \
+    account_addresses_assets
+
+# import health
+# import cardano
 import requests
 
-
-class ApiUrls(Enum):
-    mainnet = 'https://cardano-mainnet.blockfrost.io/api'
-    testnet = 'https://cardano-testnet.blockfrost.io/api'
-    ipfs = 'https://ipfs.blockfrost.io/api'
-
-
-DEFAULT_API_VERSION = 'v0'
-DEFAULT_ORDER = 'asc'
-DEFAULT_PAGINATION_PAGE_COUNT = 1
-DEFAULT_PAGINATION_PAGE_ITEMS_COUNT = 100
-
-ADDRESS_GAP_LIMIT = 20
+#
+# class ApiUrls(Enum):
+#     mainnet = 'https://cardano-mainnet.blockfrost.io/api'
+#     testnet = 'https://cardano-testnet.blockfrost.io/api'
+#     ipfs = 'https://ipfs.blockfrost.io/api'
+#
+#
+# DEFAULT_API_VERSION = 'v0'
+# DEFAULT_ORDER = 'asc'
+# DEFAULT_PAGINATION_PAGE_COUNT = 1
+# DEFAULT_PAGINATION_PAGE_ITEMS_COUNT = 100
+#
+# ADDRESS_GAP_LIMIT = 20
 
 
 class Api:
@@ -44,9 +57,34 @@ class Api:
             'project_id': self.project_id
         }
 
+    @staticmethod
+    def query_parameters(kwargs: dict):
+        """
+        count
+        integer <= 100
+        Default: 100
+        The number of results displayed on one page.
+
+        page
+        integer
+        Default: 1
+        The page number for listing the results.
+
+        order
+        string
+        Default: "asc"
+        Enum: "asc" "desc"
+        The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+        """
+        return {
+            "count": kwargs.get('count', None),
+            "page": kwargs.get('page', None),
+            "order": kwargs.get('order', None),
+        }
+
 
 class BlockFrostApi(Api):
-    @api_request_wrapper
+    @object_request_wrapper
     def root(self) -> json:
         """https://cardano-mainnet.blockfrost.io/api/v0/"""
         return requests.get(
@@ -56,3 +94,12 @@ class BlockFrostApi(Api):
 
     health = health
     clock = clock
+    accounts = accounts
+    account_rewards = account_rewards
+    account_history = account_history
+    account_delegations = account_delegations
+    account_registrations = account_registrations
+    account_withdrawals = account_withdrawals
+    account_mirs = account_mirs
+    account_addresses = account_addresses
+    account_addresses_assets = account_addresses_assets
