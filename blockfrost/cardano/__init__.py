@@ -8,3 +8,8 @@ from .accounts import \
     account_mirs, \
     account_addresses, \
     account_addresses_assets
+from .addresses import \
+    address, \
+    address_total, \
+    address_utxos, \
+    address_transactions

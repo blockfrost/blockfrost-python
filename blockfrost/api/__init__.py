@@ -1,11 +1,17 @@
 import os
 import json
-from enum import Enum
+import requests
 
 from ..config import ApiUrls, DEFAULT_API_VERSION
 from ..utils import object_request_wrapper
-from .health import health, clock
-from ..cardano import accounts, \
+from .health import \
+    health, \
+    clock
+from .metrics import \
+    metrics, \
+    metrics_endpoints
+from ..cardano import \
+    accounts, \
     account_rewards, \
     account_history, \
     account_delegations, \
@@ -13,25 +19,11 @@ from ..cardano import accounts, \
     account_withdrawals, \
     account_mirs, \
     account_addresses, \
-    account_addresses_assets
-
-# import health
-# import cardano
-import requests
-
-#
-# class ApiUrls(Enum):
-#     mainnet = 'https://cardano-mainnet.blockfrost.io/api'
-#     testnet = 'https://cardano-testnet.blockfrost.io/api'
-#     ipfs = 'https://ipfs.blockfrost.io/api'
-#
-#
-# DEFAULT_API_VERSION = 'v0'
-# DEFAULT_ORDER = 'asc'
-# DEFAULT_PAGINATION_PAGE_COUNT = 1
-# DEFAULT_PAGINATION_PAGE_ITEMS_COUNT = 100
-#
-# ADDRESS_GAP_LIMIT = 20
+    account_addresses_assets, \
+    address, \
+    address_total, \
+    address_utxos, \
+    address_transactions
 
 
 class Api:
@@ -85,15 +77,20 @@ class Api:
 
 class BlockFrostApi(Api):
     @object_request_wrapper
-    def root(self) -> json:
+    def root(self) -> requests.Response:
         """https://cardano-mainnet.blockfrost.io/api/v0/"""
         return requests.get(
             url=f"{self.url}/",
             headers=self.authentication_header
         )
 
+    # root
     health = health
     clock = clock
+    # metrics
+    metrics = metrics
+    metrics_endpoints = metrics_endpoints
+    # account
     accounts = accounts
     account_rewards = account_rewards
     account_history = account_history
@@ -103,3 +100,8 @@ class BlockFrostApi(Api):
     account_mirs = account_mirs
     account_addresses = account_addresses
     account_addresses_assets = account_addresses_assets
+    # address
+    address = address
+    address_total = address_total
+    address_utxos = address_utxos
+    address_transactions = address_transactions

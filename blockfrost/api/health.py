@@ -1,10 +1,9 @@
 from ..utils import object_request_wrapper
 import requests
-from requests import Response
 
 
 @object_request_wrapper
-def health(self) -> Response:
+def health(self) -> requests.Response:
     """
     Return backend status as a boolean. Your application should handle situations when backend for the given chain is unavailable.
 
@@ -17,7 +16,7 @@ def health(self) -> Response:
 
 
 @object_request_wrapper
-def clock(self) -> Response:
+def clock(self) -> requests.Response:
     """
     This endpoint provides the current UNIX time. Your application might use this to verify if the client clock is not out of sync.
 

@@ -36,6 +36,7 @@ def list_request_wrapper(func) -> json:
         def recursive_append(json_list, *args, **kwargs):
             request_response: Response = func(*args, **kwargs)
             if request_response.status_code != 200:
+                print(request_response.json())
                 raise ApiError(request_response)
             json_list.extend(request_response.json())
             if 'count' not in kwargs:
@@ -50,7 +51,7 @@ def list_request_wrapper(func) -> json:
                 recursive_append(json_list, *args, **kwargs)
             else:
                 return json_list
-        if kwargs['gather_pages'] is True:
+        if 'gather_pages' in kwargs and kwargs['gather_pages'] is True:
             json_list = []
             recursive_append(json_list, *args, **kwargs)
             request_json = json_list
