@@ -2,7 +2,7 @@ from ..utils import object_request_wrapper
 import requests
 
 
-@object_request_wrapper
+@object_request_wrapper()
 def metrics(self) -> requests.Response:
     """
     History of your Blockfrost usage metrics in the past 30 days.
@@ -15,7 +15,7 @@ def metrics(self) -> requests.Response:
     )
 
 
-@object_request_wrapper
+@object_request_wrapper()
 def metrics_endpoints(self) -> requests.Response:
     """
     History of your Blockfrost usage metrics per endpoint in the past 30 days.

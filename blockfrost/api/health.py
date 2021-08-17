@@ -1,9 +1,16 @@
-from ..utils import object_request_wrapper
 import requests
+from dataclasses import dataclass
+
+from ..utils import object_request_wrapper
 
 
-@object_request_wrapper
-def health(self) -> requests.Response:
+@dataclass
+class Health:
+    is_healthy: bool
+
+
+@object_request_wrapper(Health)
+def health(self):
     """
     Return backend status as a boolean. Your application should handle situations when backend for the given chain is unavailable.
 
@@ -15,8 +22,13 @@ def health(self) -> requests.Response:
     )
 
 
-@object_request_wrapper
-def clock(self) -> requests.Response:
+@dataclass
+class Clock:
+    server_time: int
+
+
+@object_request_wrapper(Clock)
+def clock(self):
     """
     This endpoint provides the current UNIX time. Your application might use this to verify if the client clock is not out of sync.
 

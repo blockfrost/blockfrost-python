@@ -1,9 +1,24 @@
-from blockfrost.utils import object_request_wrapper, list_request_wrapper
 import requests
+from dataclasses import dataclass
+from blockfrost.utils import object_request_wrapper, object_list_request_wrapper
 
 
-@object_request_wrapper
-def accounts(self, stake_address: str) -> requests.Response:
+@dataclass
+class Account:
+    stake_address: str
+    active: bool
+    active_epoch: int
+    controlled_amount: str
+    rewards_sum: str
+    withdrawals_sum: str
+    reserves_sum: str
+    treasury_sum: str
+    withdrawable_amount: str
+    pool_id: str
+
+
+@object_request_wrapper(Account)
+def accounts(self, stake_address: str):
     """
     Obtain information about a specific networkStake account.
 
@@ -15,8 +30,15 @@ def accounts(self, stake_address: str) -> requests.Response:
     )
 
 
-@list_request_wrapper
-def account_rewards(self, stake_address: str, **kwargs) -> requests.Response:
+@dataclass
+class AccountRewards:
+    epoch: int
+    amount: str
+    pool_id: str
+
+
+@object_list_request_wrapper(AccountRewards)
+def account_rewards(self, stake_address: str, **kwargs):
     """
     Obtain information about the history of a specific account.
 
@@ -29,7 +51,7 @@ def account_rewards(self, stake_address: str, **kwargs) -> requests.Response:
     )
 
 
-@list_request_wrapper
+@object_list_request_wrapper()
 def account_history(self, stake_address: str, **kwargs) -> requests.Response:
     """
     Obtain information about the history of a specific account.
@@ -43,7 +65,7 @@ def account_history(self, stake_address: str, **kwargs) -> requests.Response:
     )
 
 
-@list_request_wrapper
+@object_list_request_wrapper()
 def account_delegations(self, stake_address: str, **kwargs) -> requests.Response:
     """
     Obtain information about the delegation of a specific account.
@@ -57,7 +79,7 @@ def account_delegations(self, stake_address: str, **kwargs) -> requests.Response
     )
 
 
-@list_request_wrapper
+@object_list_request_wrapper()
 def account_registrations(self, stake_address: str, **kwargs) -> requests.Response:
     """
     Obtain information about the registrations and deregistrations of a specific account.
@@ -71,7 +93,7 @@ def account_registrations(self, stake_address: str, **kwargs) -> requests.Respon
     )
 
 
-@list_request_wrapper
+@object_list_request_wrapper()
 def account_withdrawals(self, stake_address: str, **kwargs) -> requests.Response:
     """
     Obtain information about the withdrawals of a specific account.
@@ -85,7 +107,7 @@ def account_withdrawals(self, stake_address: str, **kwargs) -> requests.Response
     )
 
 
-@list_request_wrapper
+@object_list_request_wrapper()
 def account_mirs(self, stake_address: str, **kwargs) -> requests.Response:
     """
     Obtain information about the MIRs of a specific account.
@@ -99,7 +121,7 @@ def account_mirs(self, stake_address: str, **kwargs) -> requests.Response:
     )
 
 
-@list_request_wrapper
+@object_list_request_wrapper()
 def account_addresses(self, stake_address: str, **kwargs) -> requests.Response:
     """
     Obtain information about the addresses of a specific account.
@@ -113,7 +135,7 @@ def account_addresses(self, stake_address: str, **kwargs) -> requests.Response:
     )
 
 
-@list_request_wrapper
+@object_list_request_wrapper()
 def account_addresses_assets(self, stake_address: str, **kwargs) -> requests.Response:
     """
     Obtain information about assets associated with addresses of a specific account.

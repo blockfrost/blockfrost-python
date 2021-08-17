@@ -1,8 +1,8 @@
-from blockfrost.utils import object_request_wrapper, list_request_wrapper
+from blockfrost.utils import object_request_wrapper, object_list_request_wrapper
 import requests
 
 
-@object_request_wrapper
+@object_request_wrapper()
 def address(self, address: str) -> requests.Response:
     """
     Obtain information about a specific address.
@@ -15,7 +15,7 @@ def address(self, address: str) -> requests.Response:
     )
 
 
-@object_request_wrapper
+@object_request_wrapper()
 def address_total(self, address: str) -> requests.Response:
     """
     Obtain details about an address.
@@ -28,7 +28,7 @@ def address_total(self, address: str) -> requests.Response:
     )
 
 
-@list_request_wrapper
+@object_list_request_wrapper()
 def address_utxos(self, address: str, **kwargs) -> requests.Response:
     """
     UTXOs of the address.
@@ -42,7 +42,7 @@ def address_utxos(self, address: str, **kwargs) -> requests.Response:
     )
 
 
-@list_request_wrapper
+@object_list_request_wrapper()
 def address_transactions(self, address: str, from_block: str = None, to_block: str = None,
                          **kwargs) -> requests.Response:
     """

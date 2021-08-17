@@ -1,8 +1,10 @@
 import os
 import json
 
-from .config import ApiUrls, DEFAULT_API_VERSION, DEFAULT_PAGINATION_PAGE_ITEMS_COUNT
 from requests import Response
+from functools import wraps
+
+from .config import ApiUrls, DEFAULT_API_VERSION, DEFAULT_PAGINATION_PAGE_ITEMS_COUNT
 
 
 class ApiError(Exception):
@@ -22,15 +24,63 @@ class ApiError(Exception):
             self.message = None
 
 
-def object_request_wrapper(func) -> json:
-    def error_wrapper(*args, **kwargs):
-        request_response: Response = func(*args, **kwargs)
-        if request_response.status_code != 200:
-            raise ApiError(request_response)
-        else:
-            return request_response.json()
+def object_request_wrapper(object_class=None):
+    def request_wrapper(func):
+        @wraps(func)
+        def error_wrapper(*args, **kwargs):
+            request_response: Response = func(*args, **kwargs)
+            if request_response.status_code != 200:
+                raise ApiError(request_response)
+            else:
+                if object_class:
+                    return object_class(**request_response.json())
+                else:
+                    return request_response.json()
 
-    return error_wrapper
+        return error_wrapper
+
+    return request_wrapper
+
+
+def object_list_request_wrapper(object_class=None):
+    def list_request_wrapper(func):
+        @wraps(func)
+        def pagination(*args, **kwargs):
+            def recursive_append(json_list, *args, **kwargs):
+                request_response: Response = func(*args, **kwargs)
+                if request_response.status_code != 200:
+                    raise ApiError(request_response)
+                json_list.extend(request_response.json())
+                if 'count' not in kwargs:
+                    expected_result_length = DEFAULT_PAGINATION_PAGE_ITEMS_COUNT
+                else:
+                    expected_result_length = kwargs['count']
+                if len(request_response.json()) == expected_result_length:
+                    if 'page' not in kwargs:
+                        kwargs['page'] = 2
+                    else:
+                        kwargs['page'] = kwargs['page'] + 1
+                    recursive_append(json_list, *args, **kwargs)
+                else:
+                    return json_list
+
+            if 'gather_pages' in kwargs and kwargs['gather_pages'] is True:
+                json_list = []
+                recursive_append(json_list, *args, **kwargs)
+                request_json = json_list
+            else:
+                request_response: Response = func(*args, **kwargs)
+                if request_response.status_code != 200:
+                    raise ApiError(request_response)
+                request_json = request_response.json()
+            if object_class:
+                return [object_class(**o) for o in request_json]
+            else:
+                return request_json
+
+        return pagination
+
+    return list_request_wrapper
 
 
 def list_request_wrapper(func) -> json:
