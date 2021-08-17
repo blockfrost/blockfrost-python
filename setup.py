@@ -27,7 +27,7 @@ setup(
     license='Apache-2.0',
     keywords='blockfrost blockchain cardano ipfs',
     packages=find_packages(exclude=['contrib', 'docs', 'tests', 'tests.*']),
-    python_requires='>=3.6, <4',
+    python_requires='>=3.7, <4',
     install_requires=[
         "requests",
     ],
