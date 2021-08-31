@@ -31,13 +31,13 @@ def accounts(self, stake_address: str):
 
 
 @dataclass
-class AccountRewards:
+class AccountReward:
     epoch: int
     amount: str
     pool_id: str
 
 
-@object_list_request_wrapper(AccountRewards)
+@object_list_request_wrapper(AccountReward)
 def account_rewards(self, stake_address: str, **kwargs):
     """
     Obtain information about the history of a specific account.
@@ -51,7 +51,14 @@ def account_rewards(self, stake_address: str, **kwargs):
     )
 
 
-@object_list_request_wrapper()
+@dataclass
+class AccountHistory:
+    active_epoch: int
+    amount: str
+    pool_id: str
+
+
+@object_list_request_wrapper(AccountHistory)
 def account_history(self, stake_address: str, **kwargs) -> requests.Response:
     """
     Obtain information about the history of a specific account.
@@ -65,7 +72,15 @@ def account_history(self, stake_address: str, **kwargs) -> requests.Response:
     )
 
 
-@object_list_request_wrapper()
+@dataclass
+class AccountDelegation:
+    active_epoch: int
+    tx_hash: str
+    amount: str
+    pool_id: str
+
+
+@object_list_request_wrapper(AccountDelegation)
 def account_delegations(self, stake_address: str, **kwargs) -> requests.Response:
     """
     Obtain information about the delegation of a specific account.
@@ -79,7 +94,13 @@ def account_delegations(self, stake_address: str, **kwargs) -> requests.Response
     )
 
 
-@object_list_request_wrapper()
+@dataclass
+class AccountRegistration:
+    tx_hash: str
+    action: str
+
+
+@object_list_request_wrapper(AccountRegistration)
 def account_registrations(self, stake_address: str, **kwargs) -> requests.Response:
     """
     Obtain information about the registrations and deregistrations of a specific account.
@@ -93,7 +114,13 @@ def account_registrations(self, stake_address: str, **kwargs) -> requests.Respon
     )
 
 
-@object_list_request_wrapper()
+@dataclass
+class AccountWithdrawals:
+    tx_hash: str
+    amount: str
+
+
+@object_list_request_wrapper(AccountWithdrawals)
 def account_withdrawals(self, stake_address: str, **kwargs) -> requests.Response:
     """
     Obtain information about the withdrawals of a specific account.
@@ -107,7 +134,13 @@ def account_withdrawals(self, stake_address: str, **kwargs) -> requests.Response
     )
 
 
-@object_list_request_wrapper()
+@dataclass
+class AccountMIRS:
+    tx_hash: str
+    amount: str
+
+
+@object_list_request_wrapper(AccountMIRS)
 def account_mirs(self, stake_address: str, **kwargs) -> requests.Response:
     """
     Obtain information about the MIRs of a specific account.
@@ -121,7 +154,12 @@ def account_mirs(self, stake_address: str, **kwargs) -> requests.Response:
     )
 
 
-@object_list_request_wrapper()
+@dataclass
+class AccountAddress:
+    address: str
+
+
+@object_list_request_wrapper(AccountAddress)
 def account_addresses(self, stake_address: str, **kwargs) -> requests.Response:
     """
     Obtain information about the addresses of a specific account.
@@ -135,7 +173,13 @@ def account_addresses(self, stake_address: str, **kwargs) -> requests.Response:
     )
 
 
-@object_list_request_wrapper()
+@dataclass
+class AccountAddressesAsset:
+    unit: str
+    quantity: str
+
+
+@object_list_request_wrapper(AccountAddressesAsset)
 def account_addresses_assets(self, stake_address: str, **kwargs) -> requests.Response:
     """
     Obtain information about assets associated with addresses of a specific account.
