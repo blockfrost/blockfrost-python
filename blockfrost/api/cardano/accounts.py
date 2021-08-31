@@ -59,7 +59,7 @@ class AccountHistory:
 
 
 @object_list_request_wrapper(AccountHistory)
-def account_history(self, stake_address: str, **kwargs) -> requests.Response:
+def account_history(self, stake_address: str, **kwargs):
     """
     Obtain information about the history of a specific account.
 
@@ -81,7 +81,7 @@ class AccountDelegation:
 
 
 @object_list_request_wrapper(AccountDelegation)
-def account_delegations(self, stake_address: str, **kwargs) -> requests.Response:
+def account_delegations(self, stake_address: str, **kwargs):
     """
     Obtain information about the delegation of a specific account.
 
@@ -101,7 +101,7 @@ class AccountRegistration:
 
 
 @object_list_request_wrapper(AccountRegistration)
-def account_registrations(self, stake_address: str, **kwargs) -> requests.Response:
+def account_registrations(self, stake_address: str, **kwargs):
     """
     Obtain information about the registrations and deregistrations of a specific account.
 
@@ -121,7 +121,7 @@ class AccountWithdrawals:
 
 
 @object_list_request_wrapper(AccountWithdrawals)
-def account_withdrawals(self, stake_address: str, **kwargs) -> requests.Response:
+def account_withdrawals(self, stake_address: str, **kwargs):
     """
     Obtain information about the withdrawals of a specific account.
 
@@ -141,7 +141,7 @@ class AccountMIRS:
 
 
 @object_list_request_wrapper(AccountMIRS)
-def account_mirs(self, stake_address: str, **kwargs) -> requests.Response:
+def account_mirs(self, stake_address: str, **kwargs):
     """
     Obtain information about the MIRs of a specific account.
 
@@ -160,7 +160,7 @@ class AccountAddress:
 
 
 @object_list_request_wrapper(AccountAddress)
-def account_addresses(self, stake_address: str, **kwargs) -> requests.Response:
+def account_addresses(self, stake_address: str, **kwargs):
     """
     Obtain information about the addresses of a specific account.
 
@@ -180,7 +180,7 @@ class AccountAddressesAsset:
 
 
 @object_list_request_wrapper(AccountAddressesAsset)
-def account_addresses_assets(self, stake_address: str, **kwargs) -> requests.Response:
+def account_addresses_assets(self, stake_address: str, **kwargs):
     """
     Obtain information about assets associated with addresses of a specific account.
 
