@@ -4,7 +4,7 @@ import json
 from requests import Response
 from functools import wraps
 
-from .config import ApiUrls, DEFAULT_API_VERSION, DEFAULT_PAGINATION_PAGE_ITEMS_COUNT
+from .config import ApiUrls, USER_AGENT, DEFAULT_API_VERSION, DEFAULT_PAGINATION_PAGE_ITEMS_COUNT
 
 
 class ApiError(Exception):
@@ -139,6 +139,16 @@ class Api:
         return {
             'project_id': self.project_id
         }
+
+    @property
+    def user_agent_header(self):
+        return {
+            'User-Agent': USER_AGENT
+        }
+
+    @property
+    def default_headers(self):
+        return {**self.authentication_header, **self.user_agent_header}
 
     @staticmethod
     def query_parameters(kwargs: dict):

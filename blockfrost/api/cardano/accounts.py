@@ -26,7 +26,7 @@ def accounts(self, stake_address: str):
     """
     return requests.get(
         url=f"{self.url}/accounts/{stake_address}",
-        headers=self.authentication_header
+        headers=self.default_headers
     )
 
 
@@ -47,7 +47,7 @@ def account_rewards(self, stake_address: str, **kwargs):
     return requests.get(
         url=f"{self.url}/accounts/{stake_address}/rewards",
         params=self.query_parameters(kwargs),
-        headers=self.authentication_header
+        headers=self.default_headers
     )
 
 
@@ -68,7 +68,7 @@ def account_history(self, stake_address: str, **kwargs):
     return requests.get(
         url=f"{self.url}/accounts/{stake_address}/history",
         params=self.query_parameters(kwargs),
-        headers=self.authentication_header
+        headers=self.default_headers
     )
 
 
@@ -90,7 +90,7 @@ def account_delegations(self, stake_address: str, **kwargs):
     return requests.get(
         url=f"{self.url}/accounts/{stake_address}/delegations",
         params=self.query_parameters(kwargs),
-        headers=self.authentication_header
+        headers=self.default_headers
     )
 
 
@@ -110,7 +110,7 @@ def account_registrations(self, stake_address: str, **kwargs):
     return requests.get(
         url=f"{self.url}/accounts/{stake_address}/registrations",
         params=self.query_parameters(kwargs),
-        headers=self.authentication_header
+        headers=self.default_headers
     )
 
 
@@ -130,7 +130,7 @@ def account_withdrawals(self, stake_address: str, **kwargs):
     return requests.get(
         url=f"{self.url}/accounts/{stake_address}/withdrawals",
         params=self.query_parameters(kwargs),
-        headers=self.authentication_header
+        headers=self.default_headers
     )
 
 
@@ -150,7 +150,7 @@ def account_mirs(self, stake_address: str, **kwargs):
     return requests.get(
         url=f"{self.url}/accounts/{stake_address}/mirs",
         params=self.query_parameters(kwargs),
-        headers=self.authentication_header
+        headers=self.default_headers
     )
 
 
@@ -169,7 +169,7 @@ def account_addresses(self, stake_address: str, **kwargs):
     return requests.get(
         url=f"{self.url}/accounts/{stake_address}/addresses",
         params=self.query_parameters(kwargs),
-        headers=self.authentication_header
+        headers=self.default_headers
     )
 
 
@@ -191,5 +191,5 @@ def account_addresses_assets(self, stake_address: str, **kwargs):
     return requests.get(
         url=f"{self.url}/accounts/{stake_address}/addresses/assets",
         params=self.query_parameters(kwargs),
-        headers=self.authentication_header
+        headers=self.default_headers
     )

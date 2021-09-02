@@ -1,4 +1,5 @@
 from enum import Enum
+import pkg_resources
 
 
 class ApiUrls(Enum):
@@ -13,3 +14,6 @@ DEFAULT_PAGINATION_PAGE_COUNT = 1
 DEFAULT_PAGINATION_PAGE_ITEMS_COUNT = 100
 
 ADDRESS_GAP_LIMIT = 20
+
+package_name = 'blockfrost-python'
+USER_AGENT = f'{package_name} {pkg_resources.get_distribution(package_name).version}'

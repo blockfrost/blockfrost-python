@@ -17,7 +17,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 setup(
     name='blockfrost-python',
     version='0.0.1',
-    description='The official Python SDK for Blockfrost API',
+    description='The official Python SDK for Blockfrost API v0.1.26',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/blockfrost/blockfrost-python',
@@ -56,7 +56,6 @@ setup(
         # that you indicate you support Python 3. These classifiers are *not*
         # checked by 'pip install'. See instead 'python_requires' below.
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
