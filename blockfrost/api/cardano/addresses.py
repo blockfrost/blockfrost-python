@@ -106,11 +106,6 @@ class AccountAddressesTransaction:
     tx_index: int
     block_height: int
 
-    def __init__(self, tx_hash: str, tx_index: int, block_height: int) -> None:
-        self.tx_hash = tx_hash
-        self.tx_index = tx_index
-        self.block_height = block_height
-
 
 @object_list_request_wrapper(AccountAddressesTransaction)
 def address_transactions(self, address: str, from_block: str = None, to_block: str = None,

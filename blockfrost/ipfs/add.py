@@ -2,7 +2,7 @@ from ..utils import object_request_wrapper
 import requests
 
 
-@object_request_wrapper
+@object_request_wrapper()
 def add(self, file_path: str) -> requests.Response:
     """
     Add a file or directory to IPFS
@@ -15,6 +15,6 @@ def add(self, file_path: str) -> requests.Response:
     with open(file_path, 'rb') as file:
         return requests.post(
             url=f"{self.url}/ipfs/add",
-            headers=self.authentication_header,
+            headers=self.default_headers,
             files={'file': file},
         )

@@ -24,7 +24,45 @@ from .cardano import \
     address, \
     address_total, \
     address_utxos, \
-    address_transactions
+    address_transactions, \
+    assets, \
+    asset, \
+    asset_history, \
+    asset_transactions, \
+    asset_addresses, \
+    policy_assets, \
+    block_latest, \
+    block_latest_transactions, \
+    block, \
+    block_slot, \
+    block_epoch_slot, \
+    blocks_next, \
+    blocks_previous, \
+    block_transactions, \
+    epoch_latest, \
+    epoch_latest_parameters, \
+    epoch, \
+    epochs_next, \
+    epochs_previous, \
+    epoch_stakes, \
+    epoch_pool_stakes, \
+    epoch_blocks, \
+    epoch_pool_blocks, \
+    genesis, \
+    metadata_labels, \
+    metadata_label_json, \
+    metadata_label_cbor, \
+    network, \
+    pools, \
+    pools_retired, \
+    pools_retiring, \
+    pool, \
+    pool_history, \
+    pool_metadata, \
+    pool_relays, \
+    pool_delegators, \
+    pool_blocks, \
+    pool_updates
 
 
 class BlockFrostApi(Api):
@@ -66,3 +104,48 @@ class BlockFrostApi(Api):
     address_total = address_total
     address_utxos = address_utxos
     address_transactions = address_transactions
+    # assets
+    assets = assets
+    asset = asset
+    asset_history = asset_history
+    asset_transactions = asset_transactions
+    asset_addresses = asset_addresses
+    policy_assets = policy_assets
+    # blocks
+    block_latest = block_latest
+    block_latest_transactions = block_latest_transactions
+    block = block
+    block_slot = block_slot
+    block_epoch_slot = block_epoch_slot
+    blocks_next = blocks_next
+    blocks_previous = blocks_previous
+    block_transactions = block_transactions
+    # epochs
+    epoch_latest = epoch_latest
+    epoch_latest_parameters = epoch_latest_parameters
+    epoch = epoch
+    epochs_next = epochs_next
+    epochs_previous = epochs_previous
+    epoch_stakes = epoch_stakes
+    epoch_pool_stakes = epoch_pool_stakes
+    epoch_blocks = epoch_blocks
+    epoch_pool_blocks = epoch_pool_blocks
+    # ledger
+    genesis = genesis
+    # metadata
+    metadata_labels = metadata_labels
+    metadata_label_json = metadata_label_json
+    metadata_label_cbor = metadata_label_cbor
+    # network
+    network = network
+    # pools
+    pools = pools
+    pools_retired = pools_retired
+    pools_retiring = pools_retiring
+    pool = pool
+    pool_history = pool_history
+    pool_metadata = pool_metadata
+    pool_relays = pool_relays
+    pool_delegators = pool_delegators
+    pool_blocks = pool_blocks
+    pool_updates = pool_updates
