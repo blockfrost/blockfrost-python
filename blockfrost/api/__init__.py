@@ -62,7 +62,18 @@ from .cardano import \
     pool_relays, \
     pool_delegators, \
     pool_blocks, \
-    pool_updates
+    pool_updates, \
+    transaction, \
+    transaction_utxos, \
+    transaction_stakes, \
+    transaction_delegations, \
+    transaction_withdrawals, \
+    transaction_mirs, \
+    transaction_pool_updates, \
+    transaction_pool_retires, \
+    transaction_metadata, \
+    transaction_metadata_cbor, \
+    transaction_submit
 
 
 class BlockFrostApi(Api):
@@ -149,3 +160,14 @@ class BlockFrostApi(Api):
     pool_delegators = pool_delegators
     pool_blocks = pool_blocks
     pool_updates = pool_updates
+    transaction = transaction
+    transaction_utxos = transaction_utxos
+    transaction_stakes = transaction_stakes
+    transaction_delegations = transaction_delegations
+    transaction_withdrawals = transaction_withdrawals
+    transaction_mirs = transaction_mirs
+    transaction_pool_updates = transaction_pool_updates
+    transaction_pool_retires = transaction_pool_retires
+    transaction_metadata = transaction_metadata
+    transaction_metadata_cbor = transaction_metadata_cbor
+    transaction_submit = transaction_submit
