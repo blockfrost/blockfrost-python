@@ -18,7 +18,7 @@ def health(self):
     """
     return requests.get(
         url=f"{self.url}/health",
-        headers=self.authentication_header
+        headers=self.default_headers
     )
 
 
@@ -36,5 +36,5 @@ def clock(self):
     """
     return requests.get(
         url=f"{self.url}/health/clock",
-        headers=self.authentication_header
+        headers=self.default_headers
     )

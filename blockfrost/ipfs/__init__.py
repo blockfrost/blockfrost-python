@@ -2,6 +2,8 @@ import os
 
 from ..utils import Api, ApiUrls
 from .add import add
+from .gateway import gateway
+from .pins import pin
 
 
 class BlockFrostIPFS(Api):
@@ -14,3 +16,8 @@ class BlockFrostIPFS(Api):
 
     # add
     add = add
+    # gateway
+    gateway = gateway
+    # pins
+    pin = pin
+

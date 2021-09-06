@@ -80,9 +80,18 @@ from blockfrost import BlockFrostIPFS, ApiError
 ipfs = BlockFrostIPFS(
     project_id='YOUR API KEY HERE'  # or export environment variable BLOCKFROST_PROJECT_ID
 )
+file_hash = None
 try:
-    response = ipfs.add('./README.md')
-    print(response)
+    ipfs_object = ipfs.add('./README.md')
+    file_hash = ipfs_object.ipfs_hash
+    print(file_hash)
+except ApiError as e:
+    print(e)
+
+try:
+    with open('./README_downloaded.md', 'w') as file:
+        file_data = ipfs.gateway(IPFS_path=file_hash)
+        file.write(file_data)
 except ApiError as e:
     print(e)
 ```

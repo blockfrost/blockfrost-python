@@ -24,6 +24,17 @@ class ApiError(Exception):
             self.message = None
 
 
+def simple_request_wrapper(func):
+    def error_wrapper(*args, **kwargs):
+        request_response: Response = func(*args, **kwargs)
+        if request_response.status_code != 200:
+            raise ApiError(request_response)
+        else:
+            return request_response
+
+    return error_wrapper
+
+
 def object_request_wrapper(object_class=None):
     def request_wrapper(func):
         @wraps(func)

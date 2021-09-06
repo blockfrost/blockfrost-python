@@ -9,8 +9,10 @@ from .metrics import \
     metrics, \
     metrics_endpoints
 from .nutlink import \
-    nutlink, \
-    nutlink_tickers
+    nutlink_address, \
+    nutlink_address_tickers, \
+    nutlink_address_ticker, \
+    nutlink_ticker
 from .cardano import \
     accounts, \
     account_rewards, \
@@ -95,8 +97,10 @@ class BlockFrostApi(Api):
     # misc
     health = health
     clock = clock
-    nutlink = nutlink
-    nutlink_tickers = nutlink_tickers
+    nutlink_address = nutlink_address
+    nutlink_address_tickers = nutlink_address_tickers
+    nutlink_address_ticker = nutlink_address_ticker
+    nutlink_ticker = nutlink_ticker
     # metrics
     metrics = metrics
     metrics_endpoints = metrics_endpoints
@@ -160,6 +164,7 @@ class BlockFrostApi(Api):
     pool_delegators = pool_delegators
     pool_blocks = pool_blocks
     pool_updates = pool_updates
+    # transactions
     transaction = transaction
     transaction_utxos = transaction_utxos
     transaction_stakes = transaction_stakes

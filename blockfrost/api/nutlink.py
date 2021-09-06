@@ -1,9 +1,15 @@
-from ..utils import object_request_wrapper, object_list_request_wrapper
 import requests
+from dataclasses import dataclass
+from ..utils import object_request_wrapper, object_list_request_wrapper
+
+
+@dataclass
+class Metadata:
+    server_time: int
 
 
 @object_request_wrapper()
-def nutlink(self, address: str) -> requests.Response:
+def nutlink_address(self, address: str) -> requests.Response:
     """
     List metadata about specific address
 
@@ -11,12 +17,12 @@ def nutlink(self, address: str) -> requests.Response:
     """
     return requests.get(
         url=f"{self.url}/nutlink/{address}",
-        headers=self.authentication_header
+        headers=self.default_headers
     )
 
 
 @object_list_request_wrapper()
-def nutlink_address_ticker(self, address: str, **kwargs) -> requests.Response:
+def nutlink_address_tickers(self, address: str) -> requests.Response:
     """
     List tickers for a specific metadata oracle
 
@@ -24,20 +30,31 @@ def nutlink_address_ticker(self, address: str, **kwargs) -> requests.Response:
     """
     return requests.get(
         url=f"{self.url}/nutlink/{address}/tickers",
-        params=self.query_parameters(kwargs),
-        headers=self.authentication_header
+        headers=self.default_headers
     )
 
 
 @object_list_request_wrapper()
-def nutlink_tickers(self, address: str, **kwargs) -> requests.Response:
+def nutlink_address_ticker(self, address: str, ticker: str) -> requests.Response:
     """
-    List tickers for a specific metadata oracle
+    List of records of a specific ticker
 
-    https://docs.blockfrost.io/#tag/Nut.link/paths/~1nutlink~1{address}~1tickers/get
+    https://docs.blockfrost.io/#tag/Nut.link/paths/~1nutlink~1{address}~1tickers~1{ticker}/get
     """
     return requests.get(
-        url=f"{self.url}/nutlink/{address}/tickers",
-        params=self.query_parameters(kwargs),
-        headers=self.authentication_header
+        url=f"{self.url}/nutlink/{address}/tickers/{ticker}",
+        headers=self.default_headers
+    )
+
+
+@object_list_request_wrapper()
+def nutlink_ticker(self, ticker: str) -> requests.Response:
+    """
+    List of records of a specific ticker
+
+    https://docs.blockfrost.io/#tag/Nut.link/paths/~1nutlink~1tickers~1{ticker}/get
+    """
+    return requests.get(
+        url=f"{self.url}/nutlink/tickers/{ticker}",
+        headers=self.default_headers
     )
