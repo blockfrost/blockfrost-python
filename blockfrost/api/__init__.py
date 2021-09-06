@@ -79,6 +79,19 @@ from .cardano import \
     transaction_submit
 
 
+@dataclass
+class RootResponse:
+    url: str
+    version: str
+
+@object_request_wrapper(RootResponse)
+def root(self) -> requests.Response:
+    """https://cardano-mainnet.blockfrost.io/api/v0/"""
+    return requests.get(
+        url=f"{self.url}/",
+        headers=self.authentication_header
+    )
+
 class BlockFrostApi(Api):
 
     def __init__(self, project_id: str = None, base_url: str = None, api_version: str = None):
@@ -87,19 +100,8 @@ class BlockFrostApi(Api):
             base_url=base_url if base_url else os.environ.get('BLOCKFROST_API_URL', default=ApiUrls.mainnet.value),
             api_version=api_version)
 
-    @dataclass
-    class RootResponse:
-        url: str
-        version: str
-
-    @object_request_wrapper(RootResponse)
-    def root(self) -> requests.Response:
-        """https://cardano-mainnet.blockfrost.io/api/v0/"""
-        return requests.get(
-            url=f"{self.url}/",
-            headers=self.authentication_header
-        )
-
+    #root
+    root = root
     # misc
     health = health
     clock = clock
