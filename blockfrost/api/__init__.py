@@ -1,5 +1,6 @@
 import os
 import requests
+from dataclasses import dataclass
 
 from ..utils import Api, ApiUrls, object_request_wrapper
 from .health import \
@@ -86,7 +87,12 @@ class BlockFrostApi(Api):
             base_url=base_url if base_url else os.environ.get('BLOCKFROST_API_URL', default=ApiUrls.mainnet.value),
             api_version=api_version)
 
-    @object_request_wrapper()
+    @dataclass
+    class RootResponse:
+        url: str
+        version: str
+
+    @object_request_wrapper(RootResponse)
     def root(self) -> requests.Response:
         """https://cardano-mainnet.blockfrost.io/api/v0/"""
         return requests.get(
