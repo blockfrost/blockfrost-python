@@ -5,16 +5,21 @@ from ..utils import object_request_wrapper
 
 
 @dataclass
-class Health:
+class HealthResponse:
     is_healthy: bool
 
 
-@object_request_wrapper(Health)
+@object_request_wrapper(HealthResponse)
 def health(self):
     """
     Return backend status as a boolean. Your application should handle situations when backend for the given chain is unavailable.
 
     https://docs.blockfrost.io/#tag/Health/paths/~1health/get
+
+    :returns: HealthResponse object.
+    :rtype: HealthResponse
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/health",
@@ -23,16 +28,22 @@ def health(self):
 
 
 @dataclass
-class Clock:
+class ClockResponse:
     server_time: int
 
 
-@object_request_wrapper(Clock)
+@object_request_wrapper(ClockResponse)
 def clock(self):
     """
     This endpoint provides the current UNIX time. Your application might use this to verify if the client clock is not out of sync.
 
-    https://cardano-mainnet.blockfrost.io/api/v0/health
+    https://docs.blockfrost.io/#tag/Health/paths/~1health~1clock/get
+
+
+    :returns: ClockResponse object.
+    :rtype: ClockResponse
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/health/clock",

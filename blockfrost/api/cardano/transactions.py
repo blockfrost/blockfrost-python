@@ -4,7 +4,7 @@ from blockfrost.utils import object_request_wrapper, object_list_request_wrapper
 
 
 @dataclass
-class Transaction:
+class TransactionResponse:
     @dataclass
     class Amount:
         unit: str
@@ -72,12 +72,19 @@ class Transaction:
         self.asset_mint_or_burn_count = asset_mint_or_burn_count
 
 
-@object_request_wrapper(Transaction)
+@object_request_wrapper(TransactionResponse)
 def transaction(self, hash: str):
     """
     Return content of the requested transaction.
 
     https://docs.blockfrost.io/#tag/Cardano-Transactions/paths/~1txs~1{hash}/get
+
+    :param hash: Hash of the requested transaction.
+    :type hash: str
+    :returns: TransactionResponse object.
+    :rtype: TransactionResponse
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/txs/{hash}",
@@ -86,7 +93,7 @@ def transaction(self, hash: str):
 
 
 @dataclass
-class AccountAddressesUTXOS:
+class TransactionAddressUTXOSResponse:
     @dataclass
     class Inputs:
         unit: str
@@ -107,12 +114,19 @@ class AccountAddressesUTXOS:
         self.outputs = [self.Outputs(**o) for o in outputs]
 
 
-@object_request_wrapper(AccountAddressesUTXOS)
+@object_request_wrapper(TransactionAddressUTXOSResponse)
 def transaction_utxos(self, hash: str):
     """
     Return the inputs and UTXOs of the specific transaction.
 
     https://docs.blockfrost.io/#tag/Cardano-Transactions/paths/~1txs~1{hash}~1utxos/get
+
+    :param hash: Hash of the requested transaction.
+    :type hash: str
+    :returns: TransactionAddressUTXOSResponse object.
+    :rtype: TransactionAddressUTXOSResponse
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/txs/{hash}/utxos",
@@ -121,18 +135,25 @@ def transaction_utxos(self, hash: str):
 
 
 @dataclass
-class Stake:
+class TransactionStakeResponse:
     cert_index: int
     hash: str
     registration: bool
 
 
-@object_list_request_wrapper(Stake)
+@object_list_request_wrapper(TransactionStakeResponse)
 def transaction_stakes(self, hash: str):
     """
     Obtain information about (de)registration of stake addresses within a transaction.
 
     https://docs.blockfrost.io/#tag/Cardano-Transactions/paths/~1txs~1{hash}~1stakes/get
+
+    :param hash: Hash of the requested transaction.
+    :type hash: str
+    :returns: A list of TransactionStakeResponse objects.
+    :rtype: [TransactionStakeResponse]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/txs/{hash}/stakes",
@@ -141,19 +162,26 @@ def transaction_stakes(self, hash: str):
 
 
 @dataclass
-class Delegations:
+class TransactionDelegationResponse:
     cert_index: int
     hash: str
     pool_id: str
     active_epoch: int
 
 
-@object_list_request_wrapper(Delegations)
+@object_list_request_wrapper(TransactionDelegationResponse)
 def transaction_delegations(self, hash: str):
     """
     Obtain information about delegation certificates of a specific transaction.
 
     https://docs.blockfrost.io/#tag/Cardano-Transactions/paths/~1txs~1{hash}~1delegations/get
+
+    :param hash: Hash of the requested transaction.
+    :type hash: str
+    :returns: A list of TransactionDelegationResponse objects.
+    :rtype: [TransactionDelegationResponse]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/txs/{hash}/delegations",
@@ -162,17 +190,24 @@ def transaction_delegations(self, hash: str):
 
 
 @dataclass
-class Withdrawal:
+class TransactionWithdrawalResponse:
     address: str
     amount: str
 
 
-@object_list_request_wrapper(Withdrawal)
+@object_list_request_wrapper(TransactionWithdrawalResponse)
 def transaction_withdrawals(self, hash: str):
     """
     Obtain information about withdrawals of a specific transaction.
 
     https://docs.blockfrost.io/#tag/Cardano-Transactions/paths/~1txs~1{hash}~1withdrawals/get
+
+    :param hash: Hash of the requested transaction.
+    :type hash: str
+    :returns: A list of TransactionWithdrawalResponse objects.
+    :rtype: [TransactionWithdrawalResponse]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/txs/{hash}/withdrawals",
@@ -181,19 +216,26 @@ def transaction_withdrawals(self, hash: str):
 
 
 @dataclass
-class MIR:
+class TransactionMIRResponse:
     pot: str
     cert_index: str
     address: str
     amount: str
 
 
-@object_list_request_wrapper(MIR)
+@object_list_request_wrapper(TransactionMIRResponse)
 def transaction_mirs(self, hash: str):
     """
     Obtain information about Move Instantaneous Rewards (MIRs) of a specific transaction.
 
     https://docs.blockfrost.io/#tag/Cardano-Transactions/paths/~1txs~1{hash}~1mirs/get
+
+    :param hash: Hash of the requested transaction.
+    :type hash: str
+    :returns: A list of TransactionMIRResponse objects.
+    :rtype: [TransactionMIRResponse]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/txs/{hash}/mirs",
@@ -202,7 +244,7 @@ def transaction_mirs(self, hash: str):
 
 
 @dataclass
-class PoolUpdate:
+class TransactionPoolUpdateResponse:
     @dataclass
     class PoolMetadata:
         url: str
@@ -257,12 +299,19 @@ class PoolUpdate:
         self.active_epoch = active_epoch
 
 
-@object_list_request_wrapper(PoolUpdate)
+@object_list_request_wrapper(TransactionPoolUpdateResponse)
 def transaction_pool_updates(self, hash: str):
     """
     Obtain information about stake pool registration and update certificates of a specific transaction.
 
     https://docs.blockfrost.io/#tag/Cardano-Transactions/paths/~1txs~1{hash}~1pool_updates/get
+
+    :param hash: Hash of the requested transaction.
+    :type hash: str
+    :returns: A list of TransactionPoolUpdateResponse objects.
+    :rtype: [TransactionPoolUpdateResponse]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/txs/{hash}/pool_updates",
@@ -271,18 +320,25 @@ def transaction_pool_updates(self, hash: str):
 
 
 @dataclass
-class PoolRetires:
+class TransactionPoolRetiresResponse:
     cert_index: int
     pool_id: str
     retiring_epoch: int
 
 
-@object_list_request_wrapper(PoolRetires)
+@object_list_request_wrapper(TransactionPoolRetiresResponse)
 def transaction_pool_retires(self, hash: str):
     """
     Obtain information about stake pool retirements within a specific transaction.
 
     https://docs.blockfrost.io/#tag/Cardano-Transactions/paths/~1txs~1{hash}~1pool_retires/get
+
+    :param hash: Hash of the requested transaction.
+    :type hash: str
+    :returns: A list of TransactionPoolRetiresResponse objects.
+    :rtype: [TransactionPoolRetiresResponse]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/txs/{hash}/pool_retires",
@@ -291,17 +347,24 @@ def transaction_pool_retires(self, hash: str):
 
 
 @dataclass
-class Metadata:
+class TransactionMetadataResponse:
     label: str
     json_metadata: dict
 
 
-@object_list_request_wrapper(Metadata)
+@object_list_request_wrapper(TransactionMetadataResponse)
 def transaction_metadata(self, hash: str):
     """
     Obtain the transaction metadata.
 
     https://docs.blockfrost.io/#tag/Cardano-Transactions/paths/~1txs~1{hash}~1metadata/get
+
+    :param hash: Hash of the requested transaction.
+    :type hash: str
+    :returns: A list of TransactionMetadataResponse objects.
+    :rtype: [TransactionMetadataResponse]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/txs/{hash}/metadata",
@@ -310,17 +373,24 @@ def transaction_metadata(self, hash: str):
 
 
 @dataclass
-class Metadata:
+class TransactionMetadataCBORResponse:
     label: str
     cbor_metadata: str
 
 
-@object_list_request_wrapper(Metadata)
+@object_list_request_wrapper(TransactionMetadataCBORResponse)
 def transaction_metadata_cbor(self, hash: str):
     """
     Obtain the transaction metadata in CBOR.
 
     https://docs.blockfrost.io/#tag/Cardano-Transactions/paths/~1txs~1{hash}~1metadata~1cbor/get
+
+    :param hash: Hash of the requested transaction.
+    :type hash: str
+    :returns: A list of TransactionMetadataResponse objects.
+    :rtype: [TransactionMetadataResponse]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/txs/{hash}/metadata/cbor",
@@ -328,16 +398,25 @@ def transaction_metadata_cbor(self, hash: str):
     )
 
 
-@object_request_wrapper(str)
+@object_request_wrapper()
 def transaction_submit(self, file_path: str):
     """
     Submit an already serialized transaction to the network.
 
     https://docs.blockfrost.io/#tag/Cardano-Transactions/paths/~1tx~1submit/post
+
+    :param file_path: Path to file.
+    :type file_path: str
+    :returns: str object.
+    :rtype: str
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
+    header = self.default_headers
+    header['Content-Type'] = 'application/cbor'
     with open(file_path, 'rb') as file:
         return requests.post(
             url=f"{self.url}/tx/submit",
-            headers=self.default_headers,
+            headers=header,
             data=file,
         )

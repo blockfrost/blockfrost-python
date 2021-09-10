@@ -4,7 +4,7 @@ from blockfrost.utils import object_request_wrapper, object_list_request_wrapper
 
 
 @dataclass
-class Network:
+class NetworkResponse:
     @dataclass
     class Supply:
         max: str
@@ -24,12 +24,17 @@ class Network:
         self.stake = self.Stake(**stake) if stake is not None else None
 
 
-@object_request_wrapper(Network)
+@object_request_wrapper(NetworkResponse)
 def network(self):
     """
     Return detailed network information.
 
     https://docs.blockfrost.io/#tag/Cardano-Network/paths/~1network/get
+
+    :returns: NetworkResponse object.
+    :rtype: NetworkResponse
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/network",

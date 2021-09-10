@@ -4,7 +4,7 @@ from blockfrost.utils import object_request_wrapper, object_list_request_wrapper
 
 
 @dataclass
-class AccountAddressesAsset:
+class AddressResponse:
     @dataclass
     class Amount:
         unit: str
@@ -22,12 +22,19 @@ class AccountAddressesAsset:
         self.type = type
 
 
-@object_request_wrapper(AccountAddressesAsset)
+@object_request_wrapper(AddressResponse)
 def address(self, address: str):
     """
     Obtain information about a specific address.
 
     https://docs.blockfrost.io/#tag/Cardano-Addresses/paths/~1addresses~1{address}/get
+
+    :param address: Bech32 address.
+    :type address: str
+    :returns: AddressResponse object.
+    :rtype: AddressResponse
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/addresses/{address}",
@@ -36,7 +43,7 @@ def address(self, address: str):
 
 
 @dataclass
-class AccountAddressesTotal:
+class AddressesTotalResponse:
     @dataclass
     class Sum:
         unit: str
@@ -54,12 +61,19 @@ class AccountAddressesTotal:
         self.tx_count = tx_count
 
 
-@object_request_wrapper(AccountAddressesTotal)
+@object_request_wrapper(AddressesTotalResponse)
 def address_total(self, address: str):
     """
     Obtain details about an address.
 
     https://docs.blockfrost.io/#tag/Cardano-Addresses/paths/~1addresses~1{address}~1total/get
+
+    :param address: Bech32 address.
+    :type address: str
+    :returns: AddressesTotalResponse object.
+    :rtype: AddressesTotalResponse
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/addresses/{address}/total",
@@ -68,7 +82,7 @@ def address_total(self, address: str):
 
 
 @dataclass
-class AccountAddressesUTXOS:
+class AddressesUTXOSResponse:
     @dataclass
     class Amount:
         unit: str
@@ -86,12 +100,27 @@ class AccountAddressesUTXOS:
         self.block = block
 
 
-@object_list_request_wrapper(AccountAddressesUTXOS)
+@object_list_request_wrapper(AddressesUTXOSResponse)
 def address_utxos(self, address: str, **kwargs):
     """
     UTXOs of the address.
 
     https://docs.blockfrost.io/#tag/Cardano-Addresses/paths/~1addresses~1{address}~1utxos/get
+
+    :param address: Bech32 address.
+    :type address: str
+    :param gather_pages: Optional. Default: 100. Will collect all pages into one return
+    :type gather_pages: bool
+    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :param order: Optional. "asc" or "desc". Default: "asc".
+    :type order: str
+    :returns: A list of AddressesUTXOSResponse objects.
+    :rtype: [AddressesUTXOSResponse]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/addresses/{address}/utxos",
@@ -101,29 +130,38 @@ def address_utxos(self, address: str, **kwargs):
 
 
 @dataclass
-class AccountAddressesTransaction:
+class AddressesTransactionResponse:
     tx_hash: str
     tx_index: int
     block_height: int
 
 
-@object_list_request_wrapper(AccountAddressesTransaction)
+@object_list_request_wrapper(AddressesTransactionResponse)
 def address_transactions(self, address: str, from_block: str = None, to_block: str = None,
                          **kwargs):
     """
     Transactions on the address.
 
-    from
-    string
-    Example: from=8929261
-    The block number and optionally also index from which (inclusive) to start search for results, concatenated using colon. Has to be lower than or equal to to parameter.
-
-    to
-    string
-    Example: to=9999269:10
-    The block number and optionally also index where (inclusive) to end the search for results, concatenated using colon. Has to be higher than or equal to from parameter.
-
     https://docs.blockfrost.io/#tag/Cardano-Addresses/paths/~1addresses~1{address}~1transactions/get
+
+    :param address: Bech32 address.
+    :type address: str
+    :param from: The block number and optionally also index from which (inclusive) to start search for results, concatenated using colon. Has to be lower than or equal to to parameter.
+    :type from: str
+    :param to: The block number and optionally also index where (inclusive) to end the search for results, concatenated using colon. Has to be higher than or equal to from parameter.
+    :type to: str
+    :param gather_pages: Optional. Default: 100. Will collect all pages into one return
+    :type gather_pages: bool
+    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :param order: Optional. "asc" or "desc". Default: "asc".
+    :type order: str
+    :returns: A list of AddressesUTXOSResponse objects.
+    :rtype: [AddressesUTXOSResponse]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/addresses/{address}/transactions",

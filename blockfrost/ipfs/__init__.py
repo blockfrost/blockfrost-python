@@ -3,7 +3,11 @@ import os
 from ..utils import Api, ApiUrls
 from .add import add
 from .gateway import gateway
-from .pins import pin
+from .pins import \
+    pin_object, \
+    pined_list, \
+    pined_object, \
+    pined_object_remove
 
 
 class BlockFrostIPFS(Api):
@@ -19,5 +23,8 @@ class BlockFrostIPFS(Api):
     # gateway
     gateway = gateway
     # pins
-    pin = pin
+    pin_object = pin_object
+    pined_list = pined_list
+    pined_object = pined_object
+    pined_object_remove = pined_object_remove
 

@@ -86,7 +86,16 @@ class RootResponse:
 
 @object_request_wrapper(RootResponse)
 def root(self) -> requests.Response:
-    """https://cardano-mainnet.blockfrost.io/api/v0/"""
+    """
+    Root endpoint has no other function than to point end users to documentation.
+
+    https://docs.blockfrost.io/#tag/Health/paths/~1/get
+
+    :returns: RootResponse object.
+    :rtype: RootResponse
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
     return requests.get(
         url=f"{self.url}/",
         headers=self.authentication_header

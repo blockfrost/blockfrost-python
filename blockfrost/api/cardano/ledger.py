@@ -4,7 +4,7 @@ from blockfrost.utils import object_request_wrapper, object_list_request_wrapper
 
 
 @dataclass
-class Genesis:
+class GenesisResponse:
     active_slots_coefficient: float
     update_quorum: int
     max_lovelace_supply: str
@@ -17,12 +17,17 @@ class Genesis:
     security_param: int
 
 
-@object_request_wrapper(Genesis)
+@object_request_wrapper(GenesisResponse)
 def genesis(self):
     """
     Return the information about blockchain genesis.
 
     https://docs.blockfrost.io/#tag/Cardano-Ledger/paths/~1genesis/get
+
+    :returns: GenesisResponse object.
+    :rtype: GenesisResponse
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/genesis",

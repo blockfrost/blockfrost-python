@@ -4,7 +4,7 @@ from blockfrost.utils import object_request_wrapper, object_list_request_wrapper
 
 
 @dataclass
-class Epoch:
+class EpochResponse:
     epoch: int
     start_time: int
     end_time: int
@@ -17,12 +17,17 @@ class Epoch:
     active_stake: str
 
 
-@object_request_wrapper(Epoch)
+@object_request_wrapper(EpochResponse)
 def epoch_latest(self):
     """
     Return the information about the latest, therefore current, epoch.
 
     https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1latest/get
+
+    :returns: EpochResponse object.
+    :rtype: EpochResponse
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/epochs/latest",
@@ -31,7 +36,7 @@ def epoch_latest(self):
 
 
 @dataclass
-class EpochParameters:
+class EpochParameterResponse:
     epoch: int
     min_fee_a: int
     min_fee_b: int
@@ -54,12 +59,17 @@ class EpochParameters:
     nonce: str
 
 
-@object_request_wrapper(EpochParameters)
+@object_request_wrapper(EpochParameterResponse)
 def epoch_latest_parameters(self):
     """
     Return the protocol parameters for the latest epoch.
 
     https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1latest~1parameters/get
+
+    :returns: EpochParameterResponse object.
+    :rtype: EpochParameterResponse
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/epochs/latest/parameters",
@@ -67,12 +77,19 @@ def epoch_latest_parameters(self):
     )
 
 
-@object_request_wrapper(Epoch)
+@object_request_wrapper(EpochResponse)
 def epoch(self, number: int):
     """
     Return the content of the requested epoch.
 
     https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1{number}/get
+
+    :param number: Number of the epoch.
+    :type number: int
+    :returns: EpochResponse object.
+    :rtype: EpochResponse
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/epochs/{number}",
@@ -80,103 +97,190 @@ def epoch(self, number: int):
     )
 
 
-@object_list_request_wrapper(Epoch)
-def epochs_next(self, number: int):
+@object_list_request_wrapper(EpochResponse)
+def epochs_next(self, number: int, **kwargs):
     """
     Return the list of epochs following a specific epoch.
 
     https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1{number}~1next/get
+
+    :param number: Number of the epoch.
+    :type number: int
+    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :returns: A list of EpochResponse objects.
+    :rtype: [EpochResponse]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/epochs/{number}/next",
+        params=self.query_parameters(kwargs),
         headers=self.default_headers
     )
 
 
-@object_list_request_wrapper(Epoch)
-def epochs_previous(self, number: int):
+@object_list_request_wrapper(EpochResponse)
+def epochs_previous(self, number: int, **kwargs):
     """
     Return the list of epochs preceding a specific epoch.
 
     https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1{number}~1previous/get
+
+    :param number: Number of the epoch.
+    :type number: int
+    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :returns: A list of EpochResponse objects.
+    :rtype: [EpochResponse]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/epochs/{number}/previous",
+        params=self.query_parameters(kwargs),
         headers=self.default_headers
     )
 
 
 @dataclass
-class Stake:
+class EpochStakeResponse:
     stake_address: str
     pool_id: str
     amount: str
 
 
-@object_list_request_wrapper(Stake)
-def epoch_stakes(self, number: int):
+@object_list_request_wrapper(EpochStakeResponse)
+def epoch_stakes(self, number: int, **kwargs):
     """
     Return the active stake distribution for the specified epoch.
 
     https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1{number}~1stakes/get
+
+    :param number: Number of the epoch.
+    :type number: int
+    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :returns: A list of EpochStakeResponse objects.
+    :rtype: [EpochStakeResponse]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/epochs/{number}/stakes",
+        params=self.query_parameters(kwargs),
         headers=self.default_headers
     )
 
 
 @dataclass
-class StakeByPool:
+class EpochStakePoolResponse:
     stake_address: str
     amount: str
 
 
-@object_list_request_wrapper(StakeByPool)
-def epoch_pool_stakes(self, number: int, pool_id: str):
+@object_list_request_wrapper(EpochStakePoolResponse)
+def epoch_pool_stakes(self, number: int, pool_id: str, **kwargs):
     """
     Return the active stake distribution for the epoch specified by stake pool.
 
     https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1{number}~1stakes~1{pool_id}/get
+
+    :param number: Number of the epoch.
+    :type number: int
+    :param pool_id: Stake pool ID to filter.
+    :type pool_id: int
+    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :returns: A list of EpochStakePoolResponse objects.
+    :rtype: [EpochStakePoolResponse]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/epochs/{number}/stakes/{pool_id}",
+        params=self.query_parameters(kwargs),
         headers=self.default_headers
     )
 
 
-@object_list_request_wrapper(str)
-def epoch_blocks(self, number: int):
+@object_list_request_wrapper()
+def epoch_blocks(self, number: int, **kwargs):
     """
     Return the blocks minted for the epoch specified.
 
     https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1{number}~1blocks/get
+
+    :param number: Number of the epoch.
+    :type number: int
+    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :param order: Optional. "asc" or "desc". Default: "asc".
+    :type order: str
+    :returns: A list of str objects.
+    :rtype: [str]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/epochs/{number}/blocks",
+        params=self.query_parameters(kwargs),
         headers=self.default_headers
     )
 
 
-@object_list_request_wrapper(str)
-def epoch_pool_blocks(self, number: int, pool_id: str):
+@object_list_request_wrapper()
+def epoch_pool_blocks(self, number: int, pool_id: str, **kwargs):
     """
     Return the block minted for the epoch specified by stake pool.
 
     https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1{number}~1blocks~1{pool_id}/get
+
+    :param number: Number of the epoch.
+    :type number: int
+    :param pool_id: Stake pool ID to filter.
+    :type pool_id: int
+    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :param order: Optional. "asc" or "desc". Default: "asc".
+    :type order: str
+    :returns: A list of str objects.
+    :rtype: [str]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/epochs/{number}/stakes/{pool_id}/blocks",
+        params=self.query_parameters(kwargs),
         headers=self.default_headers
     )
 
 
-@object_request_wrapper(EpochParameters)
+@object_request_wrapper(EpochParameterResponse)
 def epoch_latest_parameters(self, number: int):
     """
     Return the protocol parameters for the epoch specified.
 
     https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1{number}~1parameters/get
+
+    :param number: Number of the epoch.
+    :type number: int
+    :returns: EpochParameterResponse object.
+    :rtype: EpochParameterResponse
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/epochs/{number}/parameters",

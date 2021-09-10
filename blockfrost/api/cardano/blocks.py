@@ -4,7 +4,7 @@ from blockfrost.utils import object_request_wrapper, object_list_request_wrapper
 
 
 @dataclass
-class Block:
+class BlockResponse:
     time: int
     height: int
     hash: str
@@ -22,12 +22,17 @@ class Block:
     confirmations: int
 
 
-@object_request_wrapper(Block)
+@object_request_wrapper(BlockResponse)
 def block_latest(self):
     """
     Return the latest block available to the backends, also known as the tip of the blockchain.
 
     https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1latest/get
+
+    :returns: BlockResponse object.
+    :rtype: BlockResponse
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/blocks/latest",
@@ -35,25 +40,44 @@ def block_latest(self):
     )
 
 
-@object_list_request_wrapper(str)
-def block_latest_transactions(self):
+@object_list_request_wrapper()
+def block_latest_transactions(self, **kwargs):
     """
     Return the transactions within the latest block.
 
     https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1latest~1txs/get
+
+    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :param order: Optional. "asc" or "desc". Default: "asc".
+    :type order: str
+    :returns: A list of str objects.
+    :rtype: [str]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/blocks/latest/txs",
+        params=self.query_parameters(kwargs),
         headers=self.default_headers
     )
 
 
-@object_request_wrapper(Block)
+@object_request_wrapper(BlockResponse)
 def block(self, hash_or_number: str):
     """
     Return the content of a requested block.
 
     https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1{hash_or_number}/get
+
+    :param hash_or_number: Hash or number of the requested block.
+    :type hash_or_number: str
+    :returns: BlockResponse object.
+    :rtype: BlockResponse
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/blocks/{hash_or_number}",
@@ -61,12 +85,19 @@ def block(self, hash_or_number: str):
     )
 
 
-@object_request_wrapper(Block)
+@object_request_wrapper(BlockResponse)
 def block_slot(self, slot_number: int):
     """
     Return the content of a requested block for a specific slot.
 
     https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1slot~1{slot_number}/get
+
+    :param slot_number: Slot position for requested block.
+    :type slot_number: int
+    :returns: BlockResponse object.
+    :rtype: BlockResponse
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/blocks/slot/{slot_number}",
@@ -74,12 +105,21 @@ def block_slot(self, slot_number: int):
     )
 
 
-@object_request_wrapper(Block)
+@object_request_wrapper(BlockResponse)
 def block_epoch_slot(self, epoch_number: int, slot_number: int):
     """
     Return the content of a requested block for a specific slot in an epoch.
 
     https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1epoch~1{epoch_number}~1slot~1{slot_number}/get
+
+    :param epoch_number: Epoch for specific epoch slot.
+    :type epoch_number: int
+    :param slot_number: Slot position for requested block.
+    :type slot_number: int
+    :returns: BlockResponse object.
+    :rtype: BlockResponse
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/blocks/epoch/{epoch_number}/slot/{slot_number}",
@@ -87,39 +127,78 @@ def block_epoch_slot(self, epoch_number: int, slot_number: int):
     )
 
 
-@object_list_request_wrapper(Block)
-def blocks_next(self, hash_or_number: str):
+@object_list_request_wrapper(BlockResponse)
+def blocks_next(self, hash_or_number: str, **kwargs):
     """
     Return the list of blocks following a specific block.
 
     https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1{hash_or_number}~1next/get
+
+    :param hash_or_number: Hash or number of the requested block.
+    :type hash_or_number: str
+    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :returns: A list of BlockResponse objects.
+    :rtype: [BlockResponse]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/blocks/{hash_or_number}/next",
+        params=self.query_parameters(kwargs),
         headers=self.default_headers
     )
 
 
-@object_list_request_wrapper(Block)
-def blocks_previous(self, hash_or_number: str):
+@object_list_request_wrapper(BlockResponse)
+def blocks_previous(self, hash_or_number: str, **kwargs):
     """
     Return the list of blocks preceding a specific block.
 
     https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1{hash_or_number}~1previous/get
+
+    :param hash_or_number: Hash or number of the requested block.
+    :type hash_or_number: str
+    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :returns: A list of BlockResponse objects.
+    :rtype: [BlockResponse]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/blocks/{hash_or_number}/previous",
+        params=self.query_parameters(kwargs),
         headers=self.default_headers
     )
 
-@object_list_request_wrapper(str)
-def block_transactions(self, hash_or_number: str):
+
+@object_list_request_wrapper()
+def block_transactions(self, hash_or_number: str, **kwargs):
     """
     Return the transactions within the block.
 
     https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1{hash_or_number}~1txs/get
+
+    :param hash_or_number: Hash or number of the requested block.
+    :type hash_or_number: str
+    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :param order: Optional. "asc" or "desc". Default: "asc".
+    :type order: str
+    :returns: A list of str objects.
+    :rtype: [str]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
         url=f"{self.url}/blocks/{hash_or_number}/txs",
+        params=self.query_parameters(kwargs),
         headers=self.default_headers
     )
