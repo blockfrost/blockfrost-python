@@ -92,7 +92,7 @@ except ApiError as e:
 
 try:
     with open('./README_downloaded.md', 'w') as file:
-        file_data = ipfs.gateway(IPFS_path=file_hash)
+        file_data = ipfs.gateway(IPFS_path=file_hash).text
         file.write(file_data)
 except ApiError as e:
     print(e)

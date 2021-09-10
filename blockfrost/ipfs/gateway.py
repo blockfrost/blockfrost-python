@@ -21,4 +21,4 @@ def gateway(self, IPFS_path: str):
         url=f"{self.url}/ipfs/gateway/{IPFS_path}",
         headers=self.default_headers,
     )
-    return response.text
+    return response
