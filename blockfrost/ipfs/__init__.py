@@ -1,13 +1,6 @@
 import os
 
 from ..utils import Api, ApiUrls
-from .add import add
-from .gateway import gateway
-from .pins import \
-    pin_object, \
-    pined_list, \
-    pined_object, \
-    pined_object_remove
 
 
 class BlockFrostIPFS(Api):
@@ -18,13 +11,10 @@ class BlockFrostIPFS(Api):
             base_url=base_url if base_url else os.environ.get('BLOCKFROST_IPFS_URL', default=ApiUrls.ipfs.value),
             api_version=api_version)
 
-    # add
-    add = add
-    # gateway
-    gateway = gateway
-    # pins
-    pin_object = pin_object
-    pined_list = pined_list
-    pined_object = pined_object
-    pined_object_remove = pined_object_remove
-
+    from .add import add
+    from .gateway import gateway
+    from .pins import \
+        pin_object, \
+        pined_list, \
+        pined_object, \
+        pined_object_remove
