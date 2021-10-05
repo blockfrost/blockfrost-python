@@ -210,13 +210,13 @@ def asset_addresses(self, asset: str, **kwargs):
 
 
 @dataclass
-class PolicyAssetResponse:
-    address: str
+class AssetPolicyResponse:
+    asset: str
     quantity: str
 
 
-@object_request_wrapper(PolicyAssetResponse)
-def policy_assets(self, policy_id: str, **kwargs):
+@object_list_request_wrapper(AssetPolicyResponse)
+def assets_policy(self, policy_id: str, **kwargs):
     """
     List of asset minted under a specific policy
 
@@ -238,7 +238,7 @@ def policy_assets(self, policy_id: str, **kwargs):
     :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
-        url=f"{self.url}/assets/{policy_id}",
+        url=f"{self.url}/assets/policy/{policy_id}",
         params=self.query_parameters(kwargs),
         headers=self.default_headers
     )

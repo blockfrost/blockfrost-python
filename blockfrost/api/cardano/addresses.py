@@ -14,12 +14,14 @@ class AddressResponse:
     amount: [Amount]
     stake_address: str
     type: str
+    script: bool
 
-    def __init__(self, address: str, amount: [Amount], stake_address: str, type: str) -> None:
+    def __init__(self, address: str, amount: [Amount], stake_address: str, type: str, script: bool) -> None:
         self.address = address
         self.amount = [self.Amount(**o) for o in amount]
         self.stake_address = stake_address
         self.type = type
+        self.script = script
 
 
 @object_request_wrapper(AddressResponse)
@@ -92,12 +94,14 @@ class AddressesUTXOSResponse:
     output_index: int
     amount: [Amount]
     block: str
+    data_hash: str
 
-    def __init__(self, tx_hash: str, output_index: int, amount: [Amount], block: str) -> None:
+    def __init__(self, tx_hash: str, output_index: int, amount: [Amount], block: str, data_hash: str) -> None:
         self.tx_hash = tx_hash
         self.output_index = output_index
         self.amount = [self.Amount(**o) for o in amount]
         self.block = block
+        self.data_hash = data_hash
 
 
 @object_list_request_wrapper(AddressesUTXOSResponse)

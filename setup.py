@@ -16,7 +16,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='blockfrost-python',
-    version='0.1.1',
+    version='0.1.2',
     description='The official Python SDK for Blockfrost API v0.1.26',
     long_description=long_description,
     long_description_content_type='text/markdown',

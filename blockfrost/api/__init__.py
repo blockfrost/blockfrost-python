@@ -67,7 +67,7 @@ class BlockFrostApi(Api):
         asset_history, \
         asset_transactions, \
         asset_addresses, \
-        policy_assets
+        assets_policy
     from .cardano.blocks import \
         block_latest, \
         block_latest_transactions, \
