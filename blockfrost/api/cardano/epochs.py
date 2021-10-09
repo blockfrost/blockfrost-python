@@ -1,5 +1,5 @@
 import requests
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from blockfrost.utils import object_request_wrapper, object_list_request_wrapper
 
 
@@ -57,6 +57,16 @@ class EpochParameterResponse:
     min_utxo: str
     min_pool_cost: str
     nonce: str
+    price_mem: float
+    price_step: float
+    max_tx_ex_mem: str
+    max_tx_ex_steps: str
+    max_block_ex_mem: str
+    max_block_ex_steps: str
+    max_val_size: str
+    collateral_percent: float
+    max_collateral_inputs: int
+    coins_per_utxo_word: str
 
 
 @object_request_wrapper(EpochParameterResponse)

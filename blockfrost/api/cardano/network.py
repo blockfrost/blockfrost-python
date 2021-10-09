@@ -10,6 +10,7 @@ class NetworkResponse:
         max: str
         total: str
         circulating: str
+        locked: str
 
     @dataclass
     class Stake:

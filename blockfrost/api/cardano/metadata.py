@@ -6,7 +6,7 @@ from blockfrost.utils import object_request_wrapper, object_list_request_wrapper
 @dataclass
 class MetadataLabelResponse:
     label: str
-    cipl0: str
+    cip10: str
     count: str
 
 

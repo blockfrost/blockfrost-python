@@ -16,13 +16,13 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='blockfrost-python',
-    version='0.1.2',
-    description='The official Python SDK for Blockfrost API v0.1.26',
+    version='0.2.0',
+    description='The official Python SDK for Blockfrost API v0.1.27',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/blockfrost/blockfrost-python',
     # Author details
-    author='Mathias Frøhlich',
+    author='https://github.com/mathiasfrohlich',
     author_email='',
     license='Apache-2.0',
     keywords='blockfrost blockchain cardano ipfs',

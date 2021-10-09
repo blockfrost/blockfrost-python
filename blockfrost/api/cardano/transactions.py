@@ -29,6 +29,7 @@ class TransactionResponse:
     pool_update_count: int
     pool_retire_count: int
     asset_mint_or_burn_count: int
+    redeemer_count: int
 
     def __init__(self,
                  hash: str,
@@ -50,6 +51,7 @@ class TransactionResponse:
                  pool_update_count: int,
                  pool_retire_count: int,
                  asset_mint_or_burn_count: int,
+                 redeemer_count: int,
                  ) -> None:
         self.hash = hash
         self.block = block
@@ -70,6 +72,7 @@ class TransactionResponse:
         self.pool_update_count = pool_update_count
         self.pool_retire_count = pool_retire_count
         self.asset_mint_or_burn_count = asset_mint_or_burn_count
+        self.redeemer_count = redeemer_count
 
 
 @object_request_wrapper(TransactionResponse)
@@ -96,13 +99,41 @@ def transaction(self, hash: str):
 class TransactionAddressUTXOSResponse:
     @dataclass
     class Inputs:
-        unit: str
-        quantity: str
+        @dataclass
+        class Amount:
+            unit: str
+            quantity: str
+            data_hash: str
+
+        address: str
+        amount: [Amount]
+        tx_hash: str
+        output_index: int
+        data_hash: str
+        collateral: bool
+
+        def __init_(self, address, amount: [Amount], tx_hash, output_index, data_hash, collateral) -> None:
+            self.address = address
+            self.amount = [self.Amount(**o) for o in amount]
+            self.tx_hash = tx_hash
+            self.output_index = output_index
+            self.data_hash = data_hash
+            self.collateral = collateral
 
     @dataclass
     class Outputs:
-        unit: str
-        quantity: str
+        @dataclass
+        class Amount:
+            unit: str
+            quantity: str
+            data_hash: str
+
+        address: str
+        amount: [Amount]
+
+        def __init_(self, address, amount: [Amount]) -> None:
+            self.address = address
+            self.amount = [self.Amount(**o) for o in amount]
 
     hash: str
     inputs: [Inputs]
@@ -137,7 +168,7 @@ def transaction_utxos(self, hash: str):
 @dataclass
 class TransactionStakeResponse:
     cert_index: int
-    hash: str
+    address: str
     registration: bool
 
 
@@ -163,8 +194,9 @@ def transaction_stakes(self, hash: str):
 
 @dataclass
 class TransactionDelegationResponse:
+    index: int
     cert_index: int
-    hash: str
+    address: str
     pool_id: str
     active_epoch: int
 
@@ -387,8 +419,36 @@ def transaction_metadata_cbor(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: A list of TransactionMetadataResponse objects.
-    :rtype: [TransactionMetadataResponse]
+    :returns: A list of TransactionMetadataCBORResponse objects.
+    :rtype: [TransactionMetadataCBORResponse]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/txs/{hash}/metadata/cbor",
+        headers=self.default_headers
+    )
+
+@dataclass
+class TransactionRedeemersResponse:
+    tx_index: int
+    purpose: str
+    unit_mem: str
+    unit_steps: str
+    fee: str
+
+
+@object_list_request_wrapper(TransactionRedeemersResponse)
+def transaction_redeemers(self, hash: str):
+    """
+    Obtain the transaction redeemers.
+
+    https://docs.blockfrost.io/#tag/Cardano-Transactions/paths/~1txs~1{hash}~1redeemers/get
+
+    :param hash: Hash of the requested transaction.
+    :type hash: str
+    :returns: A list of TransactionRedeemersResponse objects.
+    :rtype: [TransactionRedeemersResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
