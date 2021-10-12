@@ -25,8 +25,8 @@ def metadata_labels(self, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of MetadataLabelResponse objects.
-    :rtype: [MetadataLabelResponse]
+    :returns A list of MetadataLabelResponse objects.
+    :rtype [MetadataLabelResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -60,8 +60,8 @@ def metadata_label_json(self, label: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of MetadataLabelJsonResponse objects.
-    :rtype: [MetadataLabelJsonResponse]
+    :returns A list of MetadataLabelJsonResponse objects.
+    :rtype [MetadataLabelJsonResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -95,8 +95,8 @@ def metadata_label_cbor(self, label: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of MetadataLabelCBORResponse objects.
-    :rtype: [MetadataLabelCBORResponse]
+    :returns A list of MetadataLabelCBORResponse objects.
+    :rtype [MetadataLabelCBORResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

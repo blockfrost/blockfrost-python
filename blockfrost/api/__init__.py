@@ -25,8 +25,8 @@ class BlockFrostApi(Api):
 
         https://docs.blockfrost.io/#tag/Health/paths/~1/get
 
-        :returns: RootResponse object.
-        :rtype: RootResponse
+        :returns RootResponse object.
+        :rtype RootResponse
         :raises ApiError: If API fails
         :raises Exception: If the API response is somehow malformed.
         """

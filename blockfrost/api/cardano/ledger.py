@@ -24,8 +24,8 @@ def genesis(self):
 
     https://docs.blockfrost.io/#tag/Cardano-Ledger/paths/~1genesis/get
 
-    :returns: GenesisResponse object.
-    :rtype: GenesisResponse
+    :returns GenesisResponse object.
+    :rtype GenesisResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

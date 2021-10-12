@@ -16,8 +16,8 @@ def health(self):
 
     https://docs.blockfrost.io/#tag/Health/paths/~1health/get
 
-    :returns: HealthResponse object.
-    :rtype: HealthResponse
+    :returns HealthResponse object.
+    :rtype HealthResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -40,8 +40,8 @@ def clock(self):
     https://docs.blockfrost.io/#tag/Health/paths/~1health~1clock/get
 
 
-    :returns: ClockResponse object.
-    :rtype: ClockResponse
+    :returns ClockResponse object.
+    :rtype ClockResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

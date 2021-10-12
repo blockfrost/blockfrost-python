@@ -20,8 +20,8 @@ def nutlink_address(self, address: str):
 
     :param address: Address of a metadata oracle.
     :type address: str
-    :returns: NutlinkAddressResponse object.
-    :rtype: NutlinkAddressResponse
+    :returns NutlinkAddressResponse object.
+    :rtype NutlinkAddressResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -55,8 +55,8 @@ def nutlink_address_tickers(self, address: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of NutlinkAddressTickersResponse objects.
-    :rtype: [NutlinkAddressTickersResponse]
+    :returns A list of NutlinkAddressTickersResponse objects.
+    :rtype [NutlinkAddressTickersResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -94,8 +94,8 @@ def nutlink_address_ticker(self, address: str, ticker: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of NutlinkAddressTickerResponse objects.
-    :rtype: [NutlinkAddressTickerResponse]
+    :returns A list of NutlinkAddressTickerResponse objects.
+    :rtype [NutlinkAddressTickerResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -132,8 +132,8 @@ def nutlink_ticker(self, ticker: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of NutlinkTickerResponse objects.
-    :rtype: [NutlinkTickerResponse]
+    :returns A list of NutlinkTickerResponse objects.
+    :rtype [NutlinkTickerResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

@@ -18,8 +18,8 @@ def pin_object(self, IPFS_path: str):
 
     :param IPFS_path: Path to the IPFS object.
     :type IPFS_path: str
-    :returns: IPFSPinnedObjectResponse object.
-    :rtype: IPFSPinnedObjectResponse
+    :returns IPFSPinnedObjectResponse object.
+    :rtype IPFSPinnedObjectResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -53,8 +53,8 @@ def pined_list(self, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of IPFSPinnedListObjectResponse objects.
-    :rtype: [IPFSPinnedListObjectResponse]
+    :returns A list of IPFSPinnedListObjectResponse objects.
+    :rtype [IPFSPinnedListObjectResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -74,8 +74,8 @@ def pined_object(self, IPFS_path: str):
 
     :param IPFS_path: Path to the IPFS object.
     :type IPFS_path: str
-    :returns: IPFSPinnedListObjectResponse object.
-    :rtype: IPFSPinnedListObjectResponse
+    :returns IPFSPinnedListObjectResponse object.
+    :rtype IPFSPinnedListObjectResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -94,8 +94,8 @@ def pined_object_remove(self, IPFS_path: str):
 
     :param IPFS_path: Path to the IPFS object.
     :type IPFS_path: str
-    :returns: IPFSPinnedObjectResponse object.
-    :rtype: IPFSPinnedObjectResponse
+    :returns IPFSPinnedObjectResponse object.
+    :rtype IPFSPinnedObjectResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

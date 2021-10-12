@@ -32,8 +32,8 @@ def network(self):
 
     https://docs.blockfrost.io/#tag/Cardano-Network/paths/~1network/get
 
-    :returns: NetworkResponse object.
-    :rtype: NetworkResponse
+    :returns NetworkResponse object.
+    :rtype NetworkResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

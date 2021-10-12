@@ -26,7 +26,7 @@ def accounts(self, stake_address: str):
 
     :param stake_address: Bech32 stake address.
     :type stake_address: str
-    :returns: AccountResponse object.
+    :returns AccountResponse object.
     :rtype: AccountResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
@@ -61,7 +61,7 @@ def account_rewards(self, stake_address: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of AccountRewardResponse objects.
+    :returns A list of AccountRewardResponse objects.
     :rtype: [AccountRewardResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
@@ -97,8 +97,8 @@ def account_history(self, stake_address: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of AccountHistoryResponse objects.
-    :rtype: [AccountHistoryResponse]
+    :returns A list of AccountHistoryResponse objects.
+    :rtype [AccountHistoryResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -134,7 +134,7 @@ def account_delegations(self, stake_address: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of AccountDelegationResponse objects.
+    :returns A list of AccountDelegationResponse objects.
     :rtype: [AccountDelegationResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
@@ -169,7 +169,7 @@ def account_registrations(self, stake_address: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of AccountRegistrationResponse objects.
+    :returns A list of AccountRegistrationResponse objects.
     :rtype: [AccountRegistrationResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
@@ -204,7 +204,7 @@ def account_withdrawals(self, stake_address: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of AccountWithdrawalResponse objects.
+    :returns A list of AccountWithdrawalResponse objects.
     :rtype: [AccountWithdrawalResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
@@ -239,7 +239,7 @@ def account_mirs(self, stake_address: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of AccountMIRSResponse objects.
+    :returns A list of AccountMIRSResponse objects.
     :rtype: [AccountMIRSResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
@@ -273,7 +273,7 @@ def account_addresses(self, stake_address: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of AccountAddressResponse objects.
+    :returns A list of AccountAddressResponse objects.
     :rtype: [AccountAddressResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
@@ -310,7 +310,7 @@ def account_addresses_assets(self, stake_address: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of AccountAddressesAssetResponse objects.
+    :returns A list of AccountAddressesAssetResponse objects.
     :rtype: [AccountAddressesAssetResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.

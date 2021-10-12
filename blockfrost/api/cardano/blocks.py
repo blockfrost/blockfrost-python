@@ -29,8 +29,8 @@ def block_latest(self):
 
     https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1latest/get
 
-    :returns: BlockResponse object.
-    :rtype: BlockResponse
+    :returns BlockResponse object.
+    :rtype BlockResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -53,8 +53,8 @@ def block_latest_transactions(self, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of str objects.
-    :rtype: [str]
+    :returns A list of str objects.
+    :rtype [str]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -74,8 +74,8 @@ def block(self, hash_or_number: str):
 
     :param hash_or_number: Hash or number of the requested block.
     :type hash_or_number: str
-    :returns: BlockResponse object.
-    :rtype: BlockResponse
+    :returns BlockResponse object.
+    :rtype BlockResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -94,8 +94,8 @@ def block_slot(self, slot_number: int):
 
     :param slot_number: Slot position for requested block.
     :type slot_number: int
-    :returns: BlockResponse object.
-    :rtype: BlockResponse
+    :returns BlockResponse object.
+    :rtype BlockResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -116,8 +116,8 @@ def block_epoch_slot(self, epoch_number: int, slot_number: int):
     :type epoch_number: int
     :param slot_number: Slot position for requested block.
     :type slot_number: int
-    :returns: BlockResponse object.
-    :rtype: BlockResponse
+    :returns BlockResponse object.
+    :rtype BlockResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -140,8 +140,8 @@ def blocks_next(self, hash_or_number: str, **kwargs):
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
-    :returns: A list of BlockResponse objects.
-    :rtype: [BlockResponse]
+    :returns A list of BlockResponse objects.
+    :rtype [BlockResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -165,8 +165,8 @@ def blocks_previous(self, hash_or_number: str, **kwargs):
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
-    :returns: A list of BlockResponse objects.
-    :rtype: [BlockResponse]
+    :returns A list of BlockResponse objects.
+    :rtype [BlockResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -192,8 +192,8 @@ def block_transactions(self, hash_or_number: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of str objects.
-    :rtype: [str]
+    :returns A list of str objects.
+    :rtype [str]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

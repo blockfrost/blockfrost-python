@@ -15,8 +15,8 @@ def scripts(self):
 
     https://docs.blockfrost.io/#tag/Cardano-Scripts/paths/~1scripts/get
 
-    :returns: A list of ScriptsResponse objects.
-    :rtype: [ScriptsResponse]
+    :returns A list of ScriptsResponse objects.
+    :rtype [ScriptsResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -42,8 +42,8 @@ def script(self, script_hash: str):
 
     :param script_hash: Hash of the script.
     :type script_hash: str
-    :returns: A list of ScriptResponse objects.
-    :rtype: [ScriptResponse]
+    :returns A list of ScriptResponse objects.
+    :rtype [ScriptResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -72,8 +72,8 @@ def script_redeemers(self, script_hash: str):
 
     :param script_hash: Hash of the script.
     :type script_hash: str
-    :returns: A list of ScriptRedeemersResponse objects.
-    :rtype: [ScriptRedeemersResponse]
+    :returns A list of ScriptRedeemersResponse objects.
+    :rtype [ScriptRedeemersResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

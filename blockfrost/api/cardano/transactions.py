@@ -84,8 +84,8 @@ def transaction(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: TransactionResponse object.
-    :rtype: TransactionResponse
+    :returns TransactionResponse object.
+    :rtype TransactionResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -154,8 +154,8 @@ def transaction_utxos(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: TransactionAddressUTXOSResponse object.
-    :rtype: TransactionAddressUTXOSResponse
+    :returns TransactionAddressUTXOSResponse object.
+    :rtype TransactionAddressUTXOSResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -181,8 +181,8 @@ def transaction_stakes(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: A list of TransactionStakeResponse objects.
-    :rtype: [TransactionStakeResponse]
+    :returns A list of TransactionStakeResponse objects.
+    :rtype [TransactionStakeResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -210,8 +210,8 @@ def transaction_delegations(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: A list of TransactionDelegationResponse objects.
-    :rtype: [TransactionDelegationResponse]
+    :returns A list of TransactionDelegationResponse objects.
+    :rtype [TransactionDelegationResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -236,8 +236,8 @@ def transaction_withdrawals(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: A list of TransactionWithdrawalResponse objects.
-    :rtype: [TransactionWithdrawalResponse]
+    :returns A list of TransactionWithdrawalResponse objects.
+    :rtype [TransactionWithdrawalResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -264,8 +264,8 @@ def transaction_mirs(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: A list of TransactionMIRResponse objects.
-    :rtype: [TransactionMIRResponse]
+    :returns A list of TransactionMIRResponse objects.
+    :rtype [TransactionMIRResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -340,8 +340,8 @@ def transaction_pool_updates(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: A list of TransactionPoolUpdateResponse objects.
-    :rtype: [TransactionPoolUpdateResponse]
+    :returns A list of TransactionPoolUpdateResponse objects.
+    :rtype [TransactionPoolUpdateResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -367,8 +367,8 @@ def transaction_pool_retires(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: A list of TransactionPoolRetiresResponse objects.
-    :rtype: [TransactionPoolRetiresResponse]
+    :returns A list of TransactionPoolRetiresResponse objects.
+    :rtype [TransactionPoolRetiresResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -393,8 +393,8 @@ def transaction_metadata(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: A list of TransactionMetadataResponse objects.
-    :rtype: [TransactionMetadataResponse]
+    :returns A list of TransactionMetadataResponse objects.
+    :rtype [TransactionMetadataResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -419,8 +419,8 @@ def transaction_metadata_cbor(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: A list of TransactionMetadataCBORResponse objects.
-    :rtype: [TransactionMetadataCBORResponse]
+    :returns A list of TransactionMetadataCBORResponse objects.
+    :rtype [TransactionMetadataCBORResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -447,8 +447,8 @@ def transaction_redeemers(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: A list of TransactionRedeemersResponse objects.
-    :rtype: [TransactionRedeemersResponse]
+    :returns A list of TransactionRedeemersResponse objects.
+    :rtype [TransactionRedeemersResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -467,8 +467,8 @@ def transaction_submit(self, file_path: str):
 
     :param file_path: Path to file.
     :type file_path: str
-    :returns: str object.
-    :rtype: str
+    :returns str object.
+    :rtype str
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

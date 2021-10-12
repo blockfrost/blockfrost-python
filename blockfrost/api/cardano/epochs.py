@@ -24,8 +24,8 @@ def epoch_latest(self):
 
     https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1latest/get
 
-    :returns: EpochResponse object.
-    :rtype: EpochResponse
+    :returns EpochResponse object.
+    :rtype EpochResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -76,8 +76,8 @@ def epoch_latest_parameters(self):
 
     https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1latest~1parameters/get
 
-    :returns: EpochParameterResponse object.
-    :rtype: EpochParameterResponse
+    :returns EpochParameterResponse object.
+    :rtype EpochParameterResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -96,8 +96,8 @@ def epoch(self, number: int):
 
     :param number: Number of the epoch.
     :type number: int
-    :returns: EpochResponse object.
-    :rtype: EpochResponse
+    :returns EpochResponse object.
+    :rtype EpochResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -120,8 +120,8 @@ def epochs_next(self, number: int, **kwargs):
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
-    :returns: A list of EpochResponse objects.
-    :rtype: [EpochResponse]
+    :returns A list of EpochResponse objects.
+    :rtype [EpochResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -145,8 +145,8 @@ def epochs_previous(self, number: int, **kwargs):
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
-    :returns: A list of EpochResponse objects.
-    :rtype: [EpochResponse]
+    :returns A list of EpochResponse objects.
+    :rtype [EpochResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -177,8 +177,8 @@ def epoch_stakes(self, number: int, **kwargs):
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
-    :returns: A list of EpochStakeResponse objects.
-    :rtype: [EpochStakeResponse]
+    :returns A list of EpochStakeResponse objects.
+    :rtype [EpochStakeResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -210,8 +210,8 @@ def epoch_pool_stakes(self, number: int, pool_id: str, **kwargs):
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
-    :returns: A list of EpochStakePoolResponse objects.
-    :rtype: [EpochStakePoolResponse]
+    :returns A list of EpochStakePoolResponse objects.
+    :rtype [EpochStakePoolResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -237,8 +237,8 @@ def epoch_blocks(self, number: int, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of str objects.
-    :rtype: [str]
+    :returns A list of str objects.
+    :rtype [str]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -266,8 +266,8 @@ def epoch_pool_blocks(self, number: int, pool_id: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of str objects.
-    :rtype: [str]
+    :returns A list of str objects.
+    :rtype [str]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -287,8 +287,8 @@ def epoch_latest_parameters(self, number: int):
 
     :param number: Number of the epoch.
     :type number: int
-    :returns: EpochParameterResponse object.
-    :rtype: EpochParameterResponse
+    :returns EpochParameterResponse object.
+    :rtype EpochParameterResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

@@ -33,8 +33,8 @@ def address(self, address: str):
 
     :param address: Bech32 address.
     :type address: str
-    :returns: AddressResponse object.
-    :rtype: AddressResponse
+    :returns AddressResponse object.
+    :rtype AddressResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -72,8 +72,8 @@ def address_total(self, address: str):
 
     :param address: Bech32 address.
     :type address: str
-    :returns: AddressesTotalResponse object.
-    :rtype: AddressesTotalResponse
+    :returns AddressesTotalResponse object.
+    :rtype AddressesTotalResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -121,8 +121,8 @@ def address_utxos(self, address: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of AddressesUTXOSResponse objects.
-    :rtype: [AddressesUTXOSResponse]
+    :returns A list of AddressesUTXOSResponse objects.
+    :rtype [AddressesUTXOSResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -162,8 +162,8 @@ def address_transactions(self, address: str, from_block: str = None, to_block: s
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of AddressesUTXOSResponse objects.
-    :rtype: [AddressesUTXOSResponse]
+    :returns A list of AddressesUTXOSResponse objects.
+    :rtype [AddressesUTXOSResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

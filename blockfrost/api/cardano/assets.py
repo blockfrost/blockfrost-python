@@ -24,8 +24,8 @@ def assets(self, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of AssetResponse objects.
-    :rtype: [AssetResponse]
+    :returns A list of AssetResponse objects.
+    :rtype [AssetResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -91,8 +91,8 @@ def asset(self, asset: str):
 
     :param asset: Concatenation of the policy_id and hex-encoded asset_name.
     :type asset: str
-    :returns: AssetResponse object.
-    :rtype: AssetResponse
+    :returns AssetResponse object.
+    :rtype AssetResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -126,8 +126,8 @@ def asset_history(self, asset: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of AssetHistoryResponse objects.
-    :rtype: [AssetHistoryResponse]
+    :returns A list of AssetHistoryResponse objects.
+    :rtype [AssetHistoryResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -162,8 +162,8 @@ def asset_transactions(self, asset: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of AssetTransactionResponse objects.
-    :rtype: [AssetTransactionResponse]
+    :returns A list of AssetTransactionResponse objects.
+    :rtype [AssetTransactionResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -197,8 +197,8 @@ def asset_addresses(self, asset: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of AssetAddressResponse objects.
-    :rtype: [AssetAddressResponse]
+    :returns A list of AssetAddressResponse objects.
+    :rtype [AssetAddressResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -232,8 +232,8 @@ def assets_policy(self, policy_id: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of PolicyAssetResponse objects.
-    :rtype: [PolicyAssetResponse]
+    :returns A list of PolicyAssetResponse objects.
+    :rtype [PolicyAssetResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

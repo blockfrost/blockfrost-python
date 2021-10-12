@@ -16,8 +16,8 @@ def metrics(self):
 
     https://docs.blockfrost.io/#tag/Metrics/paths/~1metrics~1/get
 
-    :returns: UsageMetricResponse object.
-    :rtype: UsageMetricResponse
+    :returns UsageMetricResponse object.
+    :rtype UsageMetricResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -41,8 +41,8 @@ def metrics_endpoints(self):
 
     https://docs.blockfrost.io/#tag/Metrics/paths/~1metrics~1endpoints/get
 
-    :returns: UsageMetricEndpointResponse object.
-    :rtype: UsageMetricEndpointResponse
+    :returns UsageMetricEndpointResponse object.
+    :rtype UsageMetricEndpointResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
