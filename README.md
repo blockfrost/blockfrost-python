@@ -1,4 +1,4 @@
-[![Python package](https://github.com/blockfrost/blockfrost-python/actions/workflows/python-package.yml/badge.svg)](https://github.com/blockfrost/blockfrost-python/actions/workflows/python-package.yml)
+[![Package Test](https://github.com/blockfrost/blockfrost-python/actions/workflows/package-test.yml/badge.svg)](https://github.com/blockfrost/blockfrost-python/actions/workflows/package-test.yml)
 [![PyPI Latest Release](https://img.shields.io/pypi/v/blockfrost-python.svg)](https://pypi.org/project/blockfrost-python/)
 [![Package Status](https://img.shields.io/pypi/status/blockfrost-python.svg)](https://pypi.org/project/blockfrost-python/)
 [![License](https://img.shields.io/pypi/l/blockfrost-python.svg)](https://github.com/blockfrost/blockfrost-python/blob/master/LICENSE)
