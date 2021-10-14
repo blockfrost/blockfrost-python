@@ -1,7 +1,8 @@
 name: Package Test
 
 on:
-  push
+  push:
+    branches: [ * ]
   pull_request:
     branches: [ master ]
 
