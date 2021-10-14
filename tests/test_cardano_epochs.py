@@ -45,7 +45,7 @@ def test_epoch_latest_parameters(requests_mock):
         "rho": 0.003,
         "tau": 0.2,
         "decentralisation_param": 0.5,
-        "extra_entropy": null,
+        "extra_entropy": None,
         "protocol_major_ver": 2,
         "protocol_minor_ver": 0,
         "min_utxo": "1000000",
