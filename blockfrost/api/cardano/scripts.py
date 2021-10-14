@@ -54,6 +54,59 @@ def script(self, script_hash: str):
 
 
 @dataclass
+class ScriptJsonResponse:
+    json: dict
+
+    def __init__(self, **kwargs) -> None:
+        self.json = kwargs
+
+
+@object_request_wrapper(ScriptJsonResponse)
+def script_json(self, script_hash: str):
+    """
+    JSON representation of a timelock script.
+
+    https://docs.blockfrost.io/#tag/Cardano-Scripts/paths/~1scripts~1{script_hash}~1json/get
+
+    :param script_hash: Hash of the script.
+    :type script_hash: str
+    :returns A list of ScriptJsonResponse objects.
+    :rtype [ScriptJsonResponse]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/scripts/{script_hash}/json",
+        headers=self.default_headers
+    )
+
+
+@dataclass
+class ScriptCBORResponse:
+    cbor: str
+
+
+@object_request_wrapper(ScriptCBORResponse)
+def script_cbor(self, script_hash: str):
+    """
+    CBOR representation of a plutus script
+
+    https://docs.blockfrost.io/#tag/Cardano-Scripts/paths/~1scripts~1{script_hash}~1cbor/get
+
+    :param script_hash: Hash of the script.
+    :type script_hash: str
+    :returns A list of ScriptCborResponse objects.
+    :rtype [ScriptCborResponse]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/scripts/{script_hash}/cbor",
+        headers=self.default_headers
+    )
+
+
+@dataclass
 class ScriptRedeemersResponse:
     tx_hash: str
     tx_index: int
@@ -79,5 +132,33 @@ def script_redeemers(self, script_hash: str):
     """
     return requests.get(
         url=f"{self.url}/scripts/{script_hash}/redeemers",
+        headers=self.default_headers
+    )
+
+
+@dataclass
+class ScriptDatumResponse:
+    json_value: dict
+
+    # def __init__(self, json_value: dict) -> None:
+    #     self.json_value = json_value
+
+
+@object_request_wrapper(ScriptDatumResponse)
+def script_datum(self, datum_hash: str):
+    """
+    Query JSON value of a datum by its hash.
+
+    https://docs.blockfrost.io/#tag/Cardano-Scripts/paths/~1scripts~1datum~1{datum_hash}/get
+
+    :param datum_hash: Hash of the datum.
+    :type datum_hash: str
+    :returns A list of ScriptDatumResponse objects.
+    :rtype [ScriptDatumResponse]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/scripts/datum/{datum_hash}",
         headers=self.default_headers
     )

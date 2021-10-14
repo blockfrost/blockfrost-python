@@ -134,6 +134,58 @@ def address_utxos(self, address: str, **kwargs):
 
 
 @dataclass
+class AddressesUTXOSAssetResponse:
+    @dataclass
+    class Amount:
+        unit: str
+        quantity: str
+
+    tx_hash: str
+    output_index: int
+    amount: [Amount]
+    block: str
+    data_hash: str
+
+    def __init__(self, tx_hash: str, output_index: int, amount: [Amount], block: str, data_hash: str) -> None:
+        self.tx_hash = tx_hash
+        self.output_index = output_index
+        self.amount = [self.Amount(**o) for o in amount]
+        self.block = block
+        self.data_hash = data_hash
+
+
+@object_list_request_wrapper(AddressesUTXOSAssetResponse)
+def address_utxos_asset(self, address: str, asset: str, **kwargs):
+    """
+    UTXOs of the address.
+
+    https://docs.blockfrost.io/#tag/Cardano-Addresses/paths/~1addresses~1{address}~1utxos~1{asset}/get
+
+    :param address: Bech32 address.
+    :type address: str
+    :param asset: Concatenation of the policy_id and hex-encoded asset_name.
+    :type asset: str
+    :param gather_pages: Optional. Default: 100. Will collect all pages into one return
+    :type gather_pages: bool
+    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :param order: Optional. "asc" or "desc". Default: "asc".
+    :type order: str
+    :returns A list of AddressesUTXOSAssetResponse objects.
+    :rtype [AddressesUTXOSAssetResponse]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/addresses/{address}/utxos/{asset}",
+        params=self.query_parameters(kwargs),
+        headers=self.default_headers
+    )
+
+
+@dataclass
 class AddressesTransactionResponse:
     tx_hash: str
     tx_index: int

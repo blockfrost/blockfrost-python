@@ -64,7 +64,7 @@ class EpochParameterResponse:
     max_block_ex_mem: str
     max_block_ex_steps: str
     max_val_size: str
-    collateral_percent: float
+    collateral_percent: int
     max_collateral_inputs: int
     coins_per_utxo_word: str
 

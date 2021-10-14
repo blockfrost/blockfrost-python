@@ -60,6 +60,7 @@ class BlockFrostApi(Api):
         address, \
         address_total, \
         address_utxos, \
+        address_utxos_asset, \
         address_transactions
     from .cardano.assets import \
         assets, \
@@ -122,4 +123,7 @@ class BlockFrostApi(Api):
     from .cardano.scripts import \
         scripts, \
         script, \
-        script_redeemers
+        script_json, \
+        script_cbor, \
+        script_redeemers, \
+        script_datum

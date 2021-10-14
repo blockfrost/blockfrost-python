@@ -30,6 +30,7 @@ class TransactionResponse:
     pool_retire_count: int
     asset_mint_or_burn_count: int
     redeemer_count: int
+    valid_contract: bool
 
     def __init__(self,
                  hash: str,
@@ -52,6 +53,7 @@ class TransactionResponse:
                  pool_retire_count: int,
                  asset_mint_or_burn_count: int,
                  redeemer_count: int,
+                 valid_contract: bool,
                  ) -> None:
         self.hash = hash
         self.block = block
@@ -73,6 +75,7 @@ class TransactionResponse:
         self.pool_retire_count = pool_retire_count
         self.asset_mint_or_burn_count = asset_mint_or_burn_count
         self.redeemer_count = redeemer_count
+        self.valid_contract = valid_contract
 
 
 @object_request_wrapper(TransactionResponse)
@@ -103,7 +106,6 @@ class TransactionAddressUTXOSResponse:
         class Amount:
             unit: str
             quantity: str
-            data_hash: str
 
         address: str
         amount: [Amount]
@@ -126,14 +128,17 @@ class TransactionAddressUTXOSResponse:
         class Amount:
             unit: str
             quantity: str
-            data_hash: str
 
         address: str
         amount: [Amount]
+        output_index: int
+        data_hash: str
 
-        def __init_(self, address, amount: [Amount]) -> None:
+        def __init_(self, address, amount: [Amount], output_index, data_hash) -> None:
             self.address = address
             self.amount = [self.Amount(**o) for o in amount]
+            self.output_index = output_index
+            self.data_hash = data_hash
 
     hash: str
     inputs: [Inputs]
@@ -408,6 +413,7 @@ def transaction_metadata(self, hash: str):
 class TransactionMetadataCBORResponse:
     label: str
     cbor_metadata: str
+    metadata: str
 
 
 @object_list_request_wrapper(TransactionMetadataCBORResponse)
@@ -429,10 +435,13 @@ def transaction_metadata_cbor(self, hash: str):
         headers=self.default_headers
     )
 
+
 @dataclass
 class TransactionRedeemersResponse:
     tx_index: int
     purpose: str
+    script_hash: str
+    datum_hash: str
     unit_mem: str
     unit_steps: str
     fee: str
@@ -453,7 +462,7 @@ def transaction_redeemers(self, hash: str):
     :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
-        url=f"{self.url}/txs/{hash}/metadata/cbor",
+        url=f"{self.url}/txs/{hash}/redeemers",
         headers=self.default_headers
     )
 
