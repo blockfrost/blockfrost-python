@@ -30,7 +30,7 @@ your API key.
 ## Installation
 
 ```console
-$ pip install git+https://github.com/blockfrost/blockfrost-python
+$ pip install blockfrost-python
 ```
 
 <br/>
@@ -52,7 +52,7 @@ api = BlockFrostApi(
 try:
     health = api.health()
     print(health)   # prints object:    HealthResponse(is_healthy=True)
-    health = api.health(return_type='json')
+    health = api.health(return_type='json') # Can be useful if python wrapper is behind api version
     print(health)   # prints json:      {"is_healthy":True}
     health = api.health(return_type='pandas')
     print(health)   # prints Dataframe:         is_healthy
