@@ -12,7 +12,7 @@ class NutlinkAddressResponse:
 
 
 @object_request_wrapper(NutlinkAddressResponse)
-def nutlink_address(self, address: str):
+def nutlink_address(self, address: str, **kwargs):
     """
     List metadata about specific address
 

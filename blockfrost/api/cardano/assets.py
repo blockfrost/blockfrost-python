@@ -83,7 +83,7 @@ class AssetResponse:
 
 
 @object_request_wrapper(AssetResponse)
-def asset(self, asset: str):
+def asset(self, asset: str, **kwargs):
     """
     Information about a specific asset
 

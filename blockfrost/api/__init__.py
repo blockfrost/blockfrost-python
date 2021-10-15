@@ -19,7 +19,7 @@ class BlockFrostApi(Api):
         version: str
 
     @object_request_wrapper(RootResponse)
-    def root(self):
+    def root(self, **kwargs):
         """
         Root endpoint has no other function than to point end users to documentation.
 
@@ -27,6 +27,8 @@ class BlockFrostApi(Api):
 
         :returns RootResponse object.
         :rtype RootResponse
+        :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+        :type return_type: str
         :raises ApiError: If API fails
         :raises Exception: If the API response is somehow malformed.
         """

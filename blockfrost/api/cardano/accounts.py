@@ -18,7 +18,7 @@ class AccountResponse:
 
 
 @object_request_wrapper(AccountResponse)
-def accounts(self, stake_address: str):
+def accounts(self, stake_address: str, **kwargs):
     """
     Obtain information about a specific networkStake account.
 

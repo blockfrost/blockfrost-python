@@ -23,7 +23,7 @@ class BlockResponse:
 
 
 @object_request_wrapper(BlockResponse)
-def block_latest(self):
+def block_latest(self, **kwargs):
     """
     Return the latest block available to the backends, also known as the tip of the blockchain.
 
@@ -66,7 +66,7 @@ def block_latest_transactions(self, **kwargs):
 
 
 @object_request_wrapper(BlockResponse)
-def block(self, hash_or_number: str):
+def block(self, hash_or_number: str, **kwargs):
     """
     Return the content of a requested block.
 
@@ -86,7 +86,7 @@ def block(self, hash_or_number: str):
 
 
 @object_request_wrapper(BlockResponse)
-def block_slot(self, slot_number: int):
+def block_slot(self, slot_number: int, **kwargs):
     """
     Return the content of a requested block for a specific slot.
 
@@ -106,7 +106,7 @@ def block_slot(self, slot_number: int):
 
 
 @object_request_wrapper(BlockResponse)
-def block_epoch_slot(self, epoch_number: int, slot_number: int):
+def block_epoch_slot(self, epoch_number: int, slot_number: int, **kwargs):
     """
     Return the content of a requested block for a specific slot in an epoch.
 

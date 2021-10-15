@@ -9,7 +9,7 @@ class ScriptsResponse:
 
 
 @object_list_request_wrapper(ScriptsResponse)
-def scripts(self):
+def scripts(self, **kwargs):
     """
     List of scripts.
 
@@ -34,7 +34,7 @@ class ScriptResponse:
 
 
 @object_request_wrapper(ScriptResponse)
-def script(self, script_hash: str):
+def script(self, script_hash: str, **kwargs):
     """
     Information about a specific script.
 
@@ -62,7 +62,7 @@ class ScriptJsonResponse:
 
 
 @object_request_wrapper(ScriptJsonResponse)
-def script_json(self, script_hash: str):
+def script_json(self, script_hash: str, **kwargs):
     """
     JSON representation of a timelock script.
 
@@ -87,7 +87,7 @@ class ScriptCBORResponse:
 
 
 @object_request_wrapper(ScriptCBORResponse)
-def script_cbor(self, script_hash: str):
+def script_cbor(self, script_hash: str, **kwargs):
     """
     CBOR representation of a plutus script
 
@@ -117,7 +117,7 @@ class ScriptRedeemersResponse:
 
 
 @object_list_request_wrapper(ScriptRedeemersResponse)
-def script_redeemers(self, script_hash: str):
+def script_redeemers(self, script_hash: str, **kwargs):
     """
     List of redeemers of a specific script.
 
@@ -140,12 +140,9 @@ def script_redeemers(self, script_hash: str):
 class ScriptDatumResponse:
     json_value: dict
 
-    # def __init__(self, json_value: dict) -> None:
-    #     self.json_value = json_value
-
 
 @object_request_wrapper(ScriptDatumResponse)
-def script_datum(self, datum_hash: str):
+def script_datum(self, datum_hash: str, **kwargs):
     """
     Query JSON value of a datum by its hash.
 

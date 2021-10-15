@@ -10,7 +10,7 @@ class HealthResponse:
 
 
 @object_request_wrapper(HealthResponse)
-def health(self):
+def health(self, **kwargs):
     """
     Return backend status as a boolean. Your application should handle situations when backend for the given chain is unavailable.
 
@@ -33,7 +33,7 @@ class ClockResponse:
 
 
 @object_request_wrapper(ClockResponse)
-def clock(self):
+def clock(self, **kwargs):
     """
     This endpoint provides the current UNIX time. Your application might use this to verify if the client clock is not out of sync.
 

@@ -10,7 +10,7 @@ class UsageMetricResponse:
 
 
 @object_list_request_wrapper(UsageMetricResponse)
-def metrics(self):
+def metrics(self, **kwargs):
     """
     History of your Blockfrost usage metrics in the past 30 days.
 
@@ -35,7 +35,7 @@ class UsageMetricEndpointResponse:
 
 
 @object_list_request_wrapper(UsageMetricEndpointResponse)
-def metrics_endpoints(self):
+def metrics_endpoints(self, **kwargs):
     """
     History of your Blockfrost usage metrics per endpoint in the past 30 days.
 

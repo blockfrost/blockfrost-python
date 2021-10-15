@@ -1,6 +1,7 @@
 import os
 import json
 
+import pandas as pd
 from requests import Response
 from functools import wraps
 
@@ -43,11 +44,16 @@ def object_request_wrapper(object_class=None):
             if request_response.status_code != 200:
                 raise ApiError(request_response)
             else:
-                if object_class:
-                    return object_class(**request_response.json())
+                if 'return_type' in kwargs:
+                    if kwargs['return_type'] == 'json':
+                        return request_response.json()
+                    elif kwargs['return_type'] == 'pandas':
+                        return pd.json_normalize(request_response.json())
                 else:
-                    return request_response.json()
-
+                    if object_class:
+                        return object_class(**request_response.json())
+                    else:
+                        return request_response.json()
         return error_wrapper
 
     return request_wrapper

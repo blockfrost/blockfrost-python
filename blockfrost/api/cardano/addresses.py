@@ -25,7 +25,7 @@ class AddressResponse:
 
 
 @object_request_wrapper(AddressResponse)
-def address(self, address: str):
+def address(self, address: str, **kwargs):
     """
     Obtain information about a specific address.
 
@@ -64,7 +64,7 @@ class AddressesTotalResponse:
 
 
 @object_request_wrapper(AddressesTotalResponse)
-def address_total(self, address: str):
+def address_total(self, address: str, **kwargs):
     """
     Obtain details about an address.
 

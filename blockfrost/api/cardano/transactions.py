@@ -79,7 +79,7 @@ class TransactionResponse:
 
 
 @object_request_wrapper(TransactionResponse)
-def transaction(self, hash: str):
+def transaction(self, hash: str, **kwargs):
     """
     Return content of the requested transaction.
 
@@ -151,7 +151,7 @@ class TransactionAddressUTXOSResponse:
 
 
 @object_request_wrapper(TransactionAddressUTXOSResponse)
-def transaction_utxos(self, hash: str):
+def transaction_utxos(self, hash: str, **kwargs):
     """
     Return the inputs and UTXOs of the specific transaction.
 
@@ -178,7 +178,7 @@ class TransactionStakeResponse:
 
 
 @object_list_request_wrapper(TransactionStakeResponse)
-def transaction_stakes(self, hash: str):
+def transaction_stakes(self, hash: str, **kwargs):
     """
     Obtain information about (de)registration of stake addresses within a transaction.
 
@@ -207,7 +207,7 @@ class TransactionDelegationResponse:
 
 
 @object_list_request_wrapper(TransactionDelegationResponse)
-def transaction_delegations(self, hash: str):
+def transaction_delegations(self, hash: str, **kwargs):
     """
     Obtain information about delegation certificates of a specific transaction.
 
@@ -233,7 +233,7 @@ class TransactionWithdrawalResponse:
 
 
 @object_list_request_wrapper(TransactionWithdrawalResponse)
-def transaction_withdrawals(self, hash: str):
+def transaction_withdrawals(self, hash: str, **kwargs):
     """
     Obtain information about withdrawals of a specific transaction.
 
@@ -261,7 +261,7 @@ class TransactionMIRResponse:
 
 
 @object_list_request_wrapper(TransactionMIRResponse)
-def transaction_mirs(self, hash: str):
+def transaction_mirs(self, hash: str, **kwargs):
     """
     Obtain information about Move Instantaneous Rewards (MIRs) of a specific transaction.
 
@@ -337,7 +337,7 @@ class TransactionPoolUpdateResponse:
 
 
 @object_list_request_wrapper(TransactionPoolUpdateResponse)
-def transaction_pool_updates(self, hash: str):
+def transaction_pool_updates(self, hash: str, **kwargs):
     """
     Obtain information about stake pool registration and update certificates of a specific transaction.
 
@@ -364,7 +364,7 @@ class TransactionPoolRetiresResponse:
 
 
 @object_list_request_wrapper(TransactionPoolRetiresResponse)
-def transaction_pool_retires(self, hash: str):
+def transaction_pool_retires(self, hash: str, **kwargs):
     """
     Obtain information about stake pool retirements within a specific transaction.
 
@@ -390,7 +390,7 @@ class TransactionMetadataResponse:
 
 
 @object_list_request_wrapper(TransactionMetadataResponse)
-def transaction_metadata(self, hash: str):
+def transaction_metadata(self, hash: str, **kwargs):
     """
     Obtain the transaction metadata.
 
@@ -417,7 +417,7 @@ class TransactionMetadataCBORResponse:
 
 
 @object_list_request_wrapper(TransactionMetadataCBORResponse)
-def transaction_metadata_cbor(self, hash: str):
+def transaction_metadata_cbor(self, hash: str, **kwargs):
     """
     Obtain the transaction metadata in CBOR.
 
@@ -448,7 +448,7 @@ class TransactionRedeemersResponse:
 
 
 @object_list_request_wrapper(TransactionRedeemersResponse)
-def transaction_redeemers(self, hash: str):
+def transaction_redeemers(self, hash: str, **kwargs):
     """
     Obtain the transaction redeemers.
 
@@ -468,7 +468,7 @@ def transaction_redeemers(self, hash: str):
 
 
 @object_request_wrapper()
-def transaction_submit(self, file_path: str):
+def transaction_submit(self, file_path: str, **kwargs):
     """
     Submit an already serialized transaction to the network.
 

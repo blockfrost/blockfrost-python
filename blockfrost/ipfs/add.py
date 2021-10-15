@@ -11,7 +11,7 @@ class IPFSObjectResponse:
 
 
 @object_request_wrapper(IPFSObjectResponse)
-def add(self, file_path: str):
+def add(self, file_path: str, **kwargs):
     """
     Add a file or directory to IPFS
 

@@ -18,7 +18,7 @@ class EpochResponse:
 
 
 @object_request_wrapper(EpochResponse)
-def epoch_latest(self):
+def epoch_latest(self, **kwargs):
     """
     Return the information about the latest, therefore current, epoch.
 
@@ -70,7 +70,7 @@ class EpochParameterResponse:
 
 
 @object_request_wrapper(EpochParameterResponse)
-def epoch_latest_parameters(self):
+def epoch_latest_parameters(self, **kwargs):
     """
     Return the protocol parameters for the latest epoch.
 
@@ -88,7 +88,7 @@ def epoch_latest_parameters(self):
 
 
 @object_request_wrapper(EpochResponse)
-def epoch(self, number: int):
+def epoch(self, number: int, **kwargs):
     """
     Return the content of the requested epoch.
 
@@ -279,7 +279,7 @@ def epoch_pool_blocks(self, number: int, pool_id: str, **kwargs):
 
 
 @object_request_wrapper(EpochParameterResponse)
-def epoch_latest_parameters(self, number: int):
+def epoch_latest_parameters(self, number: int, **kwargs):
     """
     Return the protocol parameters for the epoch specified.
 

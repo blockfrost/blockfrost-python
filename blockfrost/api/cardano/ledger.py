@@ -18,7 +18,7 @@ class GenesisResponse:
 
 
 @object_request_wrapper(GenesisResponse)
-def genesis(self):
+def genesis(self, **kwargs):
     """
     Return the information about blockchain genesis.
 

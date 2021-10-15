@@ -51,8 +51,14 @@ api = BlockFrostApi(
 )
 try:
     health = api.health()
-    print(health.is_healthy)  # True
+    print(health)   # prints object:    HealthResponse(is_healthy=True)
+    health = api.health(return_type='json')
+    print(health)   # prints json:      {"is_healthy":True}
+    health = api.health(return_type='pandas')
+    print(health)   # prints Dataframe:         is_healthy
+                    #                       0         True
 
+    
     account_rewards = api.account_rewards(
         stake_address='stake1ux3g2c9dx2nhhehyrezyxpkstartcqmu9hk63qgfkccw5rqttygt7',
         count=20,
@@ -63,7 +69,7 @@ try:
     account_rewards = api.account_rewards(
         stake_address='stake1ux3g2c9dx2nhhehyrezyxpkstartcqmu9hk63qgfkccw5rqttygt7',
         count=20,
-        gather_pages=True,
+        gather_pages=True, # will collect all pages
     )
     print(account_rewards[0].epoch)  # prints 221
     print(len(account_rewards))  # prints 57

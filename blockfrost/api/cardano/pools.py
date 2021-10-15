@@ -113,7 +113,7 @@ class PoolResponse:
 
 
 @object_request_wrapper(PoolResponse)
-def pool(self, pool_id: str):
+def pool(self, pool_id: str, **kwargs):
     """
     Pool information.
 
@@ -185,7 +185,7 @@ class PoolMetadataResponse:
 
 
 @object_request_wrapper(PoolMetadataResponse)
-def pool_metadata(self, pool_id: str):
+def pool_metadata(self, pool_id: str, **kwargs):
     """
     Stake pool registration metadata.
 
@@ -214,7 +214,7 @@ class PoolRelayResponse:
 
 
 @object_list_request_wrapper(PoolRelayResponse)
-def pool_relays(self, pool_id: str):
+def pool_relays(self, pool_id: str, **kwargs):
     """
     Relays of a stake pool.
 

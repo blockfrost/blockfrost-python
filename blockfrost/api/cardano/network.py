@@ -26,7 +26,7 @@ class NetworkResponse:
 
 
 @object_request_wrapper(NetworkResponse)
-def network(self):
+def network(self, **kwargs):
     """
     Return detailed network information.
 
