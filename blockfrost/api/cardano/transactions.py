@@ -87,6 +87,8 @@ def transaction(self, hash: str, **kwargs):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns TransactionResponse object.
     :rtype TransactionResponse
     :raises ApiError: If API fails
@@ -159,6 +161,8 @@ def transaction_utxos(self, hash: str, **kwargs):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns TransactionAddressUTXOSResponse object.
     :rtype TransactionAddressUTXOSResponse
     :raises ApiError: If API fails
@@ -186,6 +190,8 @@ def transaction_stakes(self, hash: str, **kwargs):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns A list of TransactionStakeResponse objects.
     :rtype [TransactionStakeResponse]
     :raises ApiError: If API fails
@@ -215,6 +221,8 @@ def transaction_delegations(self, hash: str, **kwargs):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns A list of TransactionDelegationResponse objects.
     :rtype [TransactionDelegationResponse]
     :raises ApiError: If API fails
@@ -241,6 +249,8 @@ def transaction_withdrawals(self, hash: str, **kwargs):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns A list of TransactionWithdrawalResponse objects.
     :rtype [TransactionWithdrawalResponse]
     :raises ApiError: If API fails
@@ -269,6 +279,8 @@ def transaction_mirs(self, hash: str, **kwargs):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns A list of TransactionMIRResponse objects.
     :rtype [TransactionMIRResponse]
     :raises ApiError: If API fails
@@ -345,6 +357,8 @@ def transaction_pool_updates(self, hash: str, **kwargs):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns A list of TransactionPoolUpdateResponse objects.
     :rtype [TransactionPoolUpdateResponse]
     :raises ApiError: If API fails
@@ -372,6 +386,8 @@ def transaction_pool_retires(self, hash: str, **kwargs):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns A list of TransactionPoolRetiresResponse objects.
     :rtype [TransactionPoolRetiresResponse]
     :raises ApiError: If API fails
@@ -398,6 +414,8 @@ def transaction_metadata(self, hash: str, **kwargs):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns A list of TransactionMetadataResponse objects.
     :rtype [TransactionMetadataResponse]
     :raises ApiError: If API fails
@@ -425,6 +443,8 @@ def transaction_metadata_cbor(self, hash: str, **kwargs):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns A list of TransactionMetadataCBORResponse objects.
     :rtype [TransactionMetadataCBORResponse]
     :raises ApiError: If API fails
@@ -456,6 +476,8 @@ def transaction_redeemers(self, hash: str, **kwargs):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns A list of TransactionRedeemersResponse objects.
     :rtype [TransactionRedeemersResponse]
     :raises ApiError: If API fails

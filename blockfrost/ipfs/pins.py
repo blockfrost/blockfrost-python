@@ -18,6 +18,8 @@ def pin_object(self, IPFS_path: str, **kwargs):
 
     :param IPFS_path: Path to the IPFS object.
     :type IPFS_path: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns IPFSPinnedObjectResponse object.
     :rtype IPFSPinnedObjectResponse
     :raises ApiError: If API fails
@@ -45,6 +47,8 @@ def pined_list(self, **kwargs):
 
     https://docs.blockfrost.io/#tag/IPFS-Pins/paths/~1ipfs~1pin~1list~1/get
 
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.
@@ -74,6 +78,8 @@ def pined_object(self, IPFS_path: str, **kwargs):
 
     :param IPFS_path: Path to the IPFS object.
     :type IPFS_path: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns IPFSPinnedListObjectResponse object.
     :rtype IPFSPinnedListObjectResponse
     :raises ApiError: If API fails
@@ -94,6 +100,8 @@ def pined_object_remove(self, IPFS_path: str, **kwargs):
 
     :param IPFS_path: Path to the IPFS object.
     :type IPFS_path: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns IPFSPinnedObjectResponse object.
     :rtype IPFSPinnedObjectResponse
     :raises ApiError: If API fails

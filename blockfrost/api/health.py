@@ -39,7 +39,8 @@ def clock(self, **kwargs):
 
     https://docs.blockfrost.io/#tag/Health/paths/~1health~1clock/get
 
-
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns ClockResponse object.
     :rtype ClockResponse
     :raises ApiError: If API fails

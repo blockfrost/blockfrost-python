@@ -16,6 +16,8 @@ def metrics(self, **kwargs):
 
     https://docs.blockfrost.io/#tag/Metrics/paths/~1metrics~1/get
 
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns UsageMetricResponse object.
     :rtype UsageMetricResponse
     :raises ApiError: If API fails
@@ -41,6 +43,8 @@ def metrics_endpoints(self, **kwargs):
 
     https://docs.blockfrost.io/#tag/Metrics/paths/~1metrics~1endpoints/get
 
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns UsageMetricEndpointResponse object.
     :rtype UsageMetricEndpointResponse
     :raises ApiError: If API fails

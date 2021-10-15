@@ -24,11 +24,10 @@ class BlockFrostApi(Api):
         Root endpoint has no other function than to point end users to documentation.
 
         https://docs.blockfrost.io/#tag/Health/paths/~1/get
-
-        :returns RootResponse object.
-        :rtype RootResponse
         :param return_type: Optional. "object", "json" or "pandas". Default: "object".
         :type return_type: str
+        :returns RootResponse object.
+        :rtype RootResponse
         :raises ApiError: If API fails
         :raises Exception: If the API response is somehow malformed.
         """

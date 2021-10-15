@@ -16,6 +16,8 @@ def assets(self, **kwargs):
 
     https://docs.blockfrost.io/#tag/Cardano-Assets/paths/~1assets/get
 
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.
@@ -91,6 +93,8 @@ def asset(self, asset: str, **kwargs):
 
     :param asset: Concatenation of the policy_id and hex-encoded asset_name.
     :type asset: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns AssetResponse object.
     :rtype AssetResponse
     :raises ApiError: If API fails
@@ -118,6 +122,8 @@ def asset_history(self, asset: str, **kwargs):
 
     :param asset: Concatenation of the policy_id and hex-encoded asset_name.
     :type asset: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.
@@ -154,6 +160,8 @@ def asset_transactions(self, asset: str, **kwargs):
 
     :param asset: Concatenation of the policy_id and hex-encoded asset_name.
     :type asset: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.
@@ -189,6 +197,8 @@ def asset_addresses(self, asset: str, **kwargs):
 
     :param asset: Concatenation of the policy_id and hex-encoded asset_name.
     :type asset: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.
@@ -224,6 +234,8 @@ def assets_policy(self, policy_id: str, **kwargs):
 
     :param policy_id: Specific policy_id.
     :type policy_id: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.

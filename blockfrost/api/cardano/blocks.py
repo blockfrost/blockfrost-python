@@ -29,6 +29,8 @@ def block_latest(self, **kwargs):
 
     https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1latest/get
 
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns BlockResponse object.
     :rtype BlockResponse
     :raises ApiError: If API fails
@@ -74,6 +76,8 @@ def block(self, hash_or_number: str, **kwargs):
 
     :param hash_or_number: Hash or number of the requested block.
     :type hash_or_number: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns BlockResponse object.
     :rtype BlockResponse
     :raises ApiError: If API fails
@@ -94,6 +98,8 @@ def block_slot(self, slot_number: int, **kwargs):
 
     :param slot_number: Slot position for requested block.
     :type slot_number: int
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns BlockResponse object.
     :rtype BlockResponse
     :raises ApiError: If API fails
@@ -116,6 +122,8 @@ def block_epoch_slot(self, epoch_number: int, slot_number: int, **kwargs):
     :type epoch_number: int
     :param slot_number: Slot position for requested block.
     :type slot_number: int
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns BlockResponse object.
     :rtype BlockResponse
     :raises ApiError: If API fails
@@ -136,6 +144,8 @@ def blocks_next(self, hash_or_number: str, **kwargs):
 
     :param hash_or_number: Hash or number of the requested block.
     :type hash_or_number: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param count: Optional. Default: 1. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
@@ -161,6 +171,8 @@ def blocks_previous(self, hash_or_number: str, **kwargs):
 
     :param hash_or_number: Hash or number of the requested block.
     :type hash_or_number: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param count: Optional. Default: 1. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.

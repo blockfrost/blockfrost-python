@@ -22,6 +22,8 @@ def add(self, file_path: str, **kwargs):
 
     :param file_path: Path to file.
     :type file_path: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns IPFSObject object.
     :rtype IPFSObject
     :raises ApiError: If API fails

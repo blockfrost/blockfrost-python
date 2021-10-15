@@ -32,6 +32,8 @@ def network(self, **kwargs):
 
     https://docs.blockfrost.io/#tag/Cardano-Network/paths/~1network/get
 
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns NetworkResponse object.
     :rtype NetworkResponse
     :raises ApiError: If API fails

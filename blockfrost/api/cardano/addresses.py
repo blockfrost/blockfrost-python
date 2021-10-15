@@ -33,6 +33,8 @@ def address(self, address: str, **kwargs):
 
     :param address: Bech32 address.
     :type address: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns AddressResponse object.
     :rtype AddressResponse
     :raises ApiError: If API fails
@@ -72,6 +74,8 @@ def address_total(self, address: str, **kwargs):
 
     :param address: Bech32 address.
     :type address: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns AddressesTotalResponse object.
     :rtype AddressesTotalResponse
     :raises ApiError: If API fails
@@ -113,6 +117,8 @@ def address_utxos(self, address: str, **kwargs):
 
     :param address: Bech32 address.
     :type address: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.
@@ -165,6 +171,8 @@ def address_utxos_asset(self, address: str, asset: str, **kwargs):
     :type address: str
     :param asset: Concatenation of the policy_id and hex-encoded asset_name.
     :type asset: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.
@@ -206,6 +214,8 @@ def address_transactions(self, address: str, from_block: str = None, to_block: s
     :type from: str
     :param to: The block number and optionally also index where (inclusive) to end the search for results, concatenated using colon. Has to be higher than or equal to from parameter.
     :type to: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.

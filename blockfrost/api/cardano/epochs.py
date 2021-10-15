@@ -24,6 +24,8 @@ def epoch_latest(self, **kwargs):
 
     https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1latest/get
 
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns EpochResponse object.
     :rtype EpochResponse
     :raises ApiError: If API fails
@@ -76,6 +78,8 @@ def epoch_latest_parameters(self, **kwargs):
 
     https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1latest~1parameters/get
 
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns EpochParameterResponse object.
     :rtype EpochParameterResponse
     :raises ApiError: If API fails
@@ -96,6 +100,8 @@ def epoch(self, number: int, **kwargs):
 
     :param number: Number of the epoch.
     :type number: int
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns EpochResponse object.
     :rtype EpochResponse
     :raises ApiError: If API fails
@@ -116,6 +122,8 @@ def epochs_next(self, number: int, **kwargs):
 
     :param number: Number of the epoch.
     :type number: int
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param count: Optional. Default: 1. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
@@ -141,6 +149,8 @@ def epochs_previous(self, number: int, **kwargs):
 
     :param number: Number of the epoch.
     :type number: int
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param count: Optional. Default: 1. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
@@ -173,6 +183,8 @@ def epoch_stakes(self, number: int, **kwargs):
 
     :param number: Number of the epoch.
     :type number: int
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param count: Optional. Default: 1. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
@@ -206,6 +218,8 @@ def epoch_pool_stakes(self, number: int, pool_id: str, **kwargs):
     :type number: int
     :param pool_id: Stake pool ID to filter.
     :type pool_id: int
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param count: Optional. Default: 1. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
@@ -287,6 +301,8 @@ def epoch_latest_parameters(self, number: int, **kwargs):
 
     :param number: Number of the epoch.
     :type number: int
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns EpochParameterResponse object.
     :rtype EpochParameterResponse
     :raises ApiError: If API fails

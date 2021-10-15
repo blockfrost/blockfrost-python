@@ -24,6 +24,8 @@ def genesis(self, **kwargs):
 
     https://docs.blockfrost.io/#tag/Cardano-Ledger/paths/~1genesis/get
 
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns GenesisResponse object.
     :rtype GenesisResponse
     :raises ApiError: If API fails

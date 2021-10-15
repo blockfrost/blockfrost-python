@@ -20,6 +20,8 @@ def nutlink_address(self, address: str, **kwargs):
 
     :param address: Address of a metadata oracle.
     :type address: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns NutlinkAddressResponse object.
     :rtype NutlinkAddressResponse
     :raises ApiError: If API fails
@@ -47,6 +49,8 @@ def nutlink_address_tickers(self, address: str, **kwargs):
 
     :param address: Address of a metadata oracle.
     :type address: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.
@@ -86,6 +90,8 @@ def nutlink_address_ticker(self, address: str, ticker: str, **kwargs):
     :type address: str
     :param ticker: Ticker for the pool record.
     :type ticker: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.
@@ -124,6 +130,8 @@ def nutlink_ticker(self, ticker: str, **kwargs):
 
     :param ticker: Ticker for the pool record.
     :type ticker: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.

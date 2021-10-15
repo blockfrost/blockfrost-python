@@ -26,6 +26,8 @@ def accounts(self, stake_address: str, **kwargs):
 
     :param stake_address: Bech32 stake address.
     :type stake_address: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns AccountResponse object.
     :rtype: AccountResponse
     :raises ApiError: If API fails
@@ -53,6 +55,8 @@ def account_rewards(self, stake_address: str, **kwargs):
 
     :param stake_address: Bech32 stake address.
     :type stake_address: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.
@@ -89,6 +93,8 @@ def account_history(self, stake_address: str, **kwargs):
 
     :param stake_address: Bech32 stake address.
     :type stake_address: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.
@@ -126,6 +132,8 @@ def account_delegations(self, stake_address: str, **kwargs):
 
     :param stake_address: Bech32 stake address.
     :type stake_address: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.
@@ -161,6 +169,8 @@ def account_registrations(self, stake_address: str, **kwargs):
 
     :param stake_address: Bech32 stake address.
     :type stake_address: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.
@@ -196,6 +206,8 @@ def account_withdrawals(self, stake_address: str, **kwargs):
 
     :param stake_address: Bech32 stake address.
     :type stake_address: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.
@@ -231,6 +243,8 @@ def account_mirs(self, stake_address: str, **kwargs):
 
     :param stake_address: Bech32 stake address.
     :type stake_address: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.
@@ -265,6 +279,8 @@ def account_addresses(self, stake_address: str, **kwargs):
 
     :param stake_address: Bech32 stake address.
     :type stake_address: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.
@@ -302,6 +318,8 @@ def account_addresses_assets(self, stake_address: str, **kwargs):
 
     :param stake_address: Bech32 stake address.
     :type stake_address: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.

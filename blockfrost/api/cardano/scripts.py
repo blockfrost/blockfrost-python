@@ -15,6 +15,8 @@ def scripts(self, **kwargs):
 
     https://docs.blockfrost.io/#tag/Cardano-Scripts/paths/~1scripts/get
 
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns A list of ScriptsResponse objects.
     :rtype [ScriptsResponse]
     :raises ApiError: If API fails
@@ -22,6 +24,7 @@ def scripts(self, **kwargs):
     """
     return requests.get(
         url=f"{self.url}/scripts",
+        params=self.query_parameters(kwargs),
         headers=self.default_headers
     )
 
@@ -42,6 +45,8 @@ def script(self, script_hash: str, **kwargs):
 
     :param script_hash: Hash of the script.
     :type script_hash: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns A list of ScriptResponse objects.
     :rtype [ScriptResponse]
     :raises ApiError: If API fails
@@ -70,6 +75,8 @@ def script_json(self, script_hash: str, **kwargs):
 
     :param script_hash: Hash of the script.
     :type script_hash: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns A list of ScriptJsonResponse objects.
     :rtype [ScriptJsonResponse]
     :raises ApiError: If API fails
@@ -95,6 +102,8 @@ def script_cbor(self, script_hash: str, **kwargs):
 
     :param script_hash: Hash of the script.
     :type script_hash: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns A list of ScriptCborResponse objects.
     :rtype [ScriptCborResponse]
     :raises ApiError: If API fails
@@ -125,6 +134,8 @@ def script_redeemers(self, script_hash: str, **kwargs):
 
     :param script_hash: Hash of the script.
     :type script_hash: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns A list of ScriptRedeemersResponse objects.
     :rtype [ScriptRedeemersResponse]
     :raises ApiError: If API fails
@@ -132,6 +143,7 @@ def script_redeemers(self, script_hash: str, **kwargs):
     """
     return requests.get(
         url=f"{self.url}/scripts/{script_hash}/redeemers",
+        params=self.query_parameters(kwargs),
         headers=self.default_headers
     )
 
@@ -150,6 +162,8 @@ def script_datum(self, datum_hash: str, **kwargs):
 
     :param datum_hash: Hash of the datum.
     :type datum_hash: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :returns A list of ScriptDatumResponse objects.
     :rtype [ScriptDatumResponse]
     :raises ApiError: If API fails
