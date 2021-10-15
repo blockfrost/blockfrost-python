@@ -10,7 +10,7 @@ class IPFSPinnedObjectResponse:
 
 
 @object_request_wrapper(IPFSPinnedObjectResponse)
-def pin_object(self, IPFS_path: str):
+def pin_object(self, IPFS_path: str, **kwargs):
     """
     Pinned objects are counted in your user storage quota.
 
@@ -18,8 +18,10 @@ def pin_object(self, IPFS_path: str):
 
     :param IPFS_path: Path to the IPFS object.
     :type IPFS_path: str
-    :returns: IPFSPinnedObjectResponse object.
-    :rtype: IPFSPinnedObjectResponse
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns IPFSPinnedObjectResponse object.
+    :rtype IPFSPinnedObjectResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -45,6 +47,8 @@ def pined_list(self, **kwargs):
 
     https://docs.blockfrost.io/#tag/IPFS-Pins/paths/~1ipfs~1pin~1list~1/get
 
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.
@@ -53,8 +57,8 @@ def pined_list(self, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of IPFSPinnedListObjectResponse objects.
-    :rtype: [IPFSPinnedListObjectResponse]
+    :returns A list of IPFSPinnedListObjectResponse objects.
+    :rtype [IPFSPinnedListObjectResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -66,7 +70,7 @@ def pined_list(self, **kwargs):
 
 
 @object_request_wrapper(IPFSPinnedListObjectResponse)
-def pined_object(self, IPFS_path: str):
+def pined_object(self, IPFS_path: str, **kwargs):
     """
     List objects pinned to local storage
 
@@ -74,8 +78,10 @@ def pined_object(self, IPFS_path: str):
 
     :param IPFS_path: Path to the IPFS object.
     :type IPFS_path: str
-    :returns: IPFSPinnedListObjectResponse object.
-    :rtype: IPFSPinnedListObjectResponse
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns IPFSPinnedListObjectResponse object.
+    :rtype IPFSPinnedListObjectResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -86,7 +92,7 @@ def pined_object(self, IPFS_path: str):
 
 
 @object_request_wrapper(IPFSPinnedObjectResponse)
-def pined_object_remove(self, IPFS_path: str):
+def pined_object_remove(self, IPFS_path: str, **kwargs):
     """
     Remove pinned objects from local storage
 
@@ -94,8 +100,10 @@ def pined_object_remove(self, IPFS_path: str):
 
     :param IPFS_path: Path to the IPFS object.
     :type IPFS_path: str
-    :returns: IPFSPinnedObjectResponse object.
-    :rtype: IPFSPinnedObjectResponse
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns IPFSPinnedObjectResponse object.
+    :rtype IPFSPinnedObjectResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

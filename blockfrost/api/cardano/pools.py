@@ -18,8 +18,8 @@ def pools(self, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of str objects.
-    :rtype: [str]
+    :returns A list of str objects.
+    :rtype [str]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -51,8 +51,8 @@ def pools_retired(self, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of PoolListResponse objects.
-    :rtype: [PoolListResponse]
+    :returns A list of PoolListResponse objects.
+    :rtype [PoolListResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -78,8 +78,8 @@ def pools_retiring(self, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of PoolListResponse objects.
-    :rtype: [PoolListResponse]
+    :returns A list of PoolListResponse objects.
+    :rtype [PoolListResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -113,7 +113,7 @@ class PoolResponse:
 
 
 @object_request_wrapper(PoolResponse)
-def pool(self, pool_id: str):
+def pool(self, pool_id: str, **kwargs):
     """
     Pool information.
 
@@ -121,8 +121,8 @@ def pool(self, pool_id: str):
 
     :param pool_id: Bech32 or hexadecimal pool ID.
     :type pool_id: str
-    :returns: PoolResponse object.
-    :rtype: PoolResponse
+    :returns PoolResponse object.
+    :rtype PoolResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -160,8 +160,8 @@ def pool_history(self, pool_id: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of PoolHistoryResponse objects.
-    :rtype: [PoolHistoryResponse]
+    :returns A list of PoolHistoryResponse objects.
+    :rtype [PoolHistoryResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -185,7 +185,7 @@ class PoolMetadataResponse:
 
 
 @object_request_wrapper(PoolMetadataResponse)
-def pool_metadata(self, pool_id: str):
+def pool_metadata(self, pool_id: str, **kwargs):
     """
     Stake pool registration metadata.
 
@@ -193,8 +193,8 @@ def pool_metadata(self, pool_id: str):
 
     :param pool_id: Bech32 or hexadecimal pool ID.
     :type pool_id: str
-    :returns: PoolMetadataResponse object.
-    :rtype: PoolMetadataResponse
+    :returns PoolMetadataResponse object.
+    :rtype PoolMetadataResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -214,7 +214,7 @@ class PoolRelayResponse:
 
 
 @object_list_request_wrapper(PoolRelayResponse)
-def pool_relays(self, pool_id: str):
+def pool_relays(self, pool_id: str, **kwargs):
     """
     Relays of a stake pool.
 
@@ -222,8 +222,8 @@ def pool_relays(self, pool_id: str):
 
     :param pool_id: Bech32 or hexadecimal pool ID.
     :type pool_id: str
-    :returns: A list of PoolRelayResponse objects.
-    :rtype: [PoolRelayResponse]
+    :returns A list of PoolRelayResponse objects.
+    :rtype [PoolRelayResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -256,8 +256,8 @@ def pool_delegators(self, pool_id: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of PoolDelegatorResponse objects.
-    :rtype: [PoolDelegatorResponse]
+    :returns A list of PoolDelegatorResponse objects.
+    :rtype [PoolDelegatorResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -285,8 +285,8 @@ def pool_blocks(self, pool_id: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of str objects.
-    :rtype: [str]
+    :returns A list of str objects.
+    :rtype [str]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -321,8 +321,8 @@ def pool_updates(self, pool_id: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of PoolUpdateResponse objects.
-    :rtype: [PoolUpdateResponse]
+    :returns A list of PoolUpdateResponse objects.
+    :rtype [PoolUpdateResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

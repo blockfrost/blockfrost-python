@@ -46,7 +46,8 @@ def test_transaction(requests_mock):
         "pool_update_count": 0,
         "pool_retire_count": 0,
         "asset_mint_or_burn_count": 0,
-        "redeemer_count": 0
+        "redeemer_count": 0,
+        "valid_contract": True
     }
     requests_mock.get(f"{api.url}/txs/{hash}", json=mock_data)
     mock_object = TransactionResponse(**mock_data)
@@ -56,7 +57,7 @@ def test_transaction(requests_mock):
 def test_transaction_utxos(requests_mock):
     api = BlockFrostApi()
     mock_data = {
-        "hash": hash,
+        "hash": "1e043f100dce12d107f679685acd2fc0610e10f72a92d412794c9773d11d8477",
         "inputs": [
             {
                 "address": "addr1q9ld26v2lv8wvrxxmvg90pn8n8n5k6tdst06q2s856rwmvnueldzuuqmnsye359fqrk8hwvenjnqultn7djtrlft7jnq7dy7wv",
@@ -72,7 +73,7 @@ def test_transaction_utxos(requests_mock):
                 ],
                 "tx_hash": "1a0570af966fb355a7160e4f82d5a80b8681b7955f5d44bec0dce628516157f0",
                 "output_index": 0,
-                "data_hash": "string",
+                "data_hash": "9e478573ab81ea7a8e31891ce0648b81229f408d596a3483e6f4f9b92d3cf710",
                 "collateral": False
             }
         ],
@@ -82,15 +83,15 @@ def test_transaction_utxos(requests_mock):
                 "amount": [
                     {
                         "unit": "lovelace",
-                        "quantity": "42000000",
-                        "data_hash": None
+                        "quantity": "42000000"
                     },
                     {
                         "unit": "b0d07d45fe9514f80213f4020e5a61241458be626841cde717cb38a76e7574636f696e",
-                        "quantity": "12",
-                        "data_hash": "9e478573ab81ea7a8e31891ce0648b81229f408d596a3483e6f4f9b92d3cf710"
+                        "quantity": "12"
                     }
-                ]
+                ],
+                "output_index": 0,
+                "data_hash": "9e478573ab81ea7a8e31891ce0648b81229f408d596a3483e6f4f9b92d3cf710"
             }
         ]
     }
@@ -242,7 +243,8 @@ def test_transaction_metadata_cbor(requests_mock):
     mock_data = [
         {
             "label": "1968",
-            "cbor_metadata": "\\xa100a16b436f6d62696e6174696f6e8601010101010c"
+            "cbor_metadata": "\\xa100a16b436f6d62696e6174696f6e8601010101010c",
+            "metadata": "a100a16b436f6d62696e6174696f6e8601010101010c"
         }
     ]
     requests_mock.get(f"{api.url}/txs/{hash}/metadata/cbor", json=mock_data)
@@ -256,12 +258,14 @@ def test_transaction_redeemers(requests_mock):
         {
             "tx_index": 0,
             "purpose": "spend",
+            "script_hash": "ec26b89af41bef0f7585353831cb5da42b5b37185e0c8a526143b824",
+            "datum_hash": "923918e403bf43c34b4ef6b48eb2ee04babed17320d8d1b9ff9ad086e86f44ec",
             "unit_mem": "1700",
             "unit_steps": "476468",
             "fee": "172033"
         }
     ]
-    requests_mock.get(f"{api.url}/txs/{hash}/metadata/cbor", json=mock_data)
+    requests_mock.get(f"{api.url}/txs/{hash}/redeemers", json=mock_data)
     mock_object = [TransactionRedeemersResponse(**data) for data in mock_data]
     assert api.transaction_redeemers(hash=hash) == mock_object
 

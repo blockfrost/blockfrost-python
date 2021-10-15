@@ -18,14 +18,16 @@ class GenesisResponse:
 
 
 @object_request_wrapper(GenesisResponse)
-def genesis(self):
+def genesis(self, **kwargs):
     """
     Return the information about blockchain genesis.
 
     https://docs.blockfrost.io/#tag/Cardano-Ledger/paths/~1genesis/get
 
-    :returns: GenesisResponse object.
-    :rtype: GenesisResponse
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns GenesisResponse object.
+    :rtype GenesisResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

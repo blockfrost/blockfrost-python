@@ -3,7 +3,7 @@ from ..utils import simple_request_wrapper
 
 
 @simple_request_wrapper
-def gateway(self, IPFS_path: str):
+def gateway(self, IPFS_path: str, **kwargs):
     """
     Retrieve an object from the IFPS gateway (useful if you do not want to rely on a public gateway, such as ipfs.blockfrost.dev).
 
@@ -11,8 +11,8 @@ def gateway(self, IPFS_path: str):
 
     :param IPFS_path: Path to the IPFS object.
     :type IPFS_path: str
-    :returns: file text.
-    :rtype: data
+    :returns file text.
+    :rtype data
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

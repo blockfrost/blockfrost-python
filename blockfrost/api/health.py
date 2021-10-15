@@ -10,14 +10,14 @@ class HealthResponse:
 
 
 @object_request_wrapper(HealthResponse)
-def health(self):
+def health(self, **kwargs):
     """
     Return backend status as a boolean. Your application should handle situations when backend for the given chain is unavailable.
 
     https://docs.blockfrost.io/#tag/Health/paths/~1health/get
 
-    :returns: HealthResponse object.
-    :rtype: HealthResponse
+    :returns HealthResponse object.
+    :rtype HealthResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -33,15 +33,16 @@ class ClockResponse:
 
 
 @object_request_wrapper(ClockResponse)
-def clock(self):
+def clock(self, **kwargs):
     """
     This endpoint provides the current UNIX time. Your application might use this to verify if the client clock is not out of sync.
 
     https://docs.blockfrost.io/#tag/Health/paths/~1health~1clock/get
 
-
-    :returns: ClockResponse object.
-    :rtype: ClockResponse
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns ClockResponse object.
+    :rtype ClockResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

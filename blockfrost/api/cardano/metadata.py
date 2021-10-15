@@ -17,6 +17,8 @@ def metadata_labels(self, **kwargs):
 
     https://docs.blockfrost.io/#tag/Cardano-Metadata/paths/~1metadata~1txs~1labels/get
 
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.
@@ -25,8 +27,8 @@ def metadata_labels(self, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of MetadataLabelResponse objects.
-    :rtype: [MetadataLabelResponse]
+    :returns A list of MetadataLabelResponse objects.
+    :rtype [MetadataLabelResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -52,6 +54,8 @@ def metadata_label_json(self, label: str, **kwargs):
 
     :param label: Metadata label
     :type label: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.
@@ -60,8 +64,8 @@ def metadata_label_json(self, label: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of MetadataLabelJsonResponse objects.
-    :rtype: [MetadataLabelJsonResponse]
+    :returns A list of MetadataLabelJsonResponse objects.
+    :rtype [MetadataLabelJsonResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -87,6 +91,8 @@ def metadata_label_cbor(self, label: str, **kwargs):
 
     :param label: Metadata label
     :type label: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
     :param gather_pages: Optional. Default: 100. Will collect all pages into one return
     :type gather_pages: bool
     :param count: Optional. Default: 1. The number of results displayed on one page.
@@ -95,8 +101,8 @@ def metadata_label_cbor(self, label: str, **kwargs):
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns: A list of MetadataLabelCBORResponse objects.
-    :rtype: [MetadataLabelCBORResponse]
+    :returns A list of MetadataLabelCBORResponse objects.
+    :rtype [MetadataLabelCBORResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

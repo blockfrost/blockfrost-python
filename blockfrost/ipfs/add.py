@@ -11,7 +11,7 @@ class IPFSObjectResponse:
 
 
 @object_request_wrapper(IPFSObjectResponse)
-def add(self, file_path: str):
+def add(self, file_path: str, **kwargs):
     """
     Add a file or directory to IPFS
 
@@ -22,8 +22,10 @@ def add(self, file_path: str):
 
     :param file_path: Path to file.
     :type file_path: str
-    :returns: IPFSObject object.
-    :rtype: IPFSObject
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns IPFSObject object.
+    :rtype IPFSObject
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

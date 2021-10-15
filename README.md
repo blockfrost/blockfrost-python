@@ -1,4 +1,8 @@
-[![Python package](https://github.com/blockfrost/blockfrost-python/actions/workflows/python-package.yml/badge.svg)](https://github.com/blockfrost/blockfrost-python/actions/workflows/python-package.yml)
+[![Package Test](https://github.com/blockfrost/blockfrost-python/actions/workflows/package-test.yml/badge.svg)](https://github.com/blockfrost/blockfrost-python/actions/workflows/package-test.yml)
+[![PyPI Latest Release](https://img.shields.io/pypi/v/blockfrost-python.svg)](https://pypi.org/project/blockfrost-python/)
+[![Package Status](https://img.shields.io/pypi/status/blockfrost-python.svg)](https://pypi.org/project/blockfrost-python/)
+[![License](https://img.shields.io/pypi/l/blockfrost-python.svg)](https://github.com/blockfrost/blockfrost-python/blob/master/LICENSE)
+
 
 <img src="https://blockfrost.io/images/logo.svg" width="250" align="right" height="90">
 
@@ -26,7 +30,7 @@ your API key.
 ## Installation
 
 ```console
-$ pip install git+https://github.com/blockfrost/blockfrost-python
+$ pip install blockfrost-python
 ```
 
 <br/>
@@ -47,8 +51,14 @@ api = BlockFrostApi(
 )
 try:
     health = api.health()
-    print(health.is_healthy)  # True
+    print(health)   # prints object:    HealthResponse(is_healthy=True)
+    health = api.health(return_type='json') # Can be useful if python wrapper is behind api version
+    print(health)   # prints json:      {"is_healthy":True}
+    health = api.health(return_type='pandas')
+    print(health)   # prints Dataframe:         is_healthy
+                    #                       0         True
 
+    
     account_rewards = api.account_rewards(
         stake_address='stake1ux3g2c9dx2nhhehyrezyxpkstartcqmu9hk63qgfkccw5rqttygt7',
         count=20,
@@ -59,7 +69,7 @@ try:
     account_rewards = api.account_rewards(
         stake_address='stake1ux3g2c9dx2nhhehyrezyxpkstartcqmu9hk63qgfkccw5rqttygt7',
         count=20,
-        gather_pages=True,
+        gather_pages=True, # will collect all pages
     )
     print(account_rewards[0].epoch)  # prints 221
     print(len(account_rewards))  # prints 57

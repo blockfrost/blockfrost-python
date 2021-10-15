@@ -10,14 +10,16 @@ class UsageMetricResponse:
 
 
 @object_list_request_wrapper(UsageMetricResponse)
-def metrics(self):
+def metrics(self, **kwargs):
     """
     History of your Blockfrost usage metrics in the past 30 days.
 
     https://docs.blockfrost.io/#tag/Metrics/paths/~1metrics~1/get
 
-    :returns: UsageMetricResponse object.
-    :rtype: UsageMetricResponse
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns UsageMetricResponse object.
+    :rtype UsageMetricResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -35,14 +37,16 @@ class UsageMetricEndpointResponse:
 
 
 @object_list_request_wrapper(UsageMetricEndpointResponse)
-def metrics_endpoints(self):
+def metrics_endpoints(self, **kwargs):
     """
     History of your Blockfrost usage metrics per endpoint in the past 30 days.
 
     https://docs.blockfrost.io/#tag/Metrics/paths/~1metrics~1endpoints/get
 
-    :returns: UsageMetricEndpointResponse object.
-    :rtype: UsageMetricEndpointResponse
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns UsageMetricEndpointResponse object.
+    :rtype UsageMetricEndpointResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

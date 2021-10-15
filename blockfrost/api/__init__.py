@@ -19,14 +19,15 @@ class BlockFrostApi(Api):
         version: str
 
     @object_request_wrapper(RootResponse)
-    def root(self):
+    def root(self, **kwargs):
         """
         Root endpoint has no other function than to point end users to documentation.
 
         https://docs.blockfrost.io/#tag/Health/paths/~1/get
-
-        :returns: RootResponse object.
-        :rtype: RootResponse
+        :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+        :type return_type: str
+        :returns RootResponse object.
+        :rtype RootResponse
         :raises ApiError: If API fails
         :raises Exception: If the API response is somehow malformed.
         """
@@ -60,6 +61,7 @@ class BlockFrostApi(Api):
         address, \
         address_total, \
         address_utxos, \
+        address_utxos_asset, \
         address_transactions
     from .cardano.assets import \
         assets, \
@@ -122,4 +124,7 @@ class BlockFrostApi(Api):
     from .cardano.scripts import \
         scripts, \
         script, \
-        script_redeemers
+        script_json, \
+        script_cbor, \
+        script_redeemers, \
+        script_datum

@@ -30,6 +30,7 @@ class TransactionResponse:
     pool_retire_count: int
     asset_mint_or_burn_count: int
     redeemer_count: int
+    valid_contract: bool
 
     def __init__(self,
                  hash: str,
@@ -52,6 +53,7 @@ class TransactionResponse:
                  pool_retire_count: int,
                  asset_mint_or_burn_count: int,
                  redeemer_count: int,
+                 valid_contract: bool,
                  ) -> None:
         self.hash = hash
         self.block = block
@@ -73,10 +75,11 @@ class TransactionResponse:
         self.pool_retire_count = pool_retire_count
         self.asset_mint_or_burn_count = asset_mint_or_burn_count
         self.redeemer_count = redeemer_count
+        self.valid_contract = valid_contract
 
 
 @object_request_wrapper(TransactionResponse)
-def transaction(self, hash: str):
+def transaction(self, hash: str, **kwargs):
     """
     Return content of the requested transaction.
 
@@ -84,8 +87,10 @@ def transaction(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: TransactionResponse object.
-    :rtype: TransactionResponse
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns TransactionResponse object.
+    :rtype TransactionResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -103,7 +108,6 @@ class TransactionAddressUTXOSResponse:
         class Amount:
             unit: str
             quantity: str
-            data_hash: str
 
         address: str
         amount: [Amount]
@@ -126,14 +130,17 @@ class TransactionAddressUTXOSResponse:
         class Amount:
             unit: str
             quantity: str
-            data_hash: str
 
         address: str
         amount: [Amount]
+        output_index: int
+        data_hash: str
 
-        def __init_(self, address, amount: [Amount]) -> None:
+        def __init_(self, address, amount: [Amount], output_index, data_hash) -> None:
             self.address = address
             self.amount = [self.Amount(**o) for o in amount]
+            self.output_index = output_index
+            self.data_hash = data_hash
 
     hash: str
     inputs: [Inputs]
@@ -146,7 +153,7 @@ class TransactionAddressUTXOSResponse:
 
 
 @object_request_wrapper(TransactionAddressUTXOSResponse)
-def transaction_utxos(self, hash: str):
+def transaction_utxos(self, hash: str, **kwargs):
     """
     Return the inputs and UTXOs of the specific transaction.
 
@@ -154,8 +161,10 @@ def transaction_utxos(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: TransactionAddressUTXOSResponse object.
-    :rtype: TransactionAddressUTXOSResponse
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns TransactionAddressUTXOSResponse object.
+    :rtype TransactionAddressUTXOSResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -173,7 +182,7 @@ class TransactionStakeResponse:
 
 
 @object_list_request_wrapper(TransactionStakeResponse)
-def transaction_stakes(self, hash: str):
+def transaction_stakes(self, hash: str, **kwargs):
     """
     Obtain information about (de)registration of stake addresses within a transaction.
 
@@ -181,8 +190,10 @@ def transaction_stakes(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: A list of TransactionStakeResponse objects.
-    :rtype: [TransactionStakeResponse]
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns A list of TransactionStakeResponse objects.
+    :rtype [TransactionStakeResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -202,7 +213,7 @@ class TransactionDelegationResponse:
 
 
 @object_list_request_wrapper(TransactionDelegationResponse)
-def transaction_delegations(self, hash: str):
+def transaction_delegations(self, hash: str, **kwargs):
     """
     Obtain information about delegation certificates of a specific transaction.
 
@@ -210,8 +221,10 @@ def transaction_delegations(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: A list of TransactionDelegationResponse objects.
-    :rtype: [TransactionDelegationResponse]
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns A list of TransactionDelegationResponse objects.
+    :rtype [TransactionDelegationResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -228,7 +241,7 @@ class TransactionWithdrawalResponse:
 
 
 @object_list_request_wrapper(TransactionWithdrawalResponse)
-def transaction_withdrawals(self, hash: str):
+def transaction_withdrawals(self, hash: str, **kwargs):
     """
     Obtain information about withdrawals of a specific transaction.
 
@@ -236,8 +249,10 @@ def transaction_withdrawals(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: A list of TransactionWithdrawalResponse objects.
-    :rtype: [TransactionWithdrawalResponse]
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns A list of TransactionWithdrawalResponse objects.
+    :rtype [TransactionWithdrawalResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -256,7 +271,7 @@ class TransactionMIRResponse:
 
 
 @object_list_request_wrapper(TransactionMIRResponse)
-def transaction_mirs(self, hash: str):
+def transaction_mirs(self, hash: str, **kwargs):
     """
     Obtain information about Move Instantaneous Rewards (MIRs) of a specific transaction.
 
@@ -264,8 +279,10 @@ def transaction_mirs(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: A list of TransactionMIRResponse objects.
-    :rtype: [TransactionMIRResponse]
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns A list of TransactionMIRResponse objects.
+    :rtype [TransactionMIRResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -332,7 +349,7 @@ class TransactionPoolUpdateResponse:
 
 
 @object_list_request_wrapper(TransactionPoolUpdateResponse)
-def transaction_pool_updates(self, hash: str):
+def transaction_pool_updates(self, hash: str, **kwargs):
     """
     Obtain information about stake pool registration and update certificates of a specific transaction.
 
@@ -340,8 +357,10 @@ def transaction_pool_updates(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: A list of TransactionPoolUpdateResponse objects.
-    :rtype: [TransactionPoolUpdateResponse]
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns A list of TransactionPoolUpdateResponse objects.
+    :rtype [TransactionPoolUpdateResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -359,7 +378,7 @@ class TransactionPoolRetiresResponse:
 
 
 @object_list_request_wrapper(TransactionPoolRetiresResponse)
-def transaction_pool_retires(self, hash: str):
+def transaction_pool_retires(self, hash: str, **kwargs):
     """
     Obtain information about stake pool retirements within a specific transaction.
 
@@ -367,8 +386,10 @@ def transaction_pool_retires(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: A list of TransactionPoolRetiresResponse objects.
-    :rtype: [TransactionPoolRetiresResponse]
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns A list of TransactionPoolRetiresResponse objects.
+    :rtype [TransactionPoolRetiresResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -385,7 +406,7 @@ class TransactionMetadataResponse:
 
 
 @object_list_request_wrapper(TransactionMetadataResponse)
-def transaction_metadata(self, hash: str):
+def transaction_metadata(self, hash: str, **kwargs):
     """
     Obtain the transaction metadata.
 
@@ -393,8 +414,10 @@ def transaction_metadata(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: A list of TransactionMetadataResponse objects.
-    :rtype: [TransactionMetadataResponse]
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns A list of TransactionMetadataResponse objects.
+    :rtype [TransactionMetadataResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -408,10 +431,11 @@ def transaction_metadata(self, hash: str):
 class TransactionMetadataCBORResponse:
     label: str
     cbor_metadata: str
+    metadata: str
 
 
 @object_list_request_wrapper(TransactionMetadataCBORResponse)
-def transaction_metadata_cbor(self, hash: str):
+def transaction_metadata_cbor(self, hash: str, **kwargs):
     """
     Obtain the transaction metadata in CBOR.
 
@@ -419,8 +443,10 @@ def transaction_metadata_cbor(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: A list of TransactionMetadataCBORResponse objects.
-    :rtype: [TransactionMetadataCBORResponse]
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns A list of TransactionMetadataCBORResponse objects.
+    :rtype [TransactionMetadataCBORResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -429,17 +455,20 @@ def transaction_metadata_cbor(self, hash: str):
         headers=self.default_headers
     )
 
+
 @dataclass
 class TransactionRedeemersResponse:
     tx_index: int
     purpose: str
+    script_hash: str
+    datum_hash: str
     unit_mem: str
     unit_steps: str
     fee: str
 
 
 @object_list_request_wrapper(TransactionRedeemersResponse)
-def transaction_redeemers(self, hash: str):
+def transaction_redeemers(self, hash: str, **kwargs):
     """
     Obtain the transaction redeemers.
 
@@ -447,19 +476,21 @@ def transaction_redeemers(self, hash: str):
 
     :param hash: Hash of the requested transaction.
     :type hash: str
-    :returns: A list of TransactionRedeemersResponse objects.
-    :rtype: [TransactionRedeemersResponse]
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns A list of TransactionRedeemersResponse objects.
+    :rtype [TransactionRedeemersResponse]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
-        url=f"{self.url}/txs/{hash}/metadata/cbor",
+        url=f"{self.url}/txs/{hash}/redeemers",
         headers=self.default_headers
     )
 
 
 @object_request_wrapper()
-def transaction_submit(self, file_path: str):
+def transaction_submit(self, file_path: str, **kwargs):
     """
     Submit an already serialized transaction to the network.
 
@@ -467,8 +498,8 @@ def transaction_submit(self, file_path: str):
 
     :param file_path: Path to file.
     :type file_path: str
-    :returns: str object.
-    :rtype: str
+    :returns str object.
+    :rtype str
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

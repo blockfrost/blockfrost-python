@@ -26,14 +26,16 @@ class NetworkResponse:
 
 
 @object_request_wrapper(NetworkResponse)
-def network(self):
+def network(self, **kwargs):
     """
     Return detailed network information.
 
     https://docs.blockfrost.io/#tag/Cardano-Network/paths/~1network/get
 
-    :returns: NetworkResponse object.
-    :rtype: NetworkResponse
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns NetworkResponse object.
+    :rtype NetworkResponse
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
