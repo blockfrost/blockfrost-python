@@ -13,6 +13,7 @@ class TransactionResponse:
     hash: str
     block: str
     block_height: int
+    block_time: int
     slot: int
     index: int
     output_amount: [Amount]
@@ -36,6 +37,7 @@ class TransactionResponse:
                  hash: str,
                  block: str,
                  block_height: int,
+                 block_time: int,
                  slot: int,
                  index: int,
                  output_amount: [Amount],
@@ -58,6 +60,7 @@ class TransactionResponse:
         self.hash = hash
         self.block = block
         self.block_height = block_height
+        self.block_time = block_time
         self.slot = slot
         self.index = index
         self.output_amount = [self.Amount(**o) for o in output_amount]

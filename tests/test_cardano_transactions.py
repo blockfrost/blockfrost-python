@@ -21,6 +21,7 @@ def test_transaction(requests_mock):
         "hash": hash,
         "block": "356b7d7dbb696ccd12775c016941057a9dc70898d87a63fc752271bb46856940",
         "block_height": 123456,
+        "block_time": 1635505891,
         "slot": 42000000,
         "index": 1,
         "output_amount": [
