@@ -149,6 +149,7 @@ class AssetTransactionResponse:
     tx_hash: str
     tx_index: int
     block_height: int
+    block_time: int
 
 
 @object_list_request_wrapper(AssetTransactionResponse)
