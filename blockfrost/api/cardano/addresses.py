@@ -95,13 +95,16 @@ class AddressesUTXOSResponse:
         quantity: str
 
     tx_hash: str
+    tx_index: int
     output_index: int
     amount: [Amount]
     block: str
     data_hash: str
 
-    def __init__(self, tx_hash: str, output_index: int, amount: [Amount], block: str, data_hash: str) -> None:
+    def __init__(self, tx_hash: str, tx_index: int, output_index: int, amount: [Amount], block: str,
+                 data_hash: str) -> None:
         self.tx_hash = tx_hash
+        self.tx_index = tx_index
         self.output_index = output_index
         self.amount = [self.Amount(**o) for o in amount]
         self.block = block
