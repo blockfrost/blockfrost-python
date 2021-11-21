@@ -1,4 +1,6 @@
-from blockfrost import BlockFrostApi, ApiError
+import os
+
+from blockfrost import BlockFrostApi, ApiError, ApiUrls
 from blockfrost.api.cardano.addresses import \
     AddressResponse, \
     AddressesTotalResponse, \
@@ -6,7 +8,7 @@ from blockfrost.api.cardano.addresses import \
     AddressesUTXOSAssetResponse, \
     AddressesTransactionResponse
 
-address = 'addr1q9ucyt3s5f4naz3n7fwpnt3a0t75kl3rxdvpe63e2gdes7dzs4s26v4800nwg8jygvrdqh6xhsphct0d4zqsnd3sagxq6kwrts'
+address = 'addr1qx466898end6q5mpvrwwmycq35v83c9e8cnffadv6gr6q6azs4s26v4800nwg8jygvrdqh6xhsphct0d4zqsnd3sagxqqjjgln'
 stake_address = 'stake1ux3g2c9dx2nhhehyrezyxpkstartcqmu9hk63qgfkccw5rqttygt7'
 asset = 'b0d07d45fe9514f80213f4020e5a61241458be626841cde717cb38a76e7574636f696e'
 
@@ -70,6 +72,7 @@ def test_address_utxos(requests_mock):
     mock_data = [
         {
             "tx_hash": "39a7a284c2a0948189dc45dec670211cd4d72f7b66c5726c08d9b3df11e44d58",
+            "tx_index": 1,
             "output_index": 0,
             "amount": [
                 {
@@ -82,6 +85,7 @@ def test_address_utxos(requests_mock):
         },
         {
             "tx_hash": "4c4e67bafa15e742c13c592b65c8f74c769cd7d9af04c848099672d1ba391b49",
+            "tx_index": 1,
             "output_index": 0,
             "amount": [
                 {
@@ -94,6 +98,7 @@ def test_address_utxos(requests_mock):
         },
         {
             "tx_hash": "768c63e27a1c816a83dc7b07e78af673b2400de8849ea7e7b734ae1333d100d2",
+            "tx_index": 1,
             "output_index": 1,
             "amount": [
                 {
