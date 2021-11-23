@@ -1,12 +1,6 @@
+import os
 from blockfrost import BlockFrostApi, ApiError
-from blockfrost.api.cardano.pools import \
-    PoolListResponse, \
-    PoolResponse, \
-    PoolHistoryResponse, \
-    PoolMetadataResponse, \
-    PoolRelayResponse, \
-    PoolDelegatorResponse, \
-    PoolUpdateResponse
+from blockfrost.utils import convert_json_to_object
 
 pool_id = 'pool1pu5jlj4q9w9jlxeu370a3c9myx47md5j5m2str0naunn2q3lkdy'
 
@@ -19,8 +13,13 @@ def test_pools(requests_mock):
         "pool1ztjyjfsh432eqetadf82uwuxklh28xc85zcphpwq6mmezavzad2"
     ]
     requests_mock.get(f"{api.url}/pools", json=mock_data)
-    mock_object = mock_data
-    assert api.pools() == mock_object
+    assert api.pools() == convert_json_to_object(mock_data)
+
+
+def test_integration_pools():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.pools()
 
 
 def test_pools_retired(requests_mock):
@@ -40,8 +39,13 @@ def test_pools_retired(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/pools/retired", json=mock_data)
-    mock_object = [PoolListResponse(**data) for data in mock_data]
-    assert api.pools_retired() == mock_object
+    assert api.pools_retired() == convert_json_to_object(mock_data)
+
+
+def test_integration_pools_retired():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.pools_retired()
 
 
 def test_pools_retiring(requests_mock):
@@ -61,8 +65,13 @@ def test_pools_retiring(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/pools/retiring", json=mock_data)
-    mock_object = [PoolListResponse(**data) for data in mock_data]
-    assert api.pools_retiring() == mock_object
+    assert api.pools_retiring() == convert_json_to_object(mock_data)
+
+
+def test_integration_pools_retiring():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.pools_retiring()
 
 
 def test_pool(requests_mock):
@@ -96,8 +105,13 @@ def test_pool(requests_mock):
         ]
     }
     requests_mock.get(f"{api.url}/pools/{pool_id}", json=mock_data)
-    mock_object = PoolResponse(**mock_data)
-    assert api.pool(pool_id=pool_id) == mock_object
+    assert api.pool(pool_id=pool_id) == convert_json_to_object(mock_data)
+
+
+def test_integration_pool():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.pool(pool_id=pool_id)
 
 
 def test_pool_history(requests_mock):
@@ -114,8 +128,13 @@ def test_pool_history(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/pools/{pool_id}/history", json=mock_data)
-    mock_object = [PoolHistoryResponse(**data) for data in mock_data]
-    assert api.pool_history(pool_id=pool_id) == mock_object
+    assert api.pool_history(pool_id=pool_id) == convert_json_to_object(mock_data)
+
+
+def test_integration_pool_history():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.pool_history(pool_id=pool_id)
 
 
 def test_pool_metadata(requests_mock):
@@ -131,8 +150,13 @@ def test_pool_metadata(requests_mock):
         "homepage": "https://stakentus.com/"
     }
     requests_mock.get(f"{api.url}/pools/{pool_id}/metadata", json=mock_data)
-    mock_object = PoolMetadataResponse(**mock_data)
-    assert api.pool_metadata(pool_id=pool_id) == mock_object
+    assert api.pool_metadata(pool_id=pool_id) == convert_json_to_object(mock_data)
+
+
+def test_integration_pool_metadata():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.pool_metadata(pool_id=pool_id)
 
 
 def test_pool_relays(requests_mock):
@@ -147,8 +171,13 @@ def test_pool_relays(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/pools/{pool_id}/relays", json=mock_data)
-    mock_object = [PoolRelayResponse(**data) for data in mock_data]
-    assert api.pool_relays(pool_id=pool_id) == mock_object
+    assert api.pool_relays(pool_id=pool_id) == convert_json_to_object(mock_data)
+
+
+def test_integration_pool_relays():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.pool_relays(pool_id=pool_id)
 
 
 def test_pool_delegators(requests_mock):
@@ -168,8 +197,13 @@ def test_pool_delegators(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/pools/{pool_id}/delegators", json=mock_data)
-    mock_object = [PoolDelegatorResponse(**data) for data in mock_data]
-    assert api.pool_delegators(pool_id=pool_id) == mock_object
+    assert api.pool_delegators(pool_id=pool_id) == convert_json_to_object(mock_data)
+
+
+def test_integration_pool_delegators():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.pool_delegators(pool_id=pool_id)
 
 
 def test_pool_blocks(requests_mock):
@@ -181,8 +215,13 @@ def test_pool_blocks(requests_mock):
         "86bf7b4a274e0f8ec9816171667c1b4a0cfc661dc21563f271acea9482b62df7"
     ]
     requests_mock.get(f"{api.url}/pools/{pool_id}/blocks", json=mock_data)
-    mock_object = mock_data
-    assert api.pool_blocks(pool_id=pool_id) == mock_object
+    assert api.pool_blocks(pool_id=pool_id) == convert_json_to_object(mock_data)
+
+
+def test_integration_pool_blocks():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.pool_blocks(pool_id=pool_id)
 
 
 def test_pool_updates(requests_mock):
@@ -205,5 +244,10 @@ def test_pool_updates(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/pools/{pool_id}/updates", json=mock_data)
-    mock_object = [PoolUpdateResponse(**data) for data in mock_data]
-    assert api.pool_updates(pool_id=pool_id) == mock_object
+    assert api.pool_updates(pool_id=pool_id) == convert_json_to_object(mock_data)
+
+
+def test_integration_pool_updates():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.pool_updates(pool_id=pool_id)

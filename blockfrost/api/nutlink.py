@@ -1,17 +1,9 @@
 import requests
 from dataclasses import dataclass
-from ..utils import object_request_wrapper, object_list_request_wrapper
+from ..utils import request_wrapper, list_request_wrapper
 
 
-@dataclass
-class NutlinkAddressResponse:
-    address: str
-    metadata_url: str
-    metadata_hash: str
-    metadata: dict
-
-
-@object_request_wrapper(NutlinkAddressResponse)
+@request_wrapper
 def nutlink_address(self, address: str, **kwargs):
     """
     List metadata about specific address
@@ -33,14 +25,7 @@ def nutlink_address(self, address: str, **kwargs):
     )
 
 
-@dataclass
-class NutlinkAddressTickersResponse:
-    name: str
-    count: int
-    latest_block: int
-
-
-@object_list_request_wrapper(NutlinkAddressTickersResponse)
+@list_request_wrapper
 def nutlink_address_tickers(self, address: str, **kwargs):
     """
     List tickers for a specific metadata oracle
@@ -71,15 +56,7 @@ def nutlink_address_tickers(self, address: str, **kwargs):
     )
 
 
-@dataclass
-class NutlinkAddressTickerResponse:
-    tx_hash: str
-    block_height: int
-    tx_index: int
-    payload = dict
-
-
-@object_list_request_wrapper(NutlinkAddressTickerResponse)
+@list_request_wrapper
 def nutlink_address_ticker(self, address: str, ticker: str, **kwargs):
     """
     List of records of a specific ticker
@@ -112,16 +89,7 @@ def nutlink_address_ticker(self, address: str, ticker: str, **kwargs):
     )
 
 
-@dataclass
-class NutlinkTickerResponse:
-    address: str
-    tx_hash: str
-    block_height: int
-    tx_index: int
-    payload = dict
-
-
-@object_list_request_wrapper(NutlinkTickerResponse)
+@list_request_wrapper
 def nutlink_ticker(self, ticker: str, **kwargs):
     """
     List of records of a specific ticker

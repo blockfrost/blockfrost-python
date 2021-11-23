@@ -2,7 +2,7 @@ import os
 import requests
 from dataclasses import dataclass
 
-from ..utils import Api, ApiUrls, object_request_wrapper
+from ..utils import Api, ApiUrls, request_wrapper
 
 
 class BlockFrostApi(Api):
@@ -13,12 +13,7 @@ class BlockFrostApi(Api):
             base_url=base_url if base_url else os.environ.get('BLOCKFROST_API_URL', default=ApiUrls.mainnet.value),
             api_version=api_version)
 
-    @dataclass
-    class RootResponse:
-        url: str
-        version: str
-
-    @object_request_wrapper(RootResponse)
+    @request_wrapper
     def root(self, **kwargs):
         """
         Root endpoint has no other function than to point end users to documentation.

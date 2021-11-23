@@ -1,28 +1,8 @@
 import requests
-from dataclasses import dataclass
-from blockfrost.utils import object_request_wrapper, object_list_request_wrapper
+from blockfrost.utils import request_wrapper, list_request_wrapper
 
 
-@dataclass
-class BlockResponse:
-    time: int
-    height: int
-    hash: str
-    slot: int
-    epoch: int
-    epoch_slot: int
-    slot_leader: str
-    size: int
-    tx_count: int
-    output: str
-    fees: str
-    block_vrf: str
-    previous_block: str
-    next_block: str
-    confirmations: int
-
-
-@object_request_wrapper(BlockResponse)
+@request_wrapper
 def block_latest(self, **kwargs):
     """
     Return the latest block available to the backends, also known as the tip of the blockchain.
@@ -31,8 +11,8 @@ def block_latest(self, **kwargs):
 
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :returns BlockResponse object.
-    :rtype BlockResponse
+    :returns object.
+    :rtype: Namespace
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -42,14 +22,16 @@ def block_latest(self, **kwargs):
     )
 
 
-@object_list_request_wrapper()
+@list_request_wrapper
 def block_latest_transactions(self, **kwargs):
     """
     Return the transactions within the latest block.
 
     https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1latest~1txs/get
 
-    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
+    :type gather_pages: bool
+    :param count: Optional. Default: 100. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
@@ -67,7 +49,7 @@ def block_latest_transactions(self, **kwargs):
     )
 
 
-@object_request_wrapper(BlockResponse)
+@request_wrapper
 def block(self, hash_or_number: str, **kwargs):
     """
     Return the content of a requested block.
@@ -78,8 +60,8 @@ def block(self, hash_or_number: str, **kwargs):
     :type hash_or_number: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :returns BlockResponse object.
-    :rtype BlockResponse
+    :returns object.
+    :rtype: Namespace
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -89,7 +71,7 @@ def block(self, hash_or_number: str, **kwargs):
     )
 
 
-@object_request_wrapper(BlockResponse)
+@request_wrapper
 def block_slot(self, slot_number: int, **kwargs):
     """
     Return the content of a requested block for a specific slot.
@@ -100,8 +82,8 @@ def block_slot(self, slot_number: int, **kwargs):
     :type slot_number: int
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :returns BlockResponse object.
-    :rtype BlockResponse
+    :returns object.
+    :rtype: Namespace
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -111,7 +93,7 @@ def block_slot(self, slot_number: int, **kwargs):
     )
 
 
-@object_request_wrapper(BlockResponse)
+@request_wrapper
 def block_epoch_slot(self, epoch_number: int, slot_number: int, **kwargs):
     """
     Return the content of a requested block for a specific slot in an epoch.
@@ -120,12 +102,12 @@ def block_epoch_slot(self, epoch_number: int, slot_number: int, **kwargs):
 
     :param epoch_number: Epoch for specific epoch slot.
     :type epoch_number: int
-    :param slot_number: Slot position for requested block.
+    :param slot_number: Slot position for requested block (epoch_slot).
     :type slot_number: int
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :returns BlockResponse object.
-    :rtype BlockResponse
+    :returns object.
+    :rtype: Namespace
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -135,7 +117,7 @@ def block_epoch_slot(self, epoch_number: int, slot_number: int, **kwargs):
     )
 
 
-@object_list_request_wrapper(BlockResponse)
+@list_request_wrapper
 def blocks_next(self, hash_or_number: str, **kwargs):
     """
     Return the list of blocks following a specific block.
@@ -146,12 +128,14 @@ def blocks_next(self, hash_or_number: str, **kwargs):
     :type hash_or_number: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
+    :type gather_pages: bool
+    :param count: Optional. Default: 100. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
-    :returns A list of BlockResponse objects.
-    :rtype [BlockResponse]
+    :returns A list of objects.
+    :rtype [Namespace]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -162,7 +146,7 @@ def blocks_next(self, hash_or_number: str, **kwargs):
     )
 
 
-@object_list_request_wrapper(BlockResponse)
+@list_request_wrapper
 def blocks_previous(self, hash_or_number: str, **kwargs):
     """
     Return the list of blocks preceding a specific block.
@@ -173,12 +157,14 @@ def blocks_previous(self, hash_or_number: str, **kwargs):
     :type hash_or_number: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
+    :type gather_pages: bool
+    :param count: Optional. Default: 100. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
-    :returns A list of BlockResponse objects.
-    :rtype [BlockResponse]
+    :returns A list of objects.
+    :rtype [Namespace]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -189,7 +175,7 @@ def blocks_previous(self, hash_or_number: str, **kwargs):
     )
 
 
-@object_list_request_wrapper()
+@list_request_wrapper
 def block_transactions(self, hash_or_number: str, **kwargs):
     """
     Return the transactions within the block.
@@ -198,7 +184,9 @@ def block_transactions(self, hash_or_number: str, **kwargs):
 
     :param hash_or_number: Hash or number of the requested block.
     :type hash_or_number: str
-    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
+    :type gather_pages: bool
+    :param count: Optional. Default: 100. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int

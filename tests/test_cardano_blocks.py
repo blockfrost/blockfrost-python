@@ -1,10 +1,11 @@
+import os
 from blockfrost import BlockFrostApi, ApiError
-from blockfrost.api.cardano.blocks import \
-    BlockResponse
+from blockfrost.utils import convert_json_to_object
 
-hash = '4ea1ba291e8eef538635a53e59fddba7810d1679631cc3aed7c8e6c4091a516a'
-slot_number = 412162133
-epoch_number = 425
+# hash = '4ea1ba291e8eef538635a53e59fddba7810d1679631cc3aed7c8e6c4091a516a'
+hash = '796b28e192f1c9040e3749feb1bd2b35ce9a262976c7db95b43a3d3c417d37d4'
+slot_number = 46138897
+epoch_number = 304
 
 
 def test_block_latest(requests_mock):
@@ -27,8 +28,13 @@ def test_block_latest(requests_mock):
         "confirmations": 4698
     }
     requests_mock.get(f"{api.url}/blocks/latest", json=mock_data)
-    mock_object = BlockResponse(**mock_data)
-    assert api.block_latest() == mock_object
+    assert api.block_latest() == convert_json_to_object(mock_data)
+
+
+def test_integration_block_latest():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.block_latest()
 
 
 def test_block_latest_transactions(requests_mock):
@@ -40,8 +46,13 @@ def test_block_latest_transactions(requests_mock):
         "e8073fd5318ff43eca18a852527166aa8008bee9ee9e891f585612b7e4ba700b"
     ]
     requests_mock.get(f"{api.url}/blocks/latest/txs", json=mock_data)
-    mock_object = mock_data
-    assert api.block_latest_transactions() == mock_object
+    assert api.block_latest_transactions() == convert_json_to_object(mock_data)
+
+
+def test_integration_block_latest_transactions():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.block_latest_transactions()
 
 
 def test_block(requests_mock):
@@ -64,8 +75,13 @@ def test_block(requests_mock):
         "confirmations": 4698
     }
     requests_mock.get(f"{api.url}/blocks/{hash}", json=mock_data)
-    mock_object = BlockResponse(**mock_data)
-    assert api.block(hash_or_number=hash) == mock_object
+    assert api.block(hash_or_number=hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_block():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.block(hash_or_number=hash)
 
 
 def test_block_slot(requests_mock):
@@ -88,8 +104,13 @@ def test_block_slot(requests_mock):
         "confirmations": 4698
     }
     requests_mock.get(f"{api.url}/blocks/slot/{slot_number}", json=mock_data)
-    mock_object = BlockResponse(**mock_data)
-    assert api.block_slot(slot_number=slot_number) == mock_object
+    assert api.block_slot(slot_number=slot_number) == convert_json_to_object(mock_data)
+
+
+def test_integration_block_slot():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.block_slot(slot_number=slot_number)
 
 
 def test_block_epoch_slot(requests_mock):
@@ -112,8 +133,13 @@ def test_block_epoch_slot(requests_mock):
         "confirmations": 4698
     }
     requests_mock.get(f"{api.url}/blocks/epoch/{epoch_number}/slot/{slot_number}", json=mock_data)
-    mock_object = BlockResponse(**mock_data)
-    assert api.block_epoch_slot(epoch_number=epoch_number, slot_number=slot_number) == mock_object
+    assert api.block_epoch_slot(epoch_number=epoch_number, slot_number=slot_number) == convert_json_to_object(mock_data)
+
+
+def test_integration_block_epoch_slot():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.block_epoch_slot(epoch_number=epoch_number, slot_number=174097)
 
 
 def test_blocks_next(requests_mock):
@@ -138,8 +164,13 @@ def test_blocks_next(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/blocks/{hash}/next", json=mock_data)
-    mock_object = [BlockResponse(**data) for data in mock_data]
-    assert api.blocks_next(hash_or_number=hash) == mock_object
+    assert api.blocks_next(hash_or_number=hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_blocks_next():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.blocks_next(hash_or_number=hash)
 
 
 def test_blocks_previous(requests_mock):
@@ -164,8 +195,13 @@ def test_blocks_previous(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/blocks/{hash}/previous", json=mock_data)
-    mock_object = [BlockResponse(**data) for data in mock_data]
-    assert api.blocks_previous(hash_or_number=hash) == mock_object
+    assert api.blocks_previous(hash_or_number=hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_blocks_previous():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.blocks_previous(hash_or_number=hash)
 
 
 def test_block_transactions(requests_mock):
@@ -177,5 +213,10 @@ def test_block_transactions(requests_mock):
         "e8073fd5318ff43eca18a852527166aa8008bee9ee9e891f585612b7e4ba700b"
     ]
     requests_mock.get(f"{api.url}/blocks/{hash}/txs", json=mock_data)
-    mock_object = mock_data
-    assert api.block_transactions(hash_or_number=hash) == mock_object
+    assert api.block_transactions(hash_or_number=hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_block_transactions():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.block_transactions(hash_or_number=hash)

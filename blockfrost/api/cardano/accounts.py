@@ -1,23 +1,8 @@
 import requests
-from dataclasses import dataclass
-from blockfrost.utils import object_request_wrapper, object_list_request_wrapper
+from blockfrost.utils import request_wrapper, list_request_wrapper
 
 
-@dataclass
-class AccountResponse:
-    stake_address: str
-    active: bool
-    active_epoch: int
-    controlled_amount: str
-    rewards_sum: str
-    withdrawals_sum: str
-    reserves_sum: str
-    treasury_sum: str
-    withdrawable_amount: str
-    pool_id: str
-
-
-@object_request_wrapper(AccountResponse)
+@request_wrapper
 def accounts(self, stake_address: str, **kwargs):
     """
     Obtain information about a specific networkStake account.
@@ -28,8 +13,8 @@ def accounts(self, stake_address: str, **kwargs):
     :type stake_address: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :returns AccountResponse object.
-    :rtype: AccountResponse
+    :returns object.
+    :rtype: Namespace
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -39,14 +24,7 @@ def accounts(self, stake_address: str, **kwargs):
     )
 
 
-@dataclass
-class AccountRewardResponse:
-    epoch: int
-    amount: str
-    pool_id: str
-
-
-@object_list_request_wrapper(AccountRewardResponse)
+@list_request_wrapper
 def account_rewards(self, stake_address: str, **kwargs):
     """
     Obtain information about the history of a specific account.
@@ -57,16 +35,16 @@ def account_rewards(self, stake_address: str, **kwargs):
     :type stake_address: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :param gather_pages: Optional. Default: 100. Will collect all pages into one return
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
     :type gather_pages: bool
-    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :param count: Optional. Default: 100. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns A list of AccountRewardResponse objects.
-    :rtype: [AccountRewardResponse]
+    :returns A list of objects.
+    :rtype [Namespace]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -77,14 +55,7 @@ def account_rewards(self, stake_address: str, **kwargs):
     )
 
 
-@dataclass
-class AccountHistoryResponse:
-    active_epoch: int
-    amount: str
-    pool_id: str
-
-
-@object_list_request_wrapper(AccountHistoryResponse)
+@list_request_wrapper
 def account_history(self, stake_address: str, **kwargs):
     """
     Obtain information about the history of a specific account.
@@ -95,16 +66,16 @@ def account_history(self, stake_address: str, **kwargs):
     :type stake_address: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :param gather_pages: Optional. Default: 100. Will collect all pages into one return
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
     :type gather_pages: bool
-    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :param count: Optional. Default: 100. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns A list of AccountHistoryResponse objects.
-    :rtype [AccountHistoryResponse]
+    :returns A list of objects.
+    :rtype [Namespace]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -115,15 +86,7 @@ def account_history(self, stake_address: str, **kwargs):
     )
 
 
-@dataclass
-class AccountDelegationResponse:
-    active_epoch: int
-    tx_hash: str
-    amount: str
-    pool_id: str
-
-
-@object_list_request_wrapper(AccountDelegationResponse)
+@list_request_wrapper
 def account_delegations(self, stake_address: str, **kwargs):
     """
     Obtain information about the delegation of a specific account.
@@ -134,16 +97,16 @@ def account_delegations(self, stake_address: str, **kwargs):
     :type stake_address: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :param gather_pages: Optional. Default: 100. Will collect all pages into one return
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
     :type gather_pages: bool
-    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :param count: Optional. Default: 100. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns A list of AccountDelegationResponse objects.
-    :rtype: [AccountDelegationResponse]
+    :returns A list of objects.
+    :rtype [Namespace]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -154,13 +117,7 @@ def account_delegations(self, stake_address: str, **kwargs):
     )
 
 
-@dataclass
-class AccountRegistrationResponse:
-    tx_hash: str
-    action: str
-
-
-@object_list_request_wrapper(AccountRegistrationResponse)
+@list_request_wrapper
 def account_registrations(self, stake_address: str, **kwargs):
     """
     Obtain information about the registrations and deregistrations of a specific account.
@@ -171,16 +128,16 @@ def account_registrations(self, stake_address: str, **kwargs):
     :type stake_address: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :param gather_pages: Optional. Default: 100. Will collect all pages into one return
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
     :type gather_pages: bool
-    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :param count: Optional. Default: 100. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns A list of AccountRegistrationResponse objects.
-    :rtype: [AccountRegistrationResponse]
+    :returns A list of objects.
+    :rtype [Namespace]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -191,13 +148,7 @@ def account_registrations(self, stake_address: str, **kwargs):
     )
 
 
-@dataclass
-class AccountWithdrawalResponse:
-    tx_hash: str
-    amount: str
-
-
-@object_list_request_wrapper(AccountWithdrawalResponse)
+@list_request_wrapper
 def account_withdrawals(self, stake_address: str, **kwargs):
     """
     Obtain information about the withdrawals of a specific account.
@@ -208,16 +159,16 @@ def account_withdrawals(self, stake_address: str, **kwargs):
     :type stake_address: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :param gather_pages: Optional. Default: 100. Will collect all pages into one return
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
     :type gather_pages: bool
-    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :param count: Optional. Default: 100. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns A list of AccountWithdrawalResponse objects.
-    :rtype: [AccountWithdrawalResponse]
+    :returns A list of objects.
+    :rtype [Namespace]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -228,13 +179,7 @@ def account_withdrawals(self, stake_address: str, **kwargs):
     )
 
 
-@dataclass
-class AccountMIRSResponse:
-    tx_hash: str
-    amount: str
-
-
-@object_list_request_wrapper(AccountMIRSResponse)
+@list_request_wrapper
 def account_mirs(self, stake_address: str, **kwargs):
     """
     Obtain information about the MIRs of a specific account.
@@ -245,16 +190,16 @@ def account_mirs(self, stake_address: str, **kwargs):
     :type stake_address: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :param gather_pages: Optional. Default: 100. Will collect all pages into one return
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
     :type gather_pages: bool
-    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :param count: Optional. Default: 100. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns A list of AccountMIRSResponse objects.
-    :rtype: [AccountMIRSResponse]
+    :returns A list of objects.
+    :rtype [Namespace]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -265,12 +210,7 @@ def account_mirs(self, stake_address: str, **kwargs):
     )
 
 
-@dataclass
-class AccountAddressResponse:
-    address: str
-
-
-@object_list_request_wrapper(AccountAddressResponse)
+@list_request_wrapper
 def account_addresses(self, stake_address: str, **kwargs):
     """
     Obtain information about the addresses of a specific account.
@@ -281,16 +221,16 @@ def account_addresses(self, stake_address: str, **kwargs):
     :type stake_address: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :param gather_pages: Optional. Default: 100. Will collect all pages into one return
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
     :type gather_pages: bool
-    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :param count: Optional. Default: 100. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns A list of AccountAddressResponse objects.
-    :rtype: [AccountAddressResponse]
+    :returns A list of objects.
+    :rtype [Namespace]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -301,13 +241,7 @@ def account_addresses(self, stake_address: str, **kwargs):
     )
 
 
-@dataclass
-class AccountAddressesAssetResponse:
-    unit: str
-    quantity: str
-
-
-@object_list_request_wrapper(AccountAddressesAssetResponse)
+@list_request_wrapper
 def account_addresses_assets(self, stake_address: str, **kwargs):
     """
     Obtain information about assets associated with addresses of a specific account.
@@ -320,16 +254,16 @@ def account_addresses_assets(self, stake_address: str, **kwargs):
     :type stake_address: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :param gather_pages: Optional. Default: 100. Will collect all pages into one return
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
     :type gather_pages: bool
-    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :param count: Optional. Default: 100. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns A list of AccountAddressesAssetResponse objects.
-    :rtype: [AccountAddressesAssetResponse]
+    :returns A list of objects.
+    :rtype [Namespace]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

@@ -1,5 +1,6 @@
+import os
 from blockfrost import BlockFrostApi, ApiError
-from blockfrost.api.health import HealthResponse, ClockResponse
+from blockfrost.utils import convert_json_to_object
 
 
 def test_health(requests_mock):
@@ -8,8 +9,13 @@ def test_health(requests_mock):
         "is_healthy": True
     }
     requests_mock.get(api.url + '/health', json=mock_data)
-    mock_object = HealthResponse(**mock_data)
-    assert api.health().is_healthy == mock_object.is_healthy
+    assert api.health() == convert_json_to_object(mock_data)
+
+
+def test_integration_health():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.health()
 
 
 def test_clock(requests_mock):
@@ -18,5 +24,10 @@ def test_clock(requests_mock):
         "server_time": 1603400958947
     }
     requests_mock.get(api.url + '/health/clock', json=mock_data)
-    mock_object = ClockResponse(**mock_data)
-    assert api.clock().server_time == mock_object.server_time
+    assert api.clock() == convert_json_to_object(mock_data)
+
+
+def test_integration_clock():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.clock()

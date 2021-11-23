@@ -1,14 +1,9 @@
+import os, json
 from blockfrost import BlockFrostApi, ApiError
-from blockfrost.api.cardano.scripts import \
-    ScriptsResponse, \
-    ScriptResponse, \
-    ScriptJsonResponse, \
-    ScriptCBORResponse, \
-    ScriptRedeemersResponse, \
-    ScriptDatumResponse
+from blockfrost.utils import convert_json_to_object
 
-script_hash = "13a3efd825703a352a8f71f4e2758d08c28c564e8dfcce9f77776ad1"
-datum_hash = "db583ad85881a96c73fbb26ab9e24d1120bb38f45385664bb9c797a2ea8d9a2d"
+script_hash = "65c197d565e88a20885e535f93755682444d3c02fd44dd70883fe89e"
+datum_hash = "923918e403bf43c34b4ef6b48eb2ee04babed17320d8d1b9ff9ad086e86f44ec"
 
 
 def test_scripts(requests_mock):
@@ -25,8 +20,13 @@ def test_scripts(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/scripts", json=mock_data)
-    mock_object = [ScriptsResponse(**data) for data in mock_data]
-    assert api.scripts() == mock_object
+    assert api.scripts() == convert_json_to_object(mock_data)
+
+
+def test_integration_scripts():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.scripts()
 
 
 def test_script(requests_mock):
@@ -37,8 +37,13 @@ def test_script(requests_mock):
         "serialised_size": 3119
     }
     requests_mock.get(f"{api.url}/scripts/{script_hash}", json=mock_data)
-    mock_object = ScriptResponse(**mock_data)
-    assert api.script(script_hash=script_hash) == mock_object
+    assert api.script(script_hash=script_hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_script():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.script(script_hash=script_hash)
 
 
 def test_script_json(requests_mock):
@@ -64,8 +69,13 @@ def test_script_json(requests_mock):
         }
     }
     requests_mock.get(f"{api.url}/scripts/{script_hash}/json", json=mock_data)
-    mock_object = ScriptJsonResponse(**mock_data)
-    assert api.script_json(script_hash=script_hash) == mock_object
+    assert api.script_json(script_hash=script_hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_script_json():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.script_json(script_hash=script_hash)
 
 
 def test_script_cbor(requests_mock):
@@ -74,8 +84,13 @@ def test_script_cbor(requests_mock):
         "cbor": "4e4d01000033222220051200120011"
     }
     requests_mock.get(f"{api.url}/scripts/{script_hash}/cbor", json=mock_data)
-    mock_object = ScriptCBORResponse(**mock_data)
-    assert api.script_cbor(script_hash=script_hash) == mock_object
+    assert api.script_cbor(script_hash=script_hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_script_cbor():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.script_cbor(script_hash=script_hash)
 
 
 def test_script_redeemers(requests_mock):
@@ -91,11 +106,16 @@ def test_script_redeemers(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/scripts/{script_hash}/redeemers", json=mock_data)
-    mock_object = [ScriptRedeemersResponse(**data) for data in mock_data]
-    assert api.script_redeemers(script_hash=script_hash) == mock_object
+    assert api.script_redeemers(script_hash=script_hash) == convert_json_to_object(mock_data)
 
 
-def test_script_redeemers(requests_mock):
+def test_integration_script_redeemers():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.script_redeemers(script_hash=script_hash) == []
+
+
+def test_script_datum(requests_mock):
     api = BlockFrostApi()
     mock_data = {
         "json_value": {
@@ -103,5 +123,10 @@ def test_script_redeemers(requests_mock):
         }
     }
     requests_mock.get(f"{api.url}/scripts/datum/{datum_hash}", json=mock_data)
-    mock_object = ScriptDatumResponse(**mock_data)
-    assert api.script_datum(datum_hash=datum_hash) == mock_object
+    assert api.script_datum(datum_hash=datum_hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_script_datum():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.script_datum(datum_hash=datum_hash)

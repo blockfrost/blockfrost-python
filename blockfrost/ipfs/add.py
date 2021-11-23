@@ -1,16 +1,9 @@
 import requests
 from dataclasses import dataclass
-from ..utils import object_request_wrapper
+from ..utils import request_wrapper
 
 
-@dataclass
-class IPFSObjectResponse:
-    name: str
-    ipfs_hash: str
-    size: int
-
-
-@object_request_wrapper(IPFSObjectResponse)
+@request_wrapper
 def add(self, file_path: str, **kwargs):
     """
     Add a file or directory to IPFS

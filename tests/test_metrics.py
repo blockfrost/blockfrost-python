@@ -1,5 +1,5 @@
 from blockfrost import BlockFrostApi, ApiError
-from blockfrost.api.metrics import UsageMetricResponse, UsageMetricEndpointResponse
+from blockfrost.utils import convert_json_to_object
 
 
 def test_metrics(requests_mock):
@@ -16,8 +16,7 @@ def test_metrics(requests_mock):
     ]
 
     requests_mock.get(api.url + '/metrics', json=mock_data)
-    mock_object = [UsageMetricResponse(**data) for data in mock_data]
-    assert api.metrics() == mock_object
+    assert api.metrics() == convert_json_to_object(mock_data)
 
 
 def test_metrics_endpoints(requests_mock):
@@ -36,5 +35,4 @@ def test_metrics_endpoints(requests_mock):
     ]
 
     requests_mock.get(api.url + '/metrics/endpoints', json=mock_data)
-    mock_object = [UsageMetricEndpointResponse(**data) for data in mock_data]
-    assert api.metrics_endpoints() == mock_object
+    assert api.metrics_endpoints() == convert_json_to_object(mock_data)

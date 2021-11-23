@@ -1,15 +1,9 @@
 import requests
 from dataclasses import dataclass
-from ..utils import object_request_wrapper, object_list_request_wrapper
+from ..utils import request_wrapper, list_request_wrapper
 
 
-@dataclass
-class IPFSPinnedObjectResponse:
-    ipfs_hash: str
-    state: str
-
-
-@object_request_wrapper(IPFSPinnedObjectResponse)
+@request_wrapper
 def pin_object(self, IPFS_path: str, **kwargs):
     """
     Pinned objects are counted in your user storage quota.
@@ -20,8 +14,8 @@ def pin_object(self, IPFS_path: str, **kwargs):
     :type IPFS_path: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :returns IPFSPinnedObjectResponse object.
-    :rtype IPFSPinnedObjectResponse
+    :returns object.
+    :rtype: Namespace
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -31,16 +25,7 @@ def pin_object(self, IPFS_path: str, **kwargs):
     )
 
 
-@dataclass
-class IPFSPinnedListObjectResponse:
-    time_created: int
-    time_pinned: int
-    ipfs_hash: str
-    size: int
-    state: str
-
-
-@object_list_request_wrapper(IPFSPinnedListObjectResponse)
+@list_request_wrapper
 def pined_list(self, **kwargs):
     """
     List objects pinned to local storage
@@ -49,16 +34,16 @@ def pined_list(self, **kwargs):
 
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :param gather_pages: Optional. Default: 100. Will collect all pages into one return
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
     :type gather_pages: bool
-    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :param count: Optional. Default: 100. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns A list of IPFSPinnedListObjectResponse objects.
-    :rtype [IPFSPinnedListObjectResponse]
+    :returns A list of objects.
+    :rtype [Namespace]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -69,7 +54,7 @@ def pined_list(self, **kwargs):
     )
 
 
-@object_request_wrapper(IPFSPinnedListObjectResponse)
+@request_wrapper
 def pined_object(self, IPFS_path: str, **kwargs):
     """
     List objects pinned to local storage
@@ -80,8 +65,8 @@ def pined_object(self, IPFS_path: str, **kwargs):
     :type IPFS_path: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :returns IPFSPinnedListObjectResponse object.
-    :rtype IPFSPinnedListObjectResponse
+    :returns object.
+    :rtype: Namespace
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -91,7 +76,7 @@ def pined_object(self, IPFS_path: str, **kwargs):
     )
 
 
-@object_request_wrapper(IPFSPinnedObjectResponse)
+@request_wrapper
 def pined_object_remove(self, IPFS_path: str, **kwargs):
     """
     Remove pinned objects from local storage
@@ -102,8 +87,8 @@ def pined_object_remove(self, IPFS_path: str, **kwargs):
     :type IPFS_path: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :returns IPFSPinnedObjectResponse object.
-    :rtype IPFSPinnedObjectResponse
+    :returns object.
+    :rtype: Namespace
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

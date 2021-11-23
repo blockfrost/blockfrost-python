@@ -1,14 +1,6 @@
+import os
 from blockfrost import BlockFrostApi, ApiError
-from blockfrost.api.cardano.accounts import \
-    AccountResponse, \
-    AccountRewardResponse, \
-    AccountHistoryResponse, \
-    AccountDelegationResponse, \
-    AccountRegistrationResponse, \
-    AccountWithdrawalResponse, \
-    AccountMIRSResponse, \
-    AccountAddressResponse, \
-    AccountAddressesAssetResponse
+from blockfrost.utils import convert_json_to_object
 
 stake_address = 'stake1ux3g2c9dx2nhhehyrezyxpkstartcqmu9hk63qgfkccw5rqttygt7'
 
@@ -28,8 +20,13 @@ def test_accounts(requests_mock):
         "pool_id": "pool1pu5jlj4q9w9jlxeu370a3c9myx47md5j5m2str0naunn2q3lkdy"
     }
     requests_mock.get(f"{api.url}/accounts/{stake_address}", json=mock_data)
-    mock_object = AccountResponse(**mock_data)
-    assert api.accounts(stake_address=stake_address) == mock_object
+    assert api.accounts(stake_address=stake_address) == convert_json_to_object(mock_data)
+
+
+def test_integration_accounts():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.accounts(stake_address=stake_address)
 
 
 def test_account_rewards(requests_mock):
@@ -57,8 +54,13 @@ def test_account_rewards(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/accounts/{stake_address}/rewards", json=mock_data)
-    mock_object = [AccountRewardResponse(**data) for data in mock_data]
-    assert api.account_rewards(stake_address=stake_address) == mock_object
+    assert api.account_rewards(stake_address=stake_address) == convert_json_to_object(mock_data)
+
+
+def test_integration_account_rewards():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.account_rewards(stake_address=stake_address)
 
 
 def test_account_history(requests_mock):
@@ -76,8 +78,13 @@ def test_account_history(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/accounts/{stake_address}/history", json=mock_data)
-    mock_object = [AccountHistoryResponse(**data) for data in mock_data]
-    assert api.account_history(stake_address=stake_address) == mock_object
+    assert api.account_history(stake_address=stake_address) == convert_json_to_object(mock_data)
+
+
+def test_integration_account_history():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.account_history(stake_address=stake_address)
 
 
 def test_account_delegations(requests_mock):
@@ -97,8 +104,13 @@ def test_account_delegations(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/accounts/{stake_address}/delegations", json=mock_data)
-    mock_object = [AccountDelegationResponse(**data) for data in mock_data]
-    assert api.account_delegations(stake_address=stake_address) == mock_object
+    assert api.account_delegations(stake_address=stake_address) == convert_json_to_object(mock_data)
+
+
+def test_integration_account_delegations():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.account_delegations(stake_address=stake_address)
 
 
 def test_account_registrations(requests_mock):
@@ -114,8 +126,13 @@ def test_account_registrations(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/accounts/{stake_address}/registrations", json=mock_data)
-    mock_object = [AccountRegistrationResponse(**data) for data in mock_data]
-    assert api.account_registrations(stake_address=stake_address) == mock_object
+    assert api.account_registrations(stake_address=stake_address) == convert_json_to_object(mock_data)
+
+
+def test_integration_account_registrations():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.account_registrations(stake_address=stake_address)
 
 
 def test_account_withdrawals(requests_mock):
@@ -131,8 +148,13 @@ def test_account_withdrawals(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/accounts/{stake_address}/withdrawals", json=mock_data)
-    mock_object = [AccountWithdrawalResponse(**data) for data in mock_data]
-    assert api.account_withdrawals(stake_address=stake_address) == mock_object
+    assert api.account_withdrawals(stake_address=stake_address) == convert_json_to_object(mock_data)
+
+
+def test_integration_account_withdrawals():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.account_withdrawals(stake_address=stake_address)
 
 
 def test_account_mirs(requests_mock):
@@ -148,8 +170,13 @@ def test_account_mirs(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/accounts/{stake_address}/mirs", json=mock_data)
-    mock_object = [AccountMIRSResponse(**data) for data in mock_data]
-    assert api.account_mirs(stake_address=stake_address) == mock_object
+    assert api.account_mirs(stake_address=stake_address) == convert_json_to_object(mock_data)
+
+
+def test_integration_account_mirs():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.account_mirs(stake_address=stake_address)
 
 
 def test_account_addresses(requests_mock):
@@ -169,8 +196,13 @@ def test_account_addresses(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/accounts/{stake_address}/addresses", json=mock_data)
-    mock_object = [AccountAddressResponse(**data) for data in mock_data]
-    assert api.account_addresses(stake_address=stake_address) == mock_object
+    assert api.account_addresses(stake_address=stake_address) == convert_json_to_object(mock_data)
+
+
+def test_integration_account_addresses():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.account_addresses(stake_address=stake_address)
 
 
 def test_account_addresses_assets(requests_mock):
@@ -186,5 +218,10 @@ def test_account_addresses_assets(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/accounts/{stake_address}/addresses/assets", json=mock_data)
-    mock_object = [AccountAddressesAssetResponse(**data) for data in mock_data]
-    assert api.account_addresses_assets(stake_address=stake_address) == mock_object
+    assert api.account_addresses_assets(stake_address=stake_address) == convert_json_to_object(mock_data)
+
+
+def test_integration_account_addresses_assets():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.account_addresses_assets(stake_address=stake_address) == []

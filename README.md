@@ -1,8 +1,10 @@
-[![Package Test](https://github.com/blockfrost/blockfrost-python/actions/workflows/package-test.yml/badge.svg)](https://github.com/blockfrost/blockfrost-python/actions/workflows/package-test.yml)
-[![PyPI Latest Release](https://img.shields.io/pypi/v/blockfrost-python.svg)](https://pypi.org/project/blockfrost-python/)
+[![Package Test](https://img.shields.io/github/workflow/status/blockfrost/blockfrost-python/Package%20Test?logo=GitHub&label=package%20test)](https://github.com/blockfrost/blockfrost-python/actions/workflows/package-test.yml)
+[![PyPI Latest Release](https://img.shields.io/pypi/v/blockfrost-python.svg?logo=pypi&label=pypi%20latest)](https://pypi.org/project/blockfrost-python/)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/blockfrost-python?logo=pypi&label=pypi%20downloads)](https://pypistats.org/packages/blockfrost-python)
 [![Package Status](https://img.shields.io/pypi/status/blockfrost-python.svg)](https://pypi.org/project/blockfrost-python/)
 [![License](https://img.shields.io/pypi/l/blockfrost-python.svg)](https://github.com/blockfrost/blockfrost-python/blob/master/LICENSE)
-
+[![Made by Five Binaries](https://img.shields.io/badge/made%20by-Five%20Binaries-darkviolet.svg)](https://fivebinaries.com/)
+[![Maintained by Mathias Frohlich](https://img.shields.io/badge/maintained%20by-Mathias%20Frohlich-blue.svg)](https://github.com/mathiasfrohlich)
 
 <img src="https://blockfrost.io/images/logo.svg" width="250" align="right" height="90">
 
@@ -28,11 +30,10 @@ your API key.
 <br/>
 
 ## Installation
-
+[![PyPI Latest Release](https://img.shields.io/pypi/v/blockfrost-python.svg)](https://pypi.org/project/blockfrost-python/)
 ```console
 $ pip install blockfrost-python
 ```
-
 <br/>
 
 ## Usage
