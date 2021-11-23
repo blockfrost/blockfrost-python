@@ -174,7 +174,7 @@ def test_epoch_pool_blocks(requests_mock):
         "38bc6efb92a830a0ed22a64f979d120d26483fd3c811f6622a8c62175f530878",
         "f3258fcd8b975c061b4fcdcfcbb438807134d6961ec278c200151274893b6b7d"
     ]
-    requests_mock.get(f"{api.url}/epochs/{epoch}/stakes/{pool_id}/blocks", json=mock_data)
+    requests_mock.get(f"{api.url}/epochs/{epoch}/blocks/{pool_id}", json=mock_data)
     mock_object = mock_data
     assert api.epoch_pool_blocks(number=epoch, pool_id=pool_id) == mock_object
 

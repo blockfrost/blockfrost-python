@@ -286,7 +286,7 @@ def epoch_pool_blocks(self, number: int, pool_id: str, **kwargs):
     :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
-        url=f"{self.url}/epochs/{number}/stakes/{pool_id}/blocks",
+        url=f"{self.url}/epochs/{number}/blocks/{pool_id}",
         params=self.query_parameters(kwargs),
         headers=self.default_headers
     )
