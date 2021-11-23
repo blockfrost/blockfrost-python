@@ -1,9 +1,6 @@
+import os
 from blockfrost import BlockFrostApi, ApiError
-from blockfrost.api.cardano.epochs import \
-    EpochResponse, \
-    EpochParameterResponse, \
-    EpochStakeResponse, \
-    EpochStakePoolResponse
+from blockfrost.utils import convert_json_to_object
 
 epoch = 225
 pool_id = 'pool1pu5jlj4q9w9jlxeu370a3c9myx47md5j5m2str0naunn2q3lkdy'
@@ -24,8 +21,13 @@ def test_epoch_latest(requests_mock):
         "active_stake": "784953934049314"
     }
     requests_mock.get(f"{api.url}/epochs/latest", json=mock_data)
-    mock_object = EpochResponse(**mock_data)
-    assert api.epoch_latest() == mock_object
+    assert api.epoch_latest() == convert_json_to_object(mock_data)
+
+
+def test_integration_epoch_latest():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.epoch_latest()
 
 
 def test_epoch_latest_parameters(requests_mock):
@@ -63,8 +65,13 @@ def test_epoch_latest_parameters(requests_mock):
         "coins_per_utxo_word": "34482"
     }
     requests_mock.get(f"{api.url}/epochs/latest/parameters", json=mock_data)
-    mock_object = EpochParameterResponse(**mock_data)
-    assert api.epoch_latest_parameters() == mock_object
+    assert api.epoch_latest_parameters() == convert_json_to_object(mock_data)
+
+
+def test_integration_epoch_latest_parameters():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.epoch_latest_parameters()
 
 
 def test_epoch(requests_mock):
@@ -82,8 +89,13 @@ def test_epoch(requests_mock):
         "active_stake": "784953934049314"
     }
     requests_mock.get(f"{api.url}/epochs/{epoch}", json=mock_data)
-    mock_object = EpochResponse(**mock_data)
-    assert api.epoch(number=epoch) == mock_object
+    assert api.epoch(number=epoch) == convert_json_to_object(mock_data)
+
+
+def test_integration_epoch():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.epoch(number=epoch)
 
 
 def test_epochs_next(requests_mock):
@@ -103,8 +115,13 @@ def test_epochs_next(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/epochs/{epoch}/next", json=mock_data)
-    mock_object = [EpochResponse(**data) for data in mock_data]
-    assert api.epochs_next(number=epoch) == mock_object
+    assert api.epochs_next(number=epoch) == convert_json_to_object(mock_data)
+
+
+def test_integration_epochs_next():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.epochs_next(number=epoch)
 
 
 def test_epochs_previous(requests_mock):
@@ -124,8 +141,13 @@ def test_epochs_previous(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/epochs/{epoch}/previous", json=mock_data)
-    mock_object = [EpochResponse(**data) for data in mock_data]
-    assert api.epochs_previous(number=epoch) == mock_object
+    assert api.epochs_previous(number=epoch) == convert_json_to_object(mock_data)
+
+
+def test_integration_epochs_previous():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.epochs_previous(number=epoch)
 
 
 def test_epoch_stakes(requests_mock):
@@ -138,8 +160,13 @@ def test_epoch_stakes(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/epochs/{epoch}/stakes", json=mock_data)
-    mock_object = [EpochStakeResponse(**data) for data in mock_data]
-    assert api.epoch_stakes(number=epoch) == mock_object
+    assert api.epoch_stakes(number=epoch) == convert_json_to_object(mock_data)
+
+
+def test_integration_epoch_stakes():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.epoch_stakes(number=epoch)
 
 
 def test_epoch_pool_stakes(requests_mock):
@@ -151,8 +178,13 @@ def test_epoch_pool_stakes(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/epochs/{epoch}/stakes/{pool_id}", json=mock_data)
-    mock_object = [EpochStakePoolResponse(**data) for data in mock_data]
-    assert api.epoch_pool_stakes(number=epoch, pool_id=pool_id) == mock_object
+    assert api.epoch_pool_stakes(number=epoch, pool_id=pool_id) == convert_json_to_object(mock_data)
+
+
+def test_integration_epoch_pool_stakes():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.epoch_pool_stakes(number=epoch, pool_id=pool_id)
 
 
 def test_epoch_blocks(requests_mock):
@@ -163,8 +195,13 @@ def test_epoch_blocks(requests_mock):
         "f3258fcd8b975c061b4fcdcfcbb438807134d6961ec278c200151274893b6b7d"
     ]
     requests_mock.get(f"{api.url}/epochs/{epoch}/blocks", json=mock_data)
-    mock_object = mock_data
-    assert api.epoch_blocks(number=epoch) == mock_object
+    assert api.epoch_blocks(number=epoch) == convert_json_to_object(mock_data)
+
+
+def test_integration_epoch_blocks():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.epoch_blocks(number=epoch)
 
 
 def test_epoch_pool_blocks(requests_mock):
@@ -175,8 +212,13 @@ def test_epoch_pool_blocks(requests_mock):
         "f3258fcd8b975c061b4fcdcfcbb438807134d6961ec278c200151274893b6b7d"
     ]
     requests_mock.get(f"{api.url}/epochs/{epoch}/blocks/{pool_id}", json=mock_data)
-    mock_object = mock_data
-    assert api.epoch_pool_blocks(number=epoch, pool_id=pool_id) == mock_object
+    assert api.epoch_pool_blocks(number=epoch, pool_id=pool_id) == convert_json_to_object(mock_data)
+
+
+def test_integration_epoch_pool_blocks():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.epoch_pool_blocks(number=epoch, pool_id=pool_id)
 
 
 def test_epoch_latest_parameters(requests_mock):
@@ -214,5 +256,10 @@ def test_epoch_latest_parameters(requests_mock):
         "coins_per_utxo_word": "34482"
     }
     requests_mock.get(f"{api.url}/epochs/{epoch}/parameters", json=mock_data)
-    mock_object = EpochParameterResponse(**mock_data)
-    assert api.epoch_latest_parameters(number=epoch) == mock_object
+    assert api.epoch_latest_parameters(number=epoch) == convert_json_to_object(mock_data)
+
+
+def test_integration_epoch_latest_parameters():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.epoch_latest_parameters(number=epoch)
