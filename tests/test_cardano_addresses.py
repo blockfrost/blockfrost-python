@@ -3,7 +3,6 @@ import os
 from blockfrost import BlockFrostApi, ApiError
 from blockfrost.utils import convert_json_to_object
 
-
 address = 'addr1qx466898end6q5mpvrwwmycq35v83c9e8cnffadv6gr6q6azs4s26v4800nwg8jygvrdqh6xhsphct0d4zqsnd3sagxqqjjgln'
 stake_address = 'stake1ux3g2c9dx2nhhehyrezyxpkstartcqmu9hk63qgfkccw5rqttygt7'
 asset = 'b0d07d45fe9514f80213f4020e5a61241458be626841cde717cb38a76e7574636f696e'
@@ -35,6 +34,38 @@ def test_integration_address():
     if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
         api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
         assert api.address(address=address)
+
+
+def test_address_extended(requests_mock):
+    api = BlockFrostApi()
+    mock_data = {
+        "address": address,
+        "amount": [
+            {
+                "unit": "lovelace",
+                "quantity": "42000000",
+                "decimals": 6,
+                "has_nft_onchain_metadata": None
+            },
+            {
+                "unit": "b0d07d45fe9514f80213f4020e5a61241458be626841cde717cb38a76e7574636f696e",
+                "quantity": "12",
+                "decimals": None,
+                "has_nft_onchain_metadata": True
+            }
+        ],
+        "stake_address": "stake1ux3g2c9dx2nhhehyrezyxpkstartcqmu9hk63qgfkccw5rqttygt7",
+        "type": "shelley",
+        "script": False
+    }
+    requests_mock.get(f"{api.url}/addresses/{address}/extended", json=mock_data)
+    assert api.address_extended(address=address) == convert_json_to_object(mock_data)
+
+
+def test_integration_address_extended():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.address_extended(address=address)
 
 
 def test_address_total(requests_mock):

@@ -25,6 +25,28 @@ def address(self, address: str, **kwargs):
 
 
 @request_wrapper
+def address_extended(self, address: str, **kwargs):
+    """
+    Obtain information about a specific address.
+
+    https://docs.blockfrost.io/#tag/Cardano-Addresses/paths/~1addresses~1{address}~1extended/get
+
+    :param address: Bech32 address.
+    :type address: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns object.
+    :rtype: Namespace
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/addresses/{address}/extended",
+        headers=self.default_headers
+    )
+
+
+@request_wrapper
 def address_total(self, address: str, **kwargs):
     """
     Obtain details about an address.

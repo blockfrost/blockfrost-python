@@ -272,3 +272,27 @@ def account_addresses_assets(self, stake_address: str, **kwargs):
         params=self.query_parameters(kwargs),
         headers=self.default_headers
     )
+
+
+@request_wrapper
+def account_addresses_total(self, stake_address: str, **kwargs):
+    """
+    Obtain summed details about all addresses associated with a given account.
+
+    Be careful, as an account could be part of a mangled address and does not necessarily mean the addresses are owned by user as the account.
+
+    https://docs.blockfrost.io/#tag/Cardano-Addresses/paths/~1accounts~1{stake_address}~1addresses~1total/get
+
+    :param stake_address: Bech32 address.
+    :type stake_address: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns object.
+    :rtype: Namespace
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/accounts/{stake_address}/addresses/total",
+        headers=self.default_headers
+    )

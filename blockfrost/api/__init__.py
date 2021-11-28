@@ -51,9 +51,11 @@ class BlockFrostApi(Api):
         account_withdrawals, \
         account_mirs, \
         account_addresses, \
-        account_addresses_assets
+        account_addresses_assets, \
+        account_addresses_total
     from .cardano.addresses import \
         address, \
+        address_extended, \
         address_total, \
         address_utxos, \
         address_utxos_asset, \
