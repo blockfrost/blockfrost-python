@@ -17,3 +17,10 @@ def test_integration_root():
     if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
         api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
         assert api.root()
+
+
+def test_integration_root():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        assert True
+    else:
+        assert False
