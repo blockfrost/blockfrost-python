@@ -27,7 +27,8 @@ setup(
     tests_require=[
         "pytest",
         "mock",
-        'requests-mock',
+        "requests-mock",
+        "pandas",
     ],
 
     classifiers=[  # Optional
