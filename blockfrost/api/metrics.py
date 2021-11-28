@@ -1,15 +1,9 @@
 import requests
 from dataclasses import dataclass
-from ..utils import object_list_request_wrapper
+from ..utils import list_request_wrapper
 
 
-@dataclass
-class UsageMetricResponse:
-    time: int
-    calls: int
-
-
-@object_list_request_wrapper(UsageMetricResponse)
+@list_request_wrapper
 def metrics(self, **kwargs):
     """
     History of your Blockfrost usage metrics in the past 30 days.
@@ -18,8 +12,8 @@ def metrics(self, **kwargs):
 
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :returns UsageMetricResponse object.
-    :rtype UsageMetricResponse
+    :returns A list of objects.
+    :rtype [Namespace]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -29,14 +23,7 @@ def metrics(self, **kwargs):
     )
 
 
-@dataclass
-class UsageMetricEndpointResponse:
-    time: int
-    calls: int
-    endpoint: str
-
-
-@object_list_request_wrapper(UsageMetricEndpointResponse)
+@list_request_wrapper
 def metrics_endpoints(self, **kwargs):
     """
     History of your Blockfrost usage metrics per endpoint in the past 30 days.
@@ -45,8 +32,8 @@ def metrics_endpoints(self, **kwargs):
 
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :returns UsageMetricEndpointResponse object.
-    :rtype UsageMetricEndpointResponse
+    :returns A list of objects.
+    :rtype [Namespace]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

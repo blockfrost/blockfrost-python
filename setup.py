@@ -8,8 +8,8 @@ long_description = (HERE / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='blockfrost-python',
-    version='0.3.3',
-    description='The official Python SDK for Blockfrost API v0.1.32',
+    version='0.4.0',
+    description='The official Python SDK for Blockfrost API v0.1.33',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/blockfrost/blockfrost-python',
@@ -27,7 +27,8 @@ setup(
     tests_require=[
         "pytest",
         "mock",
-        'requests-mock',
+        "requests-mock",
+        "pandas",
     ],
 
     classifiers=[  # Optional

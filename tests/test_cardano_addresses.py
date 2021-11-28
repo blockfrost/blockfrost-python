@@ -1,12 +1,7 @@
 import os
 
-from blockfrost import BlockFrostApi, ApiError, ApiUrls
-from blockfrost.api.cardano.addresses import \
-    AddressResponse, \
-    AddressesTotalResponse, \
-    AddressesUTXOSResponse, \
-    AddressesUTXOSAssetResponse, \
-    AddressesTransactionResponse
+from blockfrost import BlockFrostApi, ApiError
+from blockfrost.utils import convert_json_to_object
 
 address = 'addr1qx466898end6q5mpvrwwmycq35v83c9e8cnffadv6gr6q6azs4s26v4800nwg8jygvrdqh6xhsphct0d4zqsnd3sagxqqjjgln'
 stake_address = 'stake1ux3g2c9dx2nhhehyrezyxpkstartcqmu9hk63qgfkccw5rqttygt7'
@@ -32,8 +27,45 @@ def test_address(requests_mock):
         "script": False,
     }
     requests_mock.get(f"{api.url}/addresses/{address}", json=mock_data)
-    mock_object = AddressResponse(**mock_data)
-    assert api.address(address=address) == mock_object
+    assert api.address(address=address) == convert_json_to_object(mock_data)
+
+
+def test_integration_address():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.address(address=address)
+
+
+def test_address_extended(requests_mock):
+    api = BlockFrostApi()
+    mock_data = {
+        "address": address,
+        "amount": [
+            {
+                "unit": "lovelace",
+                "quantity": "42000000",
+                "decimals": 6,
+                "has_nft_onchain_metadata": None
+            },
+            {
+                "unit": "b0d07d45fe9514f80213f4020e5a61241458be626841cde717cb38a76e7574636f696e",
+                "quantity": "12",
+                "decimals": None,
+                "has_nft_onchain_metadata": True
+            }
+        ],
+        "stake_address": "stake1ux3g2c9dx2nhhehyrezyxpkstartcqmu9hk63qgfkccw5rqttygt7",
+        "type": "shelley",
+        "script": False
+    }
+    requests_mock.get(f"{api.url}/addresses/{address}/extended", json=mock_data)
+    assert api.address_extended(address=address) == convert_json_to_object(mock_data)
+
+
+def test_integration_address_extended():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.address_extended(address=address)
 
 
 def test_address_total(requests_mock):
@@ -63,8 +95,13 @@ def test_address_total(requests_mock):
         "tx_count": 12
     }
     requests_mock.get(f"{api.url}/addresses/{address}/total", json=mock_data)
-    mock_object = AddressesTotalResponse(**mock_data)
-    assert api.address_total(address=address) == mock_object
+    assert api.address_total(address=address) == convert_json_to_object(mock_data)
+
+
+def test_integration_address_total():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.address_total(address=address)
 
 
 def test_address_utxos(requests_mock):
@@ -115,8 +152,13 @@ def test_address_utxos(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/addresses/{address}/utxos", json=mock_data)
-    mock_object = [AddressesUTXOSResponse(**data) for data in mock_data]
-    assert api.address_utxos(address=address) == mock_object
+    assert api.address_utxos(address=address) == convert_json_to_object(mock_data)
+
+
+def test_integration_address_utxos():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.address_utxos(address=address)
 
 
 def test_address_utxos_asset(requests_mock):
@@ -164,8 +206,13 @@ def test_address_utxos_asset(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/addresses/{address}/utxos/{asset}", json=mock_data)
-    mock_object = [AddressesUTXOSAssetResponse(**data) for data in mock_data]
-    assert api.address_utxos_asset(address=address, asset=asset) == mock_object
+    assert api.address_utxos_asset(address=address, asset=asset) == convert_json_to_object(mock_data)
+
+
+def test_integration_address_utxos_asset():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.address_utxos_asset(address=address, asset=asset) == []
 
 
 def test_address_transactions(requests_mock):
@@ -191,5 +238,10 @@ def test_address_transactions(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/addresses/{address}/transactions", json=mock_data)
-    mock_object = [AddressesTransactionResponse(**data) for data in mock_data]
-    assert api.address_transactions(address=address) == mock_object
+    assert api.address_transactions(address=address) == convert_json_to_object(mock_data)
+
+
+def test_integration_address_transactions():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.address_transactions(address=address)

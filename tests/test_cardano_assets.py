@@ -1,14 +1,9 @@
+import os
 from blockfrost import BlockFrostApi, ApiError
-from blockfrost.api.cardano.assets import \
-    AssetsResponse, \
-    AssetResponse, \
-    AssetHistoryResponse, \
-    AssetTransactionResponse, \
-    AssetAddressResponse, \
-    AssetPolicyResponse
+from blockfrost.utils import convert_json_to_object
 
-asset = 'b0d07d45fe9514f80213f4020e5a61241458be626841cde717cb38a76e7574636f696e'
-policy_id = 'b0d07d45fe9514f80213f4020e5a61241458be626841cde717cb38a7'
+asset = '00000002df633853f6a47465c9496721d2d5b1291b8398016c0e87ae6e7574636f696e'
+policy_id = '00000002df633853f6a47465c9496721d2d5b1291b8398016c0e87ae'
 
 
 def test_assets(requests_mock):
@@ -28,8 +23,13 @@ def test_assets(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/assets", json=mock_data)
-    mock_object = [AssetsResponse(**data) for data in mock_data]
-    assert api.assets() == mock_object
+    assert api.assets() == convert_json_to_object(mock_data)
+
+
+def test_integration_assets():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.assets()
 
 
 def test_asset(requests_mock):
@@ -56,8 +56,13 @@ def test_asset(requests_mock):
         }
     }
     requests_mock.get(f"{api.url}/assets/{asset}", json=mock_data)
-    mock_object = AssetResponse(**mock_data)
-    assert api.asset(asset=asset) == mock_object
+    assert api.asset(asset=asset) == convert_json_to_object(mock_data)
+
+
+def test_integration_asset():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.asset(asset=asset)
 
 
 def test_asset_history(requests_mock):
@@ -80,8 +85,13 @@ def test_asset_history(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/assets/{asset}/history", json=mock_data)
-    mock_object = [AssetHistoryResponse(**data) for data in mock_data]
-    assert api.asset_history(asset=asset) == mock_object
+    assert api.asset_history(asset=asset) == convert_json_to_object(mock_data)
+
+
+def test_integration_asset_history():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.asset_history(asset=asset)
 
 
 def test_asset_transactions(requests_mock):
@@ -107,8 +117,13 @@ def test_asset_transactions(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/assets/{asset}/transactions", json=mock_data)
-    mock_object = [AssetTransactionResponse(**data) for data in mock_data]
-    assert api.asset_transactions(asset=asset) == mock_object
+    assert api.asset_transactions(asset=asset) == convert_json_to_object(mock_data)
+
+
+def test_integration_asset_transactions():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.asset_transactions(asset=asset)
 
 
 def test_asset_addresses(requests_mock):
@@ -128,8 +143,13 @@ def test_asset_addresses(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/assets/{asset}/addresses", json=mock_data)
-    mock_object = [AssetAddressResponse(**data) for data in mock_data]
-    assert api.asset_addresses(asset=asset) == mock_object
+    assert api.asset_addresses(asset=asset) == convert_json_to_object(mock_data)
+
+
+def test_integration_asset_addresses():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.asset_addresses(asset=asset)
 
 
 def test_assets_policy(requests_mock):
@@ -149,5 +169,10 @@ def test_assets_policy(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/assets/policy/{policy_id}", json=mock_data)
-    mock_object = [AssetPolicyResponse(**data) for data in mock_data]
-    assert api.assets_policy(policy_id=policy_id) == mock_object
+    assert api.assets_policy(policy_id=policy_id) == convert_json_to_object(mock_data)
+
+
+def test_integration_assets_policy():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.assets_policy(policy_id=policy_id)

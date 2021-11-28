@@ -5,6 +5,7 @@ from requests import Response
 from functools import wraps
 
 from .config import ApiUrls, USER_AGENT, DEFAULT_API_VERSION, DEFAULT_PAGINATION_PAGE_ITEMS_COUNT
+from types import SimpleNamespace
 
 
 class ApiError(Exception):
@@ -24,12 +25,24 @@ class ApiError(Exception):
             self.message = None
 
 
-def convert_json_to_pandas(json):
+class Namespace(SimpleNamespace):
+    def to_dict(self):
+        return self.__dict__
+
+    def to_json(self):
+        return json.dumps(self.to_dict())
+
+
+def convert_json_to_object(json_response):
+    return json.loads(json.dumps(json_response), object_hook=lambda d: Namespace(**d))
+
+
+def convert_json_to_pandas(json_response):
     try:
         import pandas as pd
-        return pd.json_normalize(json)
+        return pd.json_normalize(json_response)
     except ImportError as error:
-        raise ImportError("To use \"return_type='pandas'\" you must pip install panads")
+        raise ImportError("To use \"return_type='pandas'\" you must pip install pandas")
 
 
 def simple_request_wrapper(func):
@@ -43,75 +56,65 @@ def simple_request_wrapper(func):
     return error_wrapper
 
 
-def object_request_wrapper(object_class=None):
-    def request_wrapper(func):
-        @wraps(func)
-        def error_wrapper(*args, **kwargs):
+def request_wrapper(func):
+    def error_wrapper(*args, **kwargs):
+        request_response: Response = func(*args, **kwargs)
+        if request_response.status_code != 200:
+            raise ApiError(request_response)
+        else:
+            if 'return_type' in kwargs:
+                if kwargs['return_type'] == 'object':
+                    return convert_json_to_object(request_response.json())
+                elif kwargs['return_type'] == 'pandas':
+                    return convert_json_to_pandas(request_response.json())
+                elif kwargs['return_type'] == 'json':
+                    return request_response.json()
+            else:
+                return convert_json_to_object(request_response.json())
+
+    return error_wrapper
+
+
+def list_request_wrapper(func):
+    def pagination(*args, **kwargs):
+        def recursive_append(json_list, *args, **kwargs):
             request_response: Response = func(*args, **kwargs)
             if request_response.status_code != 200:
                 raise ApiError(request_response)
+            json_list.extend(request_response.json())
+            if 'count' not in kwargs:
+                expected_result_length = DEFAULT_PAGINATION_PAGE_ITEMS_COUNT
             else:
-                if 'return_type' in kwargs:
-                    if kwargs['return_type'] == 'json':
-                        return request_response.json()
-                    elif kwargs['return_type'] == 'pandas':
-                        return convert_json_to_pandas(request_response.json())
+                expected_result_length = kwargs['count']
+            if len(request_response.json()) == expected_result_length:
+                if 'page' not in kwargs:
+                    kwargs['page'] = 2
                 else:
-                    if object_class:
-                        return object_class(**request_response.json())
-                    else:
-                        return request_response.json()
-
-        return error_wrapper
-
-    return request_wrapper
-
-
-def object_list_request_wrapper(object_class=None):
-    def list_request_wrapper(func):
-        @wraps(func)
-        def pagination(*args, **kwargs):
-            def recursive_append(json_list, *args, **kwargs):
-                request_response: Response = func(*args, **kwargs)
-                if request_response.status_code != 200:
-                    raise ApiError(request_response)
-                json_list.extend(request_response.json())
-                if 'count' not in kwargs:
-                    expected_result_length = DEFAULT_PAGINATION_PAGE_ITEMS_COUNT
-                else:
-                    expected_result_length = kwargs['count']
-                if len(request_response.json()) == expected_result_length:
-                    if 'page' not in kwargs:
-                        kwargs['page'] = 2
-                    else:
-                        kwargs['page'] = kwargs['page'] + 1
-                    recursive_append(json_list, *args, **kwargs)
-                else:
-                    return json_list
-
-            if 'gather_pages' in kwargs and kwargs['gather_pages'] is True:
-                json_list = []
+                    kwargs['page'] = kwargs['page'] + 1
                 recursive_append(json_list, *args, **kwargs)
-                request_json = json_list
             else:
-                request_response: Response = func(*args, **kwargs)
-                if request_response.status_code != 200:
-                    raise ApiError(request_response)
-                request_json = request_response.json()
-            if 'return_type' in kwargs:
-                if kwargs['return_type'] == 'json':
-                    return request_json
-                elif kwargs['return_type'] == 'pandas':
-                    return convert_json_to_pandas(request_json)
-            else:
-                if object_class:
-                    return [object_class(**o) for o in request_json]
-                else:
-                    return request_json
+                return json_list
 
-        return pagination
+        if 'gather_pages' in kwargs and kwargs['gather_pages'] is True:
+            json_list = []
+            recursive_append(json_list, *args, **kwargs)
+            request_json = json_list
+        else:
+            request_response: Response = func(*args, **kwargs)
+            if request_response.status_code != 200:
+                raise ApiError(request_response)
+            request_json = request_response.json()
+        if 'return_type' in kwargs:
+            if kwargs['return_type'] == 'object':
+                return convert_json_to_object(request_json)
+            elif kwargs['return_type'] == 'pandas':
+                return convert_json_to_pandas(request_json)
+            elif kwargs['return_type'] == 'json':
+                return request_json
+        else:
+            return convert_json_to_object(request_json)
 
-    return list_request_wrapper
+    return pagination
 
 
 class Api:

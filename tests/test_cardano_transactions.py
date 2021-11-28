@@ -1,18 +1,8 @@
+import os
 from blockfrost import BlockFrostApi, ApiError
-from blockfrost.api.cardano.transactions import \
-    TransactionResponse, \
-    TransactionAddressUTXOSResponse, \
-    TransactionStakeResponse, \
-    TransactionDelegationResponse, \
-    TransactionWithdrawalResponse, \
-    TransactionMIRResponse, \
-    TransactionPoolUpdateResponse, \
-    TransactionPoolRetiresResponse, \
-    TransactionMetadataResponse, \
-    TransactionMetadataCBORResponse, \
-    TransactionRedeemersResponse
+from blockfrost.utils import convert_json_to_object
 
-hash = "1e043f100dce12d107f679685acd2fc0610e10f72a92d412794c9773d11d8477"
+hash = "8f55e18a94e4c0951e5b8bd8910b2cb20aa4d742b1608fda3a06793d39fb07b1"
 
 
 def test_transaction(requests_mock):
@@ -51,8 +41,13 @@ def test_transaction(requests_mock):
         "valid_contract": True
     }
     requests_mock.get(f"{api.url}/txs/{hash}", json=mock_data)
-    mock_object = TransactionResponse(**mock_data)
-    assert api.transaction(hash=hash) == mock_object
+    assert api.transaction(hash=hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_transaction():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.transaction(hash=hash)
 
 
 def test_transaction_utxos(requests_mock):
@@ -97,8 +92,13 @@ def test_transaction_utxos(requests_mock):
         ]
     }
     requests_mock.get(f"{api.url}/txs/{hash}/utxos", json=mock_data)
-    mock_object = TransactionAddressUTXOSResponse(**mock_data)
-    assert api.transaction_utxos(hash=hash) == mock_object
+    assert api.transaction_utxos(hash=hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_transaction_utxos():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.transaction_utxos(hash=hash)
 
 
 def test_transaction_stakes(requests_mock):
@@ -111,8 +111,15 @@ def test_transaction_stakes(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/txs/{hash}/stakes", json=mock_data)
-    mock_object = [TransactionStakeResponse(**data) for data in mock_data]
-    assert api.transaction_stakes(hash=hash) == mock_object
+    assert api.transaction_stakes(hash=hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_transaction_stakes():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.transaction_stakes(hash="b5b82432cdc18c89a64abb9b8d5cc37f492469214501a764faa423326c2f35fd")
+        # assert api.transaction_stakes(hash="889f3bc1e6321f7dd08bbb67457edfeb24233aab4d9e327e2f35df844c40a1bd")
+        # assert api.transaction_stakes(hash="0697e4f6e89d9bc3710ebec26dfdf35f2482d098eae03bd82b1949848626f0e9")
 
 
 def test_transaction_delegations(requests_mock):
@@ -127,8 +134,13 @@ def test_transaction_delegations(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/txs/{hash}/delegations", json=mock_data)
-    mock_object = [TransactionDelegationResponse(**data) for data in mock_data]
-    assert api.transaction_delegations(hash=hash) == mock_object
+    assert api.transaction_delegations(hash=hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_transaction_delegations():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.transaction_delegations(hash="b5b82432cdc18c89a64abb9b8d5cc37f492469214501a764faa423326c2f35fd")
 
 
 def test_transaction_withdrawals(requests_mock):
@@ -140,8 +152,13 @@ def test_transaction_withdrawals(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/txs/{hash}/withdrawals", json=mock_data)
-    mock_object = [TransactionWithdrawalResponse(**data) for data in mock_data]
-    assert api.transaction_withdrawals(hash=hash) == mock_object
+    assert api.transaction_withdrawals(hash=hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_transaction_withdrawals():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.transaction_withdrawals(hash=hash) == []
 
 
 def test_transaction_mirs(requests_mock):
@@ -155,8 +172,13 @@ def test_transaction_mirs(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/txs/{hash}/mirs", json=mock_data)
-    mock_object = [TransactionMIRResponse(**data) for data in mock_data]
-    assert api.transaction_mirs(hash=hash) == mock_object
+    assert api.transaction_mirs(hash=hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_transaction_mirs():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.transaction_mirs(hash=hash) == []
 
 
 def test_transaction_pool_updates(requests_mock):
@@ -194,8 +216,13 @@ def test_transaction_pool_updates(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/txs/{hash}/pool_updates", json=mock_data)
-    mock_object = [TransactionPoolUpdateResponse(**data) for data in mock_data]
-    assert api.transaction_pool_updates(hash=hash) == mock_object
+    assert api.transaction_pool_updates(hash=hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_transaction_pool_updates():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.transaction_pool_updates(hash=hash) == []
 
 
 def test_transaction_pool_retires(requests_mock):
@@ -208,8 +235,13 @@ def test_transaction_pool_retires(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/txs/{hash}/pool_retires", json=mock_data)
-    mock_object = [TransactionPoolRetiresResponse(**data) for data in mock_data]
-    assert api.transaction_pool_retires(hash=hash) == mock_object
+    assert api.transaction_pool_retires(hash=hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_transaction_pool_retires():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.transaction_pool_retires(hash=hash) == []
 
 
 def test_transaction_metadata(requests_mock):
@@ -235,9 +267,16 @@ def test_transaction_metadata(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/txs/{hash}/metadata", json=mock_data)
-    mock_object = [TransactionMetadataResponse(**data) for data in mock_data]
-    assert api.transaction_metadata(hash=hash) == mock_object
+    assert api.transaction_metadata(hash=hash) == convert_json_to_object(mock_data)
 
+
+def test_integration_transaction_metadata():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.transaction_metadata(hash="889f3bc1e6321f7dd08bbb67457edfeb24233aab4d9e327e2f35df844c40a1bd")
+#assert api.transaction_stakes(hash="b5b82432cdc18c89a64abb9b8d5cc37f492469214501a764faa423326c2f35fd")
+        # assert api.transaction_stakes(hash="889f3bc1e6321f7dd08bbb67457edfeb24233aab4d9e327e2f35df844c40a1bd")
+        # assert api.transaction_stakes(hash="0697e4f6e89d9bc3710ebec26dfdf35f2482d098eae03bd82b1949848626f0e9")
 
 def test_transaction_metadata_cbor(requests_mock):
     api = BlockFrostApi()
@@ -249,8 +288,13 @@ def test_transaction_metadata_cbor(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/txs/{hash}/metadata/cbor", json=mock_data)
-    mock_object = [TransactionMetadataCBORResponse(**data) for data in mock_data]
-    assert api.transaction_metadata_cbor(hash=hash) == mock_object
+    assert api.transaction_metadata_cbor(hash=hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_transaction_metadata_cbor():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.transaction_metadata_cbor(hash="889f3bc1e6321f7dd08bbb67457edfeb24233aab4d9e327e2f35df844c40a1bd")
 
 
 def test_transaction_redeemers(requests_mock):
@@ -267,13 +311,17 @@ def test_transaction_redeemers(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/txs/{hash}/redeemers", json=mock_data)
-    mock_object = [TransactionRedeemersResponse(**data) for data in mock_data]
-    assert api.transaction_redeemers(hash=hash) == mock_object
+    assert api.transaction_redeemers(hash=hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_transaction_redeemers():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.transaction_redeemers(hash=hash) == []
 
 
 def test_transaction_submit(requests_mock):
     api = BlockFrostApi()
     mock_data = hash
     requests_mock.post(f"{api.url}/tx/submit", json=mock_data)
-    mock_object = mock_data
-    assert api.transaction_submit(file_path="./README.md") == mock_object
+    assert api.transaction_submit(file_path="./README.md") == convert_json_to_object(mock_data)

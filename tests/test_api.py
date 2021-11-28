@@ -1,4 +1,6 @@
+import os
 from blockfrost import BlockFrostApi, ApiError
+from blockfrost.utils import convert_json_to_object
 
 
 def test_root(requests_mock):
@@ -8,5 +10,17 @@ def test_root(requests_mock):
         "version": "0.1.0"
     }
     requests_mock.get(api.url + '/', json=mock_data)
-    mock_object = api.RootResponse(**mock_data)
-    assert api.root().url == mock_object.url
+    assert api.root() == convert_json_to_object(mock_data)
+
+
+def test_integration_root():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.root()
+
+
+def test_integration_root():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        assert True
+    else:
+        assert False

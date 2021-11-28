@@ -1,14 +1,8 @@
 import requests
-from dataclasses import dataclass
-from blockfrost.utils import object_request_wrapper, object_list_request_wrapper
+from blockfrost.utils import request_wrapper, list_request_wrapper
 
 
-@dataclass
-class ScriptsResponse:
-    script_hash: str
-
-
-@object_list_request_wrapper(ScriptsResponse)
+@list_request_wrapper
 def scripts(self, **kwargs):
     """
     List of scripts.
@@ -17,8 +11,16 @@ def scripts(self, **kwargs):
 
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :returns A list of ScriptsResponse objects.
-    :rtype [ScriptsResponse]
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
+    :type gather_pages: bool
+    :param count: Optional. Default: 100. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :param order: Optional. "asc" or "desc". Default: "asc".
+    :type order: str
+    :returns A list of objects.
+    :rtype [Namespace]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -29,14 +31,7 @@ def scripts(self, **kwargs):
     )
 
 
-@dataclass
-class ScriptResponse:
-    script_hash: str
-    type: str
-    serialised_size: int
-
-
-@object_request_wrapper(ScriptResponse)
+@request_wrapper
 def script(self, script_hash: str, **kwargs):
     """
     Information about a specific script.
@@ -47,8 +42,8 @@ def script(self, script_hash: str, **kwargs):
     :type script_hash: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :returns A list of ScriptResponse objects.
-    :rtype [ScriptResponse]
+    :returns object.
+    :rtype: Namespace
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -58,15 +53,7 @@ def script(self, script_hash: str, **kwargs):
     )
 
 
-@dataclass
-class ScriptJsonResponse:
-    json: dict
-
-    def __init__(self, **kwargs) -> None:
-        self.json = kwargs
-
-
-@object_request_wrapper(ScriptJsonResponse)
+@request_wrapper
 def script_json(self, script_hash: str, **kwargs):
     """
     JSON representation of a timelock script.
@@ -77,8 +64,8 @@ def script_json(self, script_hash: str, **kwargs):
     :type script_hash: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :returns A list of ScriptJsonResponse objects.
-    :rtype [ScriptJsonResponse]
+    :returns object.
+    :rtype: Namespace
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -88,12 +75,7 @@ def script_json(self, script_hash: str, **kwargs):
     )
 
 
-@dataclass
-class ScriptCBORResponse:
-    cbor: str
-
-
-@object_request_wrapper(ScriptCBORResponse)
+@request_wrapper
 def script_cbor(self, script_hash: str, **kwargs):
     """
     CBOR representation of a plutus script
@@ -104,8 +86,8 @@ def script_cbor(self, script_hash: str, **kwargs):
     :type script_hash: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :returns A list of ScriptCborResponse objects.
-    :rtype [ScriptCborResponse]
+    :returns object.
+    :rtype: Namespace
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -115,17 +97,7 @@ def script_cbor(self, script_hash: str, **kwargs):
     )
 
 
-@dataclass
-class ScriptRedeemersResponse:
-    tx_hash: str
-    tx_index: int
-    purpose: str
-    unit_mem: str
-    unit_steps: str
-    fee: str
-
-
-@object_list_request_wrapper(ScriptRedeemersResponse)
+@list_request_wrapper
 def script_redeemers(self, script_hash: str, **kwargs):
     """
     List of redeemers of a specific script.
@@ -136,8 +108,16 @@ def script_redeemers(self, script_hash: str, **kwargs):
     :type script_hash: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :returns A list of ScriptRedeemersResponse objects.
-    :rtype [ScriptRedeemersResponse]
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
+    :type gather_pages: bool
+    :param count: Optional. Default: 100. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :param order: Optional. "asc" or "desc". Default: "asc".
+    :type order: str
+    :returns A list of objects.
+    :rtype [Namespace]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -148,12 +128,7 @@ def script_redeemers(self, script_hash: str, **kwargs):
     )
 
 
-@dataclass
-class ScriptDatumResponse:
-    json_value: dict
-
-
-@object_request_wrapper(ScriptDatumResponse)
+@request_wrapper
 def script_datum(self, datum_hash: str, **kwargs):
     """
     Query JSON value of a datum by its hash.
@@ -164,8 +139,8 @@ def script_datum(self, datum_hash: str, **kwargs):
     :type datum_hash: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
-    :returns A list of ScriptDatumResponse objects.
-    :rtype [ScriptDatumResponse]
+    :returns object.
+    :rtype: Namespace
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """

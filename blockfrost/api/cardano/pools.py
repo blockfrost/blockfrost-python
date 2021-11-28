@@ -1,18 +1,17 @@
 import requests
-from dataclasses import dataclass
-from blockfrost.utils import object_request_wrapper, object_list_request_wrapper
+from blockfrost.utils import request_wrapper, list_request_wrapper
 
 
-@object_list_request_wrapper()
+@request_wrapper
 def pools(self, **kwargs):
     """
     List of registered stake pools.
 
     https://docs.blockfrost.io/#tag/Cardano-Pools/paths/~1pools/get
 
-    :param gather_pages: Optional. Default: 100. Will collect all pages into one return
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
     :type gather_pages: bool
-    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :param count: Optional. Default: 100. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
@@ -30,29 +29,23 @@ def pools(self, **kwargs):
     )
 
 
-@dataclass
-class PoolListResponse:
-    pool_id: str
-    epoch: str
-
-
-@object_list_request_wrapper(PoolListResponse)
+@list_request_wrapper
 def pools_retired(self, **kwargs):
     """
     List of already retired pools.
 
     https://docs.blockfrost.io/#tag/Cardano-Pools/paths/~1pools~1retired/get
 
-    :param gather_pages: Optional. Default: 100. Will collect all pages into one return
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
     :type gather_pages: bool
-    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :param count: Optional. Default: 100. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns A list of PoolListResponse objects.
-    :rtype [PoolListResponse]
+    :returns A list of objects.
+    :rtype [Namespace]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -63,23 +56,23 @@ def pools_retired(self, **kwargs):
     )
 
 
-@object_list_request_wrapper(PoolListResponse)
+@list_request_wrapper
 def pools_retiring(self, **kwargs):
     """
     List of stake pools retiring in the upcoming epochs
 
     https://docs.blockfrost.io/#tag/Cardano-Pools/paths/~1pools~1retiring/get
 
-    :param gather_pages: Optional. Default: 100. Will collect all pages into one return
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
     :type gather_pages: bool
-    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :param count: Optional. Default: 100. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns A list of PoolListResponse objects.
-    :rtype [PoolListResponse]
+    :returns A list of objects.
+    :rtype [Namespace]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -90,29 +83,7 @@ def pools_retiring(self, **kwargs):
     )
 
 
-@dataclass
-class PoolResponse:
-    pool_id: str
-    hex: str
-    vrf_key: str
-    blocks_minted: int
-    live_stake: str
-    live_size: float
-    live_saturation: float
-    live_delegators: float
-    active_stake: str
-    active_size: float
-    declared_pledge: str
-    live_pledge: str
-    margin_cost: float
-    fixed_cost: str
-    reward_account: str
-    owners: [str]
-    registration: [str]
-    retirement: [str]
-
-
-@object_request_wrapper(PoolResponse)
+@request_wrapper
 def pool(self, pool_id: str, **kwargs):
     """
     Pool information.
@@ -121,8 +92,8 @@ def pool(self, pool_id: str, **kwargs):
 
     :param pool_id: Bech32 or hexadecimal pool ID.
     :type pool_id: str
-    :returns PoolResponse object.
-    :rtype PoolResponse
+    :returns object.
+    :rtype: Namespace
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -132,18 +103,7 @@ def pool(self, pool_id: str, **kwargs):
     )
 
 
-@dataclass
-class PoolHistoryResponse:
-    epoch: int
-    blocks: int
-    active_stake: str
-    active_size: float
-    delegators_count: int
-    rewards: str
-    fees: str
-
-
-@object_list_request_wrapper(PoolHistoryResponse)
+@list_request_wrapper
 def pool_history(self, pool_id: str, **kwargs):
     """
     History of stake pool parameters over epochs.
@@ -152,16 +112,16 @@ def pool_history(self, pool_id: str, **kwargs):
 
     :param pool_id: Bech32 or hexadecimal pool ID.
     :type pool_id: str
-    :param gather_pages: Optional. Default: 100. Will collect all pages into one return
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
     :type gather_pages: bool
-    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :param count: Optional. Default: 100. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns A list of PoolHistoryResponse objects.
-    :rtype [PoolHistoryResponse]
+    :returns A list of objects.
+    :rtype [Namespace]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -172,19 +132,7 @@ def pool_history(self, pool_id: str, **kwargs):
     )
 
 
-@dataclass
-class PoolMetadataResponse:
-    pool_id: str
-    hex: str
-    url: str
-    hash: str
-    ticker: str
-    name: str
-    description: str
-    homepage: str
-
-
-@object_request_wrapper(PoolMetadataResponse)
+@request_wrapper
 def pool_metadata(self, pool_id: str, **kwargs):
     """
     Stake pool registration metadata.
@@ -193,8 +141,8 @@ def pool_metadata(self, pool_id: str, **kwargs):
 
     :param pool_id: Bech32 or hexadecimal pool ID.
     :type pool_id: str
-    :returns PoolMetadataResponse object.
-    :rtype PoolMetadataResponse
+    :returns object.
+    :rtype: Namespace
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -204,16 +152,7 @@ def pool_metadata(self, pool_id: str, **kwargs):
     )
 
 
-@dataclass
-class PoolRelayResponse:
-    ipv4: str
-    ipv6: str
-    dns: str
-    dns_srv: str
-    port: int
-
-
-@object_list_request_wrapper(PoolRelayResponse)
+@list_request_wrapper
 def pool_relays(self, pool_id: str, **kwargs):
     """
     Relays of a stake pool.
@@ -222,8 +161,8 @@ def pool_relays(self, pool_id: str, **kwargs):
 
     :param pool_id: Bech32 or hexadecimal pool ID.
     :type pool_id: str
-    :returns A list of PoolRelayResponse objects.
-    :rtype [PoolRelayResponse]
+    :returns A list of objects.
+    :rtype [Namespace]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -233,13 +172,7 @@ def pool_relays(self, pool_id: str, **kwargs):
     )
 
 
-@dataclass
-class PoolDelegatorResponse:
-    address: str
-    live_stake: str
-
-
-@object_list_request_wrapper(PoolDelegatorResponse)
+@list_request_wrapper
 def pool_delegators(self, pool_id: str, **kwargs):
     """
     List of current stake pools delegators.
@@ -248,16 +181,16 @@ def pool_delegators(self, pool_id: str, **kwargs):
 
     :param pool_id: Bech32 or hexadecimal pool ID.
     :type pool_id: str
-    :param gather_pages: Optional. Default: 100. Will collect all pages into one return
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
     :type gather_pages: bool
-    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :param count: Optional. Default: 100. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns A list of PoolDelegatorResponse objects.
-    :rtype [PoolDelegatorResponse]
+    :returns A list of objects.
+    :rtype [Namespace]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
@@ -268,7 +201,7 @@ def pool_delegators(self, pool_id: str, **kwargs):
     )
 
 
-@object_list_request_wrapper()
+@list_request_wrapper
 def pool_blocks(self, pool_id: str, **kwargs):
     """
     List of stake pools blocks.
@@ -277,9 +210,9 @@ def pool_blocks(self, pool_id: str, **kwargs):
 
     :param pool_id: Bech32 or hexadecimal pool ID.
     :type pool_id: str
-    :param gather_pages: Optional. Default: 100. Will collect all pages into one return
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
     :type gather_pages: bool
-    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :param count: Optional. Default: 100. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
@@ -297,14 +230,7 @@ def pool_blocks(self, pool_id: str, **kwargs):
     )
 
 
-@dataclass
-class PoolUpdateResponse:
-    tx_hash: str
-    cert_index: int
-    action: str
-
-
-@object_list_request_wrapper(PoolUpdateResponse)
+@list_request_wrapper
 def pool_updates(self, pool_id: str, **kwargs):
     """
     List of certificate updates to the stake pool.
@@ -313,16 +239,16 @@ def pool_updates(self, pool_id: str, **kwargs):
 
     :param pool_id: Bech32 or hexadecimal pool ID.
     :type pool_id: str
-    :param gather_pages: Optional. Default: 100. Will collect all pages into one return
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
     :type gather_pages: bool
-    :param count: Optional. Default: 1. The number of results displayed on one page.
+    :param count: Optional. Default: 100. The number of results displayed on one page.
     :type count: int
     :param page: Optional. The page number for listing the results.
     :type page: int
     :param order: Optional. "asc" or "desc". Default: "asc".
     :type order: str
-    :returns A list of PoolUpdateResponse objects.
-    :rtype [PoolUpdateResponse]
+    :returns A list of objects.
+    :rtype [Namespace]
     :raises ApiError: If API fails
     :raises Exception: If the API response is somehow malformed.
     """
