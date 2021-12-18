@@ -158,7 +158,7 @@ def test_address_utxos(requests_mock):
 def test_integration_address_utxos():
     if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
         api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
-        assert api.address_utxos(address=address)
+        assert api.address_utxos(address=address) == []
 
 
 def test_address_utxos_asset(requests_mock):

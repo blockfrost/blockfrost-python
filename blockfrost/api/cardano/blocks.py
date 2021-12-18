@@ -202,3 +202,32 @@ def block_transactions(self, hash_or_number: str, **kwargs):
         params=self.query_parameters(kwargs),
         headers=self.default_headers
     )
+
+
+@list_request_wrapper
+def blocks_addresses(self, hash_or_number: str, **kwargs):
+    """
+    Return list of addresses affected in the specified block with additional information, sorted by the bech32 address, ascending.
+
+    https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1{hash_or_number}~1addresses/get
+
+    :param hash_or_number: Hash or number of the requested block.
+    :type hash_or_number: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
+    :type gather_pages: bool
+    :param count: Optional. Default: 100. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :returns A list of objects.
+    :rtype [Namespace]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/blocks/{hash_or_number}/addresses",
+        params=self.query_parameters(kwargs),
+        headers=self.default_headers
+    )
