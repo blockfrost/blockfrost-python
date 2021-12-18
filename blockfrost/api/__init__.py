@@ -75,7 +75,8 @@ class BlockFrostApi(Api):
         block_epoch_slot, \
         blocks_next, \
         blocks_previous, \
-        block_transactions
+        block_transactions, \
+        blocks_addresses
     from .cardano.epochs import \
         epoch_latest, \
         epoch_latest_parameters, \
@@ -96,6 +97,7 @@ class BlockFrostApi(Api):
         network
     from .cardano.pools import \
         pools, \
+        pools_extended, \
         pools_retired, \
         pools_retiring, \
         pool, \
@@ -125,3 +127,5 @@ class BlockFrostApi(Api):
         script_cbor, \
         script_redeemers, \
         script_datum
+    from .cardano.utils import \
+        utils_addresses_xpub

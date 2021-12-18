@@ -22,6 +22,35 @@ def test_integration_pools():
         assert api.pools()
 
 
+def test_pools_extended(requests_mock):
+    api = BlockFrostApi()
+    mock_data = [
+        {
+            "pool_id": "pool19u64770wqp6s95gkajc8udheske5e6ljmpq33awxk326zjaza0q",
+            "active_stake": "1541200000",
+            "live_stake": "1541400000"
+        },
+        {
+            "pool_id": "pool1dvla4zq98hpvacv20snndupjrqhuc79zl6gjap565nku6et5zdx",
+            "active_stake": "22200000",
+            "live_stake": "48955550"
+        },
+        {
+            "pool_id": "pool1wvccajt4eugjtf3k0ja3exjqdj7t8egsujwhcw4tzj4rzsxzw5w",
+            "active_stake": "9989541215",
+            "live_stake": "168445464878"
+        }
+    ]
+    requests_mock.get(f"{api.url}/pools/extended", json=mock_data)
+    assert api.pools_extended() == convert_json_to_object(mock_data)
+
+
+def test_integration_pools_extended():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.pools_extended()
+
+
 def test_pools_retired(requests_mock):
     api = BlockFrostApi()
     mock_data = [

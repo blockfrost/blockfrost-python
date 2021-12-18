@@ -30,6 +30,33 @@ def pools(self, **kwargs):
 
 
 @list_request_wrapper
+def pools_extended(self, **kwargs):
+    """
+    List of registered stake pools with additional information.
+
+    https://docs.blockfrost.io/#tag/Cardano-Pools/paths/~1pools~1extended/get
+
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
+    :type gather_pages: bool
+    :param count: Optional. Default: 100. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :param order: Optional. "asc" or "desc". Default: "asc".
+    :type order: str
+    :returns A list of objects.
+    :rtype [Namespace]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/pools/extended",
+        params=self.query_parameters(kwargs),
+        headers=self.default_headers
+    )
+
+
+@list_request_wrapper
 def pools_retired(self, **kwargs):
     """
     List of already retired pools.

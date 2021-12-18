@@ -220,3 +220,33 @@ def test_integration_block_transactions():
     if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
         api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
         assert api.block_transactions(hash_or_number=hash)
+
+
+def test_blocks_blocks_addresses(requests_mock):
+    api = BlockFrostApi()
+    mock_data = [
+        {
+            "address": "addr1q9ld26v2lv8wvrxxmvg90pn8n8n5k6tdst06q2s856rwmvnueldzuuqmnsye359fqrk8hwvenjnqultn7djtrlft7jnq7dy7wv",
+            "transactions": [
+                {
+                    "tx_hash": "1a0570af966fb355a7160e4f82d5a80b8681b7955f5d44bec0dce628516157f0"
+                }
+            ]
+        },
+        {
+            "address": "addr1qxqs59lphg8g6qndelq8xwqn60ag3aeyfcp33c2kdp46a09re5df3pzwwmyq946axfcejy5n4x0y99wqpgtp2gd0k09qsgy6pz",
+            "transactions": [
+                {
+                    "tx_hash": "1a0570af966fb355a7160e4f82d5a80b8681b7955f5d44bec0dce628516157d0"
+                }
+            ]
+        }
+    ]
+    requests_mock.get(f"{api.url}/blocks/{hash}/addresses", json=mock_data)
+    assert api.blocks_addresses(hash_or_number=hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_blocks_addresses():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.blocks_addresses(hash_or_number=hash)
