@@ -110,6 +110,7 @@ def test_pool(requests_mock):
         "hex": "0f292fcaa02b8b2f9b3c8f9fd8e0bb21abedb692a6d5058df3ef2735",
         "vrf_key": "0b5245f9934ec2151116fb8ec00f35fd00e0aa3b075c4ed12cce440f999d8233",
         "blocks_minted": 69,
+        "blocks_epoch": 4,
         "live_stake": "6900000000",
         "live_size": 0.42,
         "live_saturation": 0.93,
