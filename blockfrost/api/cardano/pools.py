@@ -2,7 +2,7 @@ import requests
 from blockfrost.utils import request_wrapper, list_request_wrapper
 
 
-@request_wrapper
+@list_request_wrapper
 def pools(self, **kwargs):
     """
     List of registered stake pools.
