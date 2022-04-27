@@ -35,22 +35,38 @@ def test_account_rewards(requests_mock):
         {
             "epoch": 215,
             "amount": "12695385",
-            "pool_id": "pool1pu5jlj4q9w9jlxeu370a3c9myx47md5j5m2str0naunn2q3lkdy"
+            "pool_id": "pool1pu5jlj4q9w9jlxeu370a3c9myx47md5j5m2str0naunn2q3lkdy",
+            "type": "member"
         },
         {
             "epoch": 216,
             "amount": "3586329",
-            "pool_id": "pool1pu5jlj4q9w9jlxeu370a3c9myx47md5j5m2str0naunn2q3lkdy"
+            "pool_id": "pool1pu5jlj4q9w9jlxeu370a3c9myx47md5j5m2str0naunn2q3lkdy",
+            "type": "member"
         },
         {
             "epoch": 217,
-            "amount": "0",
-            "pool_id": "pool1pu5jlj4q9w9jlxeu370a3c9myx47md5j5m2str0naunn2q3lkdy"
+            "amount": "1",
+            "pool_id": "pool1pu5jlj4q9w9jlxeu370a3c9myx47md5j5m2str0naunn2q3lkdy",
+            "type": "member"
+        },
+        {
+            "epoch": 217,
+            "amount": "1337",
+            "pool_id": "pool1cytwr0n7eas6du2h2xshl8ypa1yqr18f0erlhhjcuczysiunjcs",
+            "type": "leader"
         },
         {
             "epoch": 218,
             "amount": "1395265",
-            "pool_id": "pool1pu5jlj4q9w9jlxeu370a3c9myx47md5j5m2str0naunn2q3lkdy"
+            "pool_id": "pool1pu5jlj4q9w9jlxeu370a3c9myx47md5j5m2str0naunn2q3lkdy",
+            "type": "member"
+        },
+        {
+            "epoch": 218,
+            "amount": "500000000",
+            "pool_id": "pool1cytwr0n7eas6du2h2xshl8ypa1yqr18f0erlhhjcuczysiunjcs",
+            "type": "pool_deposit_refund"
         }
     ]
     requests_mock.get(f"{api.url}/accounts/{stake_address}/rewards", json=mock_data)

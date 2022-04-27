@@ -86,7 +86,8 @@ class BlockFrostApi(Api):
         epoch_stakes, \
         epoch_pool_stakes, \
         epoch_blocks, \
-        epoch_pool_blocks
+        epoch_pool_blocks, \
+        epoch_protocol_parameters
     from .cardano.ledger import \
         genesis
     from .cardano.metadata import \

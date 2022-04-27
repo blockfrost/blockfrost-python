@@ -2,6 +2,7 @@ import os, json
 from blockfrost import BlockFrostApi, ApiError
 from blockfrost.utils import convert_json_to_object
 
+hash = "8f55e18a94e4c0951e5b8bd8910b2cb20aa4d742b1608fda3a06793d39fb07b1"
 xpub = "d507c8f866691bd96e131334c355188b1a1d0b2fa0ab11545075aab332d77d9eb19657ad13ee581b56b0f8d744d66ca356b93d42fe176b3de007d53e9c4c4e7a"
 role = 0
 index = 0
@@ -25,3 +26,10 @@ def test_integration_utils_addresses_xpub():
     if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
         api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
         assert api.utils_addresses_xpub(xpub, role, index)
+
+
+def test_utils_transaction_evaluate(requests_mock):
+    api = BlockFrostApi()
+    mock_data = hash
+    requests_mock.post(f"{api.url}/utils/txs/evaluate", json=mock_data)
+    assert api.transaction_evaluate(file_path="./README.md") == convert_json_to_object(mock_data)
