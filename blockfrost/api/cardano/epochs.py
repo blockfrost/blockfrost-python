@@ -244,7 +244,7 @@ def epoch_pool_blocks(self, number: int, pool_id: str, **kwargs):
 
 
 @request_wrapper
-def epoch_latest_parameters(self, number: int, **kwargs):
+def epoch_protocol_parameters(self, number: int, **kwargs):
     """
     Return the protocol parameters for the epoch specified.
 

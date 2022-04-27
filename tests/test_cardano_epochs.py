@@ -256,10 +256,10 @@ def test_epoch_latest_parameters(requests_mock):
         "coins_per_utxo_word": "34482"
     }
     requests_mock.get(f"{api.url}/epochs/{epoch}/parameters", json=mock_data)
-    assert api.epoch_latest_parameters(number=epoch) == convert_json_to_object(mock_data)
+    assert api.epoch_protocol_parameters(number=epoch) == convert_json_to_object(mock_data)
 
 
 def test_integration_epoch_latest_parameters():
     if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
         api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
-        assert api.epoch_latest_parameters(number=epoch)
+        assert api.epoch_protocol_parameters(number=epoch)
