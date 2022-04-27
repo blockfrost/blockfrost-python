@@ -266,3 +266,27 @@ def transaction_submit(self, file_path: str, **kwargs):
             headers=header,
             data=file,
         )
+
+
+@request_wrapper
+def transaction_evaluate(self, file_path: str, **kwargs):
+    """
+    Submit an already serialized transaction to evaluate how much execution units it requires.
+
+    https://docs.blockfrost.io/#tag/Cardano-Utilities/paths/~1utils~1txs~1evaluate/post
+
+    :param file_path: Path to file.
+    :type file_path: str
+    :returns str object.
+    :rtype str
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    header = self.default_headers
+    header['Content-Type'] = 'application/cbor'
+    with open(file_path, 'rb') as file:
+        return requests.post(
+            url=f"{self.url}/utils/txs/evaluate",
+            headers=header,
+            data=file,
+        )
