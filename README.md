@@ -30,10 +30,13 @@ your API key.
 <br/>
 
 ## Installation
+
 [![PyPI Latest Release](https://img.shields.io/pypi/v/blockfrost-python.svg)](https://pypi.org/project/blockfrost-python/)
+
 ```console
 $ pip install blockfrost-python
 ```
+
 <br/>
 
 ## Usage
@@ -59,7 +62,7 @@ try:
     print(health)   # prints Dataframe:         is_healthy
                     #                       0         True
 
-    
+
     account_rewards = api.account_rewards(
         stake_address='stake1ux3g2c9dx2nhhehyrezyxpkstartcqmu9hk63qgfkccw5rqttygt7',
         count=20,
@@ -107,4 +110,60 @@ try:
         file.write(file_data)
 except ApiError as e:
     print(e)
+```
+
+### Verifying Secure Webhook signature
+
+Webhooks enable Blockfrost to push real-time notifications to your application. In order to prevent malicious actor from pretending to be Blockfrost every webhook request is signed. The signature is included in a request's `Blockfrost-Signature` header. This allows you to verify that the events were sent by Blockfrost, not by a third party.
+
+You can verify the signature using `verifyWebhookSignature` function.
+
+Example:
+
+```python
+# Example of Python Flask app with /webhook endpoint
+# for processing events sent by Blockfrost Secure Webhooks
+from flask import Flask, request, json
+from blockfrost import verify_webhook_signature, SignatureVerificationError
+
+SECRET_AUTH_TOKEN = "SECRET-WEBHOOK-AUTH-TOKEN"
+
+app = Flask(__name__)
+
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    if request.method == 'POST':
+        # Validate webhook signature
+        request_bytes = request.get_data()
+        try:
+            verify_webhook_signature(
+                request_bytes, request.headers['Blockfrost-Signature'], SECRET_AUTH_TOKEN)
+        except SignatureVerificationError as e:
+            # for easier debugging you can access passed header and request_body values (e.header, e.request_body)
+            print('Webhook signature is invalid.', e)
+            return 'Invalid signature', 403
+
+        # Get the payload as JSON
+        event = request.json
+
+        print('Received request id {}, webhook_id: {}'.format(
+            event['id'], event['webhook_id']))
+
+        if event['type'] == "block":
+            # process Block event
+            print('Received block hash {}'.format(event['payload']['hash']))
+        elif event['type'] == "...":
+            # truncated
+        else:
+            # Unexpected event type
+            print('Unexpected event type {}'.format(event['type']))
+
+        return 'Webhook received', 200
+    else:
+        return 'POST Method not supported', 405
+
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=6666)
 ```
