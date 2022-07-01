@@ -46,7 +46,7 @@ error_fixtures_list = [
         'signature_header': 't=1650013856,v1=abc',
         'secret': '59a1eb46-96f4-4f0b-8a03-b4d26e70593a',
         'current_timestamp_mock': 1650013856 + 1,
-        'result_error': 'No signature matches expected signature for payload.'
+        'result_error': 'No signature matches the expected signature for the payload.'
     },
     {
         'description': 'throws due to timestamp out of tolerance zone',

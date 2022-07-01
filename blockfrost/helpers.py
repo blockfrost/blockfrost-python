@@ -55,7 +55,7 @@ def verify_webhook_signature(request_body, signature_header, secret, timestamp_t
 
     if has_valid_signature == False:
         raise SignatureVerificationError(
-            'No signature matches expected signature for payload.', signature_header, request_body)
+            'No signature matches the expected signature for the payload.', signature_header, request_body)
 
     current_timestamp = get_unix_timestamp()
 
