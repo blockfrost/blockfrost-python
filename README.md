@@ -115,6 +115,7 @@ except ApiError as e:
 ### Verifying Secure Webhook signature
 
 Webhooks enable Blockfrost to push real-time notifications to your application. In order to prevent malicious actor from pretending to be Blockfrost every webhook request is signed. The signature is included in a request's `Blockfrost-Signature` header. This allows you to verify that the events were sent by Blockfrost, not by a third party.
+To learn more about Secure Webhooks, see [Secure Webhooks Docs](https://blockfrost.dev/docs/start-building/webhooks/).
 
 You can verify the signature using `verifyWebhookSignature` function.
 
