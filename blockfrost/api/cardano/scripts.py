@@ -148,3 +148,24 @@ def script_datum(self, datum_hash: str, **kwargs):
         url=f"{self.url}/scripts/datum/{datum_hash}",
         headers=self.default_headers
     )
+
+@request_wrapper
+def script_datum_cbor(self, datum_hash: str, **kwargs):
+    """
+    Query CBOR value of a datum by its hash.
+
+    https://docs.blockfrost.io/#tag/Cardano-Scripts/paths/~1scripts~1datum~1{datum_hash}~1cbor/get
+
+    :param datum_hash: Hash of the datum.
+    :type datum_hash: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns object.
+    :rtype: Namespace
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/scripts/datum/{datum_hash}/cbor",
+        headers=self.default_headers
+    )
