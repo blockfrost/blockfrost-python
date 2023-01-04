@@ -1,4 +1,4 @@
-[![Package Test](https://img.shields.io/github/workflow/status/blockfrost/blockfrost-python/Package%20Test?logo=GitHub&label=package%20test)](https://github.com/blockfrost/blockfrost-python/actions/workflows/package-test.yml)
+[![Package Test](https://img.shields.io/github/actions/workflow/status/blockfrost/blockfrost-python/package-test.yml?logo=GitHub&label=package%20test)](https://github.com/blockfrost/blockfrost-python/actions/workflows/package-test.yml)
 [![PyPI Latest Release](https://img.shields.io/pypi/v/blockfrost-python.svg?logo=pypi&label=pypi%20latest)](https://pypi.org/project/blockfrost-python/)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/blockfrost-python?logo=pypi&label=pypi%20downloads)](https://pypistats.org/packages/blockfrost-python)
 [![Package Status](https://img.shields.io/pypi/status/blockfrost-python.svg)](https://pypi.org/project/blockfrost-python/)
