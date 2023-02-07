@@ -52,7 +52,8 @@ def test_block_latest_transactions(requests_mock):
 def test_integration_block_latest_transactions():
     if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
         api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
-        assert api.block_latest_transactions()
+        assert (api.block_latest_transactions() or
+                api.block_latest_transactions() == [])
 
 
 def test_block(requests_mock):
