@@ -3,9 +3,9 @@ import os
 from blockfrost import BlockFrostApi, ApiError
 from blockfrost.utils import convert_json_to_object
 
-address = 'addr1qx466898end6q5mpvrwwmycq35v83c9e8cnffadv6gr6q6azs4s26v4800nwg8jygvrdqh6xhsphct0d4zqsnd3sagxqqjjgln'
+address = 'addr1qyptln5t5s0mastzc9rksn6wdqp9ynt67ahw0nhzukar5keu7yzv8ay6qvmlywtgvt7exaxt783dxuzv03qal7muda5sl42hg6'
 stake_address = 'stake1ux3g2c9dx2nhhehyrezyxpkstartcqmu9hk63qgfkccw5rqttygt7'
-asset = 'b0d07d45fe9514f80213f4020e5a61241458be626841cde717cb38a76e7574636f696e'
+asset = 'f4988f549728dc76b58d7677849443caf6e5385dc67e6c25f6aa901e506978656c54696c653235'
 
 
 def test_address(requests_mock):
