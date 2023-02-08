@@ -130,3 +130,17 @@ def test_integration_script_datum():
     if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
         api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
         assert api.script_datum(datum_hash=datum_hash)
+
+def test_script_datum_cbor(requests_mock):
+    api = BlockFrostApi()
+    mock_data = {
+        "cbor": "4e4d01000033222220051200120011"
+    }
+    requests_mock.get(f"{api.url}/scripts/datum/{datum_hash}/cbor", json=mock_data)
+    assert api.script_datum_cbor(datum_hash=datum_hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_script_datum_cbor():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.script_datum_cbor(datum_hash=datum_hash)

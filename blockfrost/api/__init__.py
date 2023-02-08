@@ -128,6 +128,7 @@ class BlockFrostApi(Api):
         script_json, \
         script_cbor, \
         script_redeemers, \
-        script_datum
+        script_datum, \
+        script_datum_cbor
     from .cardano.utils import \
         utils_addresses_xpub
