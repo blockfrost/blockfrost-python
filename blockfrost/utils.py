@@ -42,7 +42,8 @@ def convert_json_to_pandas(json_response):
         import pandas as pd
         return pd.json_normalize(json_response)
     except ImportError as error:
-        raise ImportError("To use \"return_type='pandas'\" you must pip install pandas")
+        raise ImportError(
+            "To use \"return_type='pandas'\" you must pip install pandas")
 
 
 def simple_request_wrapper(func):
@@ -125,14 +126,14 @@ class Api:
             base_url: str = None,
             api_version: str = None,
     ):
-        self.project_id = project_id if project_id else os.environ.get('BLOCKFROST_PROJECT_ID')
-        self.api_version = api_version if api_version else os.environ.get('BLOCKFROST_API_VERSION',
-                                                                          default=DEFAULT_API_VERSION)
+        self.project_id = project_id if project_id else os.environ.get(
+            'BLOCKFROST_PROJECT_ID')
+        self.api_version = api_version
         self.base_url = base_url
 
     @property
     def url(self):
-        return f"{self.base_url}/{self.api_version}"
+        return f"{self.base_url}/{self.api_version}" if self.api_version else f"{self.base_url}"
 
     @property
     def authentication_header(self):
