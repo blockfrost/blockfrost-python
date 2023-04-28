@@ -1,6 +1,6 @@
 import os
 
-from blockfrost import BlockFrostApi, ApiError
+from blockfrost import BlockFrostApi
 from blockfrost.utils import convert_json_to_object
 
 address = 'addr1qyptln5t5s0mastzc9rksn6wdqp9ynt67ahw0nhzukar5keu7yzv8ay6qvmlywtgvt7exaxt783dxuzv03qal7muda5sl42hg6'
