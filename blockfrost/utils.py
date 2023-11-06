@@ -47,6 +47,7 @@ def convert_json_to_pandas(json_response):
 
 
 def simple_request_wrapper(func):
+    @wraps(func)
     def error_wrapper(*args, **kwargs):
         request_response: Response = func(*args, **kwargs)
         if request_response.status_code != 200:
@@ -58,6 +59,7 @@ def simple_request_wrapper(func):
 
 
 def request_wrapper(func):
+    @wraps(func)
     def error_wrapper(*args, **kwargs):
         request_response: Response = func(*args, **kwargs)
         if request_response.status_code != 200:
@@ -77,6 +79,7 @@ def request_wrapper(func):
 
 
 def list_request_wrapper(func):
+    @wraps(func)
     def pagination(*args, **kwargs):
         def recursive_append(json_list, *args, **kwargs):
             request_response: Response = func(*args, **kwargs)
@@ -128,7 +131,8 @@ class Api:
     ):
         self.project_id = project_id if project_id else os.environ.get(
             'BLOCKFROST_PROJECT_ID')
-        self.api_version = api_version
+        self.api_version = api_version if api_version else os.environ.get('BLOCKFROST_API_VERSION',
+                                                                          default=DEFAULT_API_VERSION)
         self.base_url = base_url
 
     @property
