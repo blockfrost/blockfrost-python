@@ -129,8 +129,11 @@ class BlockFrostApi(Api):
         transaction_metadata, \
         transaction_metadata_cbor, \
         transaction_submit, \
+        transaction_submit_cbor, \
         transaction_redeemers, \
-        transaction_evaluate
+        transaction_evaluate, \
+        transaction_evaluate_cbor, \
+        transaction_evaluate_utxos
     from .cardano.scripts import \
         scripts, \
         script, \
