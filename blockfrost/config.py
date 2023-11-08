@@ -1,6 +1,8 @@
 from enum import Enum
-import pkg_resources
-
+try:
+    from importlib.metadata import version
+except ImportError: # for Python<3.8
+    from importlib_metadata import version
 
 class ApiUrls(Enum):
     mainnet = 'https://cardano-mainnet.blockfrost.io/api'
@@ -18,4 +20,5 @@ DEFAULT_PAGINATION_PAGE_ITEMS_COUNT = 100
 ADDRESS_GAP_LIMIT = 20
 
 package_name = 'blockfrost-python'
-USER_AGENT = f'{package_name} {pkg_resources.get_distribution(package_name).version}'
+version = version(package_name)
+USER_AGENT = f'{package_name} {version}'

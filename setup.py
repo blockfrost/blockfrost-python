@@ -21,6 +21,9 @@ setup(
     keywords='blockfrost blockchain cardano ipfs',
     packages=find_packages(exclude=['tests', 'tests.*']),
     python_requires='>=3.7, <4',
+    requires= [
+        "importlib_metadata",
+    ],
     install_requires=[
         "requests",
     ],
