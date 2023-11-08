@@ -168,3 +168,26 @@ def webhook():
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=6666)
 ```
+
+## Development
+
+Install dependencies
+
+```
+pip install -r requirements.txt
+pip install -r rest-requirements.txt
+```
+
+Install package
+
+```
+ pip install .
+```
+
+Run integration and unit tests:
+
+```
+pytest
+```
+
+_For integration tests you need to set env variable `BLOCKFROST_PROJECT_ID_MAINNET`_
