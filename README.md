@@ -191,3 +191,8 @@ pytest
 ```
 
 _For integration tests you need to set env variable `BLOCKFROST_PROJECT_ID_MAINNET`_
+
+### Release workflow
+
+To release the package create a new release via GitHub releases.
+This action triggers the automated release workflow that packages and uploads the distribution to PyPI.
