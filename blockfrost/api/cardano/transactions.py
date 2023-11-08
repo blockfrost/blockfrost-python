@@ -1,4 +1,5 @@
 import requests
+from typing import Union
 from blockfrost.utils import request_wrapper, list_request_wrapper
 
 
@@ -269,6 +270,36 @@ def transaction_submit(self, file_path: str, **kwargs):
 
 
 @request_wrapper
+def transaction_submit_cbor(self, tx_cbor: Union[bytes, str], **kwargs):
+    """
+    Submit an already serialized transaction to the network.
+
+    https://docs.blockfrost.io/#tag/Cardano-Transactions/paths/~1tx~1submit/post
+
+    :param tx_cbor: Transaction in CBOR format, either as a hex-encoded string or as bytes.
+    :type tx_cbor: Union[str, bytes]
+    :returns str object.
+    :rtype str
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+
+    # Convert to bytes
+    if isinstance(tx_cbor, str):
+        data = bytes.fromhex(tx_cbor)
+    else:
+        data = tx_cbor
+
+    header = self.default_headers
+    header['Content-Type'] = 'application/cbor'
+    return requests.post(
+        url=f"{self.url}/tx/submit",
+        headers=header,
+        data=data,
+    )
+
+
+@request_wrapper
 def transaction_evaluate(self, file_path: str, **kwargs):
     """
     Submit an already serialized transaction to evaluate how much execution units it requires.
@@ -290,3 +321,74 @@ def transaction_evaluate(self, file_path: str, **kwargs):
             headers=header,
             data=file,
         )
+
+
+@request_wrapper
+def transaction_evaluate_cbor(self, tx_cbor: Union[bytes, str], **kwargs):
+    """
+    Submit an already serialized transaction to evaluate how much execution units it requires.
+
+    https://docs.blockfrost.io/#tag/Cardano-Utilities/paths/~1utils~1txs~1evaluate/post
+
+    :param tx_cbor: Transaction in CBOR format, either as a hex-encoded string or as bytes.
+    :type tx_cbor: Union[str, bytes]
+    :returns str object.
+    :rtype str
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    header = self.default_headers
+    header['Content-Type'] = 'application/cbor'
+
+    # Convert bytes to hex
+    if isinstance(tx_cbor, bytes):
+        data = tx_cbor.hex()
+    else:
+        data = tx_cbor
+
+    return requests.post(
+        url=f"{self.url}/utils/txs/evaluate",
+        headers=header,
+        data=data,
+    )
+
+
+@request_wrapper
+def transaction_evaluate_utxos(self, tx_cbor: Union[bytes, str], additional_utxo_set: list, **kwargs):
+    """
+    Submits a transaction CBOR and additional utxo set to evaluate how much execution units it requires.
+
+    https://docs.blockfrost.io/#tag/Cardano-Utilities/paths/~1utils~1txs~1evaluate~1utxos/post
+    https://ogmios.dev/mini-protocols/local-tx-submission/#evaluatetx
+
+    :param tx_cbor: Transaction in CBOR format, either as a hex-encoded string or as bytes.
+    :type tx_cbor: Union[bytes, str]
+    :param additional_utxo_set: Additional UTXO as an array of tuples [TxIn, TxOut] https://ogmios.dev/mini-protocols/local-tx-submission/#additional-utxo-set.
+    :type additional_utxo_set: list
+    :returns: Result of Ogmios EvaluateTx
+    :rtype dict
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+
+    # Convert bytes to hex
+    if isinstance(tx_cbor, bytes):
+        data = tx_cbor.hex()
+    else:
+        data = tx_cbor
+
+    headers = {
+        'Content-type': 'application/json',
+        **self.default_headers
+    }
+
+    payload = {
+        'cbor': data,
+        'additionalUtxoSet': additional_utxo_set
+    }
+
+    return requests.post(
+        url=f"{self.url}/utils/txs/evaluate/utxos",
+        headers=headers,
+        json=payload
+    )

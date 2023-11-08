@@ -3,7 +3,7 @@ import os
 from blockfrost import BlockFrostApi, ApiError
 from blockfrost.utils import convert_json_to_object
 
-address = 'addr1qyptln5t5s0mastzc9rksn6wdqp9ynt67ahw0nhzukar5keu7yzv8ay6qvmlywtgvt7exaxt783dxuzv03qal7muda5sl42hg6'
+address = 'addr1qxk49ptelk7uda7acrczz30a7fu778sax5aapa38nhmve3eu7yzv8ay6qvmlywtgvt7exaxt783dxuzv03qal7muda5srnx35s'
 stake_address = 'stake1ux3g2c9dx2nhhehyrezyxpkstartcqmu9hk63qgfkccw5rqttygt7'
 asset = 'f4988f549728dc76b58d7677849443caf6e5385dc67e6c25f6aa901e506978656c54696c653235'
 
@@ -32,7 +32,8 @@ def test_address(requests_mock):
 
 def test_integration_address():
     if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
-        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        api = BlockFrostApi(project_id=os.getenv(
+            'BLOCKFROST_PROJECT_ID_MAINNET'))
         assert api.address(address=address)
 
 
@@ -58,13 +59,16 @@ def test_address_extended(requests_mock):
         "type": "shelley",
         "script": False
     }
-    requests_mock.get(f"{api.url}/addresses/{address}/extended", json=mock_data)
-    assert api.address_extended(address=address) == convert_json_to_object(mock_data)
+    requests_mock.get(
+        f"{api.url}/addresses/{address}/extended", json=mock_data)
+    assert api.address_extended(
+        address=address) == convert_json_to_object(mock_data)
 
 
 def test_integration_address_extended():
     if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
-        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        api = BlockFrostApi(project_id=os.getenv(
+            'BLOCKFROST_PROJECT_ID_MAINNET'))
         assert api.address_extended(address=address)
 
 
@@ -95,12 +99,14 @@ def test_address_total(requests_mock):
         "tx_count": 12
     }
     requests_mock.get(f"{api.url}/addresses/{address}/total", json=mock_data)
-    assert api.address_total(address=address) == convert_json_to_object(mock_data)
+    assert api.address_total(
+        address=address) == convert_json_to_object(mock_data)
 
 
 def test_integration_address_total():
     if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
-        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        api = BlockFrostApi(project_id=os.getenv(
+            'BLOCKFROST_PROJECT_ID_MAINNET'))
         assert api.address_total(address=address)
 
 
@@ -152,13 +158,15 @@ def test_address_utxos(requests_mock):
         }
     ]
     requests_mock.get(f"{api.url}/addresses/{address}/utxos", json=mock_data)
-    assert api.address_utxos(address=address) == convert_json_to_object(mock_data)
+    assert api.address_utxos(
+        address=address) == convert_json_to_object(mock_data)
 
 
 def test_integration_address_utxos():
     if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
-        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
-        assert api.address_utxos(address=address)
+        api = BlockFrostApi(project_id=os.getenv(
+            'BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.address_utxos(address=address) == []
 
 
 def test_address_utxos_asset(requests_mock):
@@ -205,13 +213,16 @@ def test_address_utxos_asset(requests_mock):
             "data_hash": None
         }
     ]
-    requests_mock.get(f"{api.url}/addresses/{address}/utxos/{asset}", json=mock_data)
-    assert api.address_utxos_asset(address=address, asset=asset) == convert_json_to_object(mock_data)
+    requests_mock.get(
+        f"{api.url}/addresses/{address}/utxos/{asset}", json=mock_data)
+    assert api.address_utxos_asset(
+        address=address, asset=asset) == convert_json_to_object(mock_data)
 
 
 def test_integration_address_utxos_asset():
     if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
-        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        api = BlockFrostApi(project_id=os.getenv(
+            'BLOCKFROST_PROJECT_ID_MAINNET'))
         assert api.address_utxos_asset(address=address, asset=asset) == []
 
 
@@ -237,11 +248,14 @@ def test_address_transactions(requests_mock):
             "block_time": 1834505492
         }
     ]
-    requests_mock.get(f"{api.url}/addresses/{address}/transactions", json=mock_data)
-    assert api.address_transactions(address=address) == convert_json_to_object(mock_data)
+    requests_mock.get(
+        f"{api.url}/addresses/{address}/transactions", json=mock_data)
+    assert api.address_transactions(
+        address=address) == convert_json_to_object(mock_data)
 
 
 def test_integration_address_transactions():
     if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
-        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        api = BlockFrostApi(project_id=os.getenv(
+            'BLOCKFROST_PROJECT_ID_MAINNET'))
         assert api.address_transactions(address=address)

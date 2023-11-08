@@ -95,6 +95,10 @@ class BlockFrostApi(Api):
         epoch_protocol_parameters
     from .cardano.ledger import \
         genesis
+    from .cardano.mempool import \
+        mempool, \
+        mempool_address, \
+        mempool_tx
     from .cardano.metadata import \
         metadata_labels, \
         metadata_label_json, \
@@ -125,8 +129,11 @@ class BlockFrostApi(Api):
         transaction_metadata, \
         transaction_metadata_cbor, \
         transaction_submit, \
+        transaction_submit_cbor, \
         transaction_redeemers, \
-        transaction_evaluate
+        transaction_evaluate, \
+        transaction_evaluate_cbor, \
+        transaction_evaluate_utxos
     from .cardano.scripts import \
         scripts, \
         script, \
