@@ -63,7 +63,7 @@ def mempool_address(self, address: str, **kwargs):
     Obtains list of mempool transactions where at least one of the transaction inputs or outputs belongs to the address (paginated).
     Shows only transactions submitted via Blockfrost.io.
 
-    https://docs.blockfrost.io/#tag/Cardano-Mempool/paths/~1mempool~1addresses~1%7Baddress%7D/ge
+    https://docs.blockfrost.io/#tag/Cardano-Mempool/paths/~1mempool~1addresses~1%7Baddress%7D/get
 
     :param address: Bech32 address.
     :type address: str
