@@ -361,6 +361,28 @@ def test_integration_transaction_redeemers():
         assert api.transaction_redeemers(hash=hash) == []
 
 
+def test_transaction_required_signers(requests_mock):
+    api = BlockFrostApi()
+    mock_data = [
+        {
+            {
+                "witness_hash": 'db7685e2d763133630e1a4afdefc5752d4b1c9be6c102e71242fb06f',
+            },
+        }
+    ]
+    requests_mock.get(f"{api.url}/txs/{hash}/required_signers", json=mock_data)
+    assert api.transaction_required_signers(
+        hash=hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_transaction_required_signers():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv(
+            'BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.transaction_required_signers(hash="b024ad35c6309a71a8e613d8bfea2a8185d81eda379ca9128877adefcde1c515") == [
+            {"witness_hash": 'db7685e2d763133630e1a4afdefc5752d4b1c9be6c102e71242fb06f'}]
+
+
 def test_transaction_submit(requests_mock):
     api = BlockFrostApi()
     mock_data = hash

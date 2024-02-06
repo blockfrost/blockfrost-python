@@ -244,6 +244,27 @@ def transaction_redeemers(self, hash: str, **kwargs):
         headers=self.default_headers
     )
 
+@list_request_wrapper
+def transaction_required_signers(self, hash: str, **kwargs):
+    """
+    Obtain the transaction required signers (extra transaction witnesses).
+
+    https://docs.blockfrost.io/#tag/Cardano-Transactions/paths/~1txs~1{hash}~required_signers/get
+
+    :param hash: Hash of the requested transaction.
+    :type hash: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns A list of objects.
+    :rtype [Namespace]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/txs/{hash}/required_signers",
+        headers=self.default_headers
+    )
+
 
 @request_wrapper
 def transaction_submit(self, file_path: str, **kwargs):
