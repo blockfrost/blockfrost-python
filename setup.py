@@ -8,7 +8,7 @@ long_description = (HERE / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='blockfrost-python',
-    version='0.5.3',
+    version='0.6.0',
     description='The official Python SDK for Blockfrost API v0.1.37',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -21,7 +21,7 @@ setup(
     keywords='blockfrost blockchain cardano ipfs',
     packages=find_packages(exclude=['tests', 'tests.*']),
     python_requires='>=3.7, <4',
-    requires= [
+    requires=[
         "importlib_metadata",
     ],
     install_requires=[
