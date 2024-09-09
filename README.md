@@ -12,7 +12,7 @@
 
 <br/>
 
-<p align="center">A Python SDK for Blockfrost.io API.</p>
+<p align="center">A Python SDK for Blockfrost.io API</p>
 <p align="center">
   <a href="#getting-started">Getting started</a> •
   <a href="#installation">Installation</a> •
@@ -22,7 +22,7 @@
 
 ## Getting started
 
-To use this SDK, you first need login into to [blockfrost.io](https://blockfrost.io) create your project to retrieve
+To use this SDK, you first need login into [blockfrost.io](https://blockfrost.io) and create your project to retrieve
 your API key.
 
 <img src="https://i.imgur.com/smY12ro.png">
