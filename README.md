@@ -34,7 +34,7 @@ your API key.
 [![PyPI Latest Release](https://img.shields.io/pypi/v/blockfrost-python.svg)](https://pypi.org/project/blockfrost-python/)
 
 ```console
-$ pip install blockfrost-python
+pip install blockfrost-python
 ```
 
 <br/>
