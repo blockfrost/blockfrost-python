@@ -144,3 +144,21 @@ class BlockFrostApi(Api):
         script_datum_cbor
     from .cardano.utils import \
         utils_addresses_xpub
+    from .cardano.governance import \
+        governance_proposals, \
+        governance_proposal, \
+        governance_proposal_votes, \
+        governance_proposal_parameters, \
+        governance_proposal_withdrawals, \
+        governance_proposal_metadata, \
+        governance_votes, \
+        governance_vote, \
+        governance_drep, \
+        governance_dreps, \
+        governance_drep_votes, \
+        governance_drep_delegators, \
+        governance_drep_metadata, \
+        governance_drep_updates, \
+        governance_committee, \
+        governance_committee_member, \
+        governance_committee_member_votes
