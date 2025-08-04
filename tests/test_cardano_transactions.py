@@ -361,12 +361,17 @@ def test_integration_transaction_redeemers():
         assert api.transaction_redeemers(hash=hash) == []
 
 
-def test_transaction_submit(requests_mock):
+def test_transaction_submit(requests_mock, tmp_path):
     api = BlockFrostApi()
     mock_data = hash
     requests_mock.post(f"{api.url}/tx/submit", json=mock_data)
+
+    tx_file = tmp_path / "tmp_tx_file"
+    tx_file.touch()
+    tx_file.write_text(tx_cbor)
+
     assert api.transaction_submit(
-        file_path="./README.md") == convert_json_to_object(mock_data)
+        file_path=tx_file) == convert_json_to_object(mock_data)
 
 
 def test_integration_transaction_submit_cbor():
