@@ -361,6 +361,42 @@ def test_integration_transaction_redeemers():
         assert api.transaction_redeemers(hash=hash) == []
 
 
+def test_transaction_required_signers(requests_mock):
+    api = BlockFrostApi()
+    mock_data = [
+        {
+            "address": "ec26b89af41bef0f7585353831cb5da42b5b37185e0c8a526143b824"
+        }
+    ]
+    requests_mock.get(f"{api.url}/txs/{hash}/required_signers", json=mock_data)
+    assert api.transaction_required_signers(
+        hash=hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_transaction_required_signers():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv(
+            'BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.transaction_required_signers(hash=hash) == []
+
+
+def test_transaction_cbor(requests_mock):
+    api = BlockFrostApi()
+    mock_data = {
+        "cbor": "84a8008282582098483df1666d5af7c4aca7ef28f112d225b81a34ef20b0ad4775bab0e41dbb30"
+    }
+    requests_mock.get(f"{api.url}/txs/{hash}/cbor", json=mock_data)
+    assert api.transaction_cbor(
+        hash=hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_transaction_cbor():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv(
+            'BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.transaction_cbor(hash=hash)
+
+
 def test_transaction_submit(requests_mock):
     api = BlockFrostApi()
     mock_data = hash

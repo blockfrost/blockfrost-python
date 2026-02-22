@@ -2,15 +2,44 @@ import requests
 from blockfrost.utils import request_wrapper, list_request_wrapper
 
 
-@request_wrapper
-def accounts(self, stake_address: str, **kwargs):
+@list_request_wrapper
+def governance_dreps(self, **kwargs):
     """
-    Obtain information about a specific networkStake account.
+    Return the list of registered delegated representatives (DReps).
 
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}/get
+    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1dreps/get
 
-    :param stake_address: Bech32 stake address.
-    :type stake_address: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
+    :type gather_pages: bool
+    :param count: Optional. Default: 100. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :param order: Optional. "asc" or "desc". Default: "asc".
+    :type order: str
+    :returns A list of objects.
+    :rtype [Namespace]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/governance/dreps",
+        params=self.query_parameters(kwargs),
+        headers=self.default_headers
+    )
+
+
+@request_wrapper
+def governance_drep(self, drep_id: str, **kwargs):
+    """
+    Return information about a specific delegated representative (DRep).
+
+    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1dreps~1{drep_id}/get
+
+    :param drep_id: The DRep ID (Bech32 or hex encoded).
+    :type drep_id: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
     :returns object.
@@ -19,20 +48,20 @@ def accounts(self, stake_address: str, **kwargs):
     :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
-        url=f"{self.url}/accounts/{stake_address}",
+        url=f"{self.url}/governance/dreps/{drep_id}",
         headers=self.default_headers
     )
 
 
 @list_request_wrapper
-def account_rewards(self, stake_address: str, **kwargs):
+def governance_drep_delegators(self, drep_id: str, **kwargs):
     """
-    Obtain information about the history of a specific account.
+    Return the list of delegators to a specific DRep.
 
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}~1rewards/get
+    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1dreps~1{drep_id}~1delegators/get
 
-    :param stake_address: Bech32 stake address.
-    :type stake_address: str
+    :param drep_id: The DRep ID (Bech32 or hex encoded).
+    :type drep_id: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
     :param gather_pages: Optional. Default: false. Will collect all pages into one return
@@ -49,304 +78,21 @@ def account_rewards(self, stake_address: str, **kwargs):
     :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
-        url=f"{self.url}/accounts/{stake_address}/rewards",
-        params=self.query_parameters(kwargs),
-        headers=self.default_headers
-    )
-
-
-@list_request_wrapper
-def account_history(self, stake_address: str, **kwargs):
-    """
-    Obtain information about the history of a specific account.
-
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}~1history/get
-
-    :param stake_address: Bech32 stake address.
-    :type stake_address: str
-    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
-    :type return_type: str
-    :param gather_pages: Optional. Default: false. Will collect all pages into one return
-    :type gather_pages: bool
-    :param count: Optional. Default: 100. The number of results displayed on one page.
-    :type count: int
-    :param page: Optional. The page number for listing the results.
-    :type page: int
-    :param order: Optional. "asc" or "desc". Default: "asc".
-    :type order: str
-    :returns A list of objects.
-    :rtype [Namespace]
-    :raises ApiError: If API fails
-    :raises Exception: If the API response is somehow malformed.
-    """
-    return requests.get(
-        url=f"{self.url}/accounts/{stake_address}/history",
-        params=self.query_parameters(kwargs),
-        headers=self.default_headers
-    )
-
-
-@list_request_wrapper
-def account_delegations(self, stake_address: str, **kwargs):
-    """
-    Obtain information about the delegation of a specific account.
-
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}~1delegations/get
-
-    :param stake_address: Bech32 stake address.
-    :type stake_address: str
-    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
-    :type return_type: str
-    :param gather_pages: Optional. Default: false. Will collect all pages into one return
-    :type gather_pages: bool
-    :param count: Optional. Default: 100. The number of results displayed on one page.
-    :type count: int
-    :param page: Optional. The page number for listing the results.
-    :type page: int
-    :param order: Optional. "asc" or "desc". Default: "asc".
-    :type order: str
-    :returns A list of objects.
-    :rtype [Namespace]
-    :raises ApiError: If API fails
-    :raises Exception: If the API response is somehow malformed.
-    """
-    return requests.get(
-        url=f"{self.url}/accounts/{stake_address}/delegations",
-        params=self.query_parameters(kwargs),
-        headers=self.default_headers
-    )
-
-
-@list_request_wrapper
-def account_registrations(self, stake_address: str, **kwargs):
-    """
-    Obtain information about the registrations and deregistrations of a specific account.
-
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}~1registrations/get
-
-    :param stake_address: Bech32 stake address.
-    :type stake_address: str
-    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
-    :type return_type: str
-    :param gather_pages: Optional. Default: false. Will collect all pages into one return
-    :type gather_pages: bool
-    :param count: Optional. Default: 100. The number of results displayed on one page.
-    :type count: int
-    :param page: Optional. The page number for listing the results.
-    :type page: int
-    :param order: Optional. "asc" or "desc". Default: "asc".
-    :type order: str
-    :returns A list of objects.
-    :rtype [Namespace]
-    :raises ApiError: If API fails
-    :raises Exception: If the API response is somehow malformed.
-    """
-    return requests.get(
-        url=f"{self.url}/accounts/{stake_address}/registrations",
-        params=self.query_parameters(kwargs),
-        headers=self.default_headers
-    )
-
-
-@list_request_wrapper
-def account_withdrawals(self, stake_address: str, **kwargs):
-    """
-    Obtain information about the withdrawals of a specific account.
-
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}~1withdrawals/get
-
-    :param stake_address: Bech32 stake address.
-    :type stake_address: str
-    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
-    :type return_type: str
-    :param gather_pages: Optional. Default: false. Will collect all pages into one return
-    :type gather_pages: bool
-    :param count: Optional. Default: 100. The number of results displayed on one page.
-    :type count: int
-    :param page: Optional. The page number for listing the results.
-    :type page: int
-    :param order: Optional. "asc" or "desc". Default: "asc".
-    :type order: str
-    :returns A list of objects.
-    :rtype [Namespace]
-    :raises ApiError: If API fails
-    :raises Exception: If the API response is somehow malformed.
-    """
-    return requests.get(
-        url=f"{self.url}/accounts/{stake_address}/withdrawals",
-        params=self.query_parameters(kwargs),
-        headers=self.default_headers
-    )
-
-
-@list_request_wrapper
-def account_mirs(self, stake_address: str, **kwargs):
-    """
-    Obtain information about the MIRs of a specific account.
-
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}~1mirs/get
-
-    :param stake_address: Bech32 stake address.
-    :type stake_address: str
-    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
-    :type return_type: str
-    :param gather_pages: Optional. Default: false. Will collect all pages into one return
-    :type gather_pages: bool
-    :param count: Optional. Default: 100. The number of results displayed on one page.
-    :type count: int
-    :param page: Optional. The page number for listing the results.
-    :type page: int
-    :param order: Optional. "asc" or "desc". Default: "asc".
-    :type order: str
-    :returns A list of objects.
-    :rtype [Namespace]
-    :raises ApiError: If API fails
-    :raises Exception: If the API response is somehow malformed.
-    """
-    return requests.get(
-        url=f"{self.url}/accounts/{stake_address}/mirs",
-        params=self.query_parameters(kwargs),
-        headers=self.default_headers
-    )
-
-
-@list_request_wrapper
-def account_addresses(self, stake_address: str, **kwargs):
-    """
-    Obtain information about the addresses of a specific account.
-
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}~1addresses/get
-
-    :param stake_address: Bech32 stake address.
-    :type stake_address: str
-    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
-    :type return_type: str
-    :param gather_pages: Optional. Default: false. Will collect all pages into one return
-    :type gather_pages: bool
-    :param count: Optional. Default: 100. The number of results displayed on one page.
-    :type count: int
-    :param page: Optional. The page number for listing the results.
-    :type page: int
-    :param order: Optional. "asc" or "desc". Default: "asc".
-    :type order: str
-    :returns A list of objects.
-    :rtype [Namespace]
-    :raises ApiError: If API fails
-    :raises Exception: If the API response is somehow malformed.
-    """
-    return requests.get(
-        url=f"{self.url}/accounts/{stake_address}/addresses",
-        params=self.query_parameters(kwargs),
-        headers=self.default_headers
-    )
-
-
-@list_request_wrapper
-def account_addresses_assets(self, stake_address: str, **kwargs):
-    """
-    Obtain information about assets associated with addresses of a specific account.
-
-    Be careful, as an account could be part of a mangled address and does not necessarily mean the addresses are owned by user as the account.
-
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}~1addresses~1assets/get
-
-    :param stake_address: Bech32 stake address.
-    :type stake_address: str
-    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
-    :type return_type: str
-    :param gather_pages: Optional. Default: false. Will collect all pages into one return
-    :type gather_pages: bool
-    :param count: Optional. Default: 100. The number of results displayed on one page.
-    :type count: int
-    :param page: Optional. The page number for listing the results.
-    :type page: int
-    :param order: Optional. "asc" or "desc". Default: "asc".
-    :type order: str
-    :returns A list of objects.
-    :rtype [Namespace]
-    :raises ApiError: If API fails
-    :raises Exception: If the API response is somehow malformed.
-    """
-    return requests.get(
-        url=f"{self.url}/accounts/{stake_address}/addresses/assets",
-        params=self.query_parameters(kwargs),
-        headers=self.default_headers
-    )
-
-
-@list_request_wrapper
-def account_utxos(self, stake_address: str, **kwargs):
-    """
-    Obtain information about UTXOs of a specific account.
-
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}~1utxos/get
-
-    :param stake_address: Bech32 stake address.
-    :type stake_address: str
-    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
-    :type return_type: str
-    :param gather_pages: Optional. Default: false. Will collect all pages into one return
-    :type gather_pages: bool
-    :param count: Optional. Default: 100. The number of results displayed on one page.
-    :type count: int
-    :param page: Optional. The page number for listing the results.
-    :type page: int
-    :param order: Optional. "asc" or "desc". Default: "asc".
-    :type order: str
-    :returns A list of objects.
-    :rtype [Namespace]
-    :raises ApiError: If API fails
-    :raises Exception: If the API response is somehow malformed.
-    """
-    return requests.get(
-        url=f"{self.url}/accounts/{stake_address}/utxos",
-        params=self.query_parameters(kwargs),
-        headers=self.default_headers
-    )
-
-
-@list_request_wrapper
-def account_transactions(self, stake_address: str, **kwargs):
-    """
-    Obtain information about transactions associated with a specific account.
-
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}~1transactions/get
-
-    :param stake_address: Bech32 stake address.
-    :type stake_address: str
-    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
-    :type return_type: str
-    :param gather_pages: Optional. Default: false. Will collect all pages into one return
-    :type gather_pages: bool
-    :param count: Optional. Default: 100. The number of results displayed on one page.
-    :type count: int
-    :param page: Optional. The page number for listing the results.
-    :type page: int
-    :param order: Optional. "asc" or "desc". Default: "asc".
-    :type order: str
-    :returns A list of objects.
-    :rtype [Namespace]
-    :raises ApiError: If API fails
-    :raises Exception: If the API response is somehow malformed.
-    """
-    return requests.get(
-        url=f"{self.url}/accounts/{stake_address}/transactions",
+        url=f"{self.url}/governance/dreps/{drep_id}/delegators",
         params=self.query_parameters(kwargs),
         headers=self.default_headers
     )
 
 
 @request_wrapper
-def account_addresses_total(self, stake_address: str, **kwargs):
+def governance_drep_metadata(self, drep_id: str, **kwargs):
     """
-    Obtain summed details about all addresses associated with a given account.
+    Return the metadata of a specific DRep.
 
-    Be careful, as an account could be part of a mangled address and does not necessarily mean the addresses are owned by user as the account.
+    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1dreps~1{drep_id}~1metadata/get
 
-    https://docs.blockfrost.io/#tag/Cardano-Addresses/paths/~1accounts~1{stake_address}~1addresses~1total/get
-
-    :param stake_address: Bech32 address.
-    :type stake_address: str
+    :param drep_id: The DRep ID (Bech32 or hex encoded).
+    :type drep_id: str
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
     :returns object.
@@ -355,6 +101,235 @@ def account_addresses_total(self, stake_address: str, **kwargs):
     :raises Exception: If the API response is somehow malformed.
     """
     return requests.get(
-        url=f"{self.url}/accounts/{stake_address}/addresses/total",
+        url=f"{self.url}/governance/dreps/{drep_id}/metadata",
+        headers=self.default_headers
+    )
+
+
+@list_request_wrapper
+def governance_drep_updates(self, drep_id: str, **kwargs):
+    """
+    Return the list of certificate updates to a specific DRep.
+
+    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1dreps~1{drep_id}~1updates/get
+
+    :param drep_id: The DRep ID (Bech32 or hex encoded).
+    :type drep_id: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
+    :type gather_pages: bool
+    :param count: Optional. Default: 100. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :param order: Optional. "asc" or "desc". Default: "asc".
+    :type order: str
+    :returns A list of objects.
+    :rtype [Namespace]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/governance/dreps/{drep_id}/updates",
+        params=self.query_parameters(kwargs),
+        headers=self.default_headers
+    )
+
+
+@list_request_wrapper
+def governance_drep_votes(self, drep_id: str, **kwargs):
+    """
+    Return the list of votes by a specific DRep.
+
+    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1dreps~1{drep_id}~1votes/get
+
+    :param drep_id: The DRep ID (Bech32 or hex encoded).
+    :type drep_id: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
+    :type gather_pages: bool
+    :param count: Optional. Default: 100. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :param order: Optional. "asc" or "desc". Default: "asc".
+    :type order: str
+    :returns A list of objects.
+    :rtype [Namespace]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/governance/dreps/{drep_id}/votes",
+        params=self.query_parameters(kwargs),
+        headers=self.default_headers
+    )
+
+
+@list_request_wrapper
+def governance_proposals(self, **kwargs):
+    """
+    Return the list of governance proposals.
+
+    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1proposals/get
+
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
+    :type gather_pages: bool
+    :param count: Optional. Default: 100. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :param order: Optional. "asc" or "desc". Default: "asc".
+    :type order: str
+    :returns A list of objects.
+    :rtype [Namespace]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/governance/proposals",
+        params=self.query_parameters(kwargs),
+        headers=self.default_headers
+    )
+
+
+@request_wrapper
+def governance_proposal(self, tx_hash: str, cert_index: int, **kwargs):
+    """
+    Return information about a specific governance proposal.
+
+    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1proposals~1{tx_hash}~1{cert_index}/get
+
+    :param tx_hash: The transaction hash of the proposal.
+    :type tx_hash: str
+    :param cert_index: The index of the certificate within the proposal transaction.
+    :type cert_index: int
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns object.
+    :rtype: Namespace
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/governance/proposals/{tx_hash}/{cert_index}",
+        headers=self.default_headers
+    )
+
+
+@request_wrapper
+def governance_proposal_parameters(self, tx_hash: str, cert_index: int, **kwargs):
+    """
+    Return the parameters of a specific governance proposal.
+
+    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1proposals~1{tx_hash}~1{cert_index}~1parameters/get
+
+    :param tx_hash: The transaction hash of the proposal.
+    :type tx_hash: str
+    :param cert_index: The index of the certificate within the proposal transaction.
+    :type cert_index: int
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns object.
+    :rtype: Namespace
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/governance/proposals/{tx_hash}/{cert_index}/parameters",
+        headers=self.default_headers
+    )
+
+
+@list_request_wrapper
+def governance_proposal_withdrawals(self, tx_hash: str, cert_index: int, **kwargs):
+    """
+    Return the withdrawals of a specific governance proposal.
+
+    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1proposals~1{tx_hash}~1{cert_index}~1withdrawals/get
+
+    :param tx_hash: The transaction hash of the proposal.
+    :type tx_hash: str
+    :param cert_index: The index of the certificate within the proposal transaction.
+    :type cert_index: int
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
+    :type gather_pages: bool
+    :param count: Optional. Default: 100. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :param order: Optional. "asc" or "desc". Default: "asc".
+    :type order: str
+    :returns A list of objects.
+    :rtype [Namespace]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/governance/proposals/{tx_hash}/{cert_index}/withdrawals",
+        params=self.query_parameters(kwargs),
+        headers=self.default_headers
+    )
+
+
+@list_request_wrapper
+def governance_proposal_votes(self, tx_hash: str, cert_index: int, **kwargs):
+    """
+    Return the votes of a specific governance proposal.
+
+    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1proposals~1{tx_hash}~1{cert_index}~1votes/get
+
+    :param tx_hash: The transaction hash of the proposal.
+    :type tx_hash: str
+    :param cert_index: The index of the certificate within the proposal transaction.
+    :type cert_index: int
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
+    :type gather_pages: bool
+    :param count: Optional. Default: 100. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :param order: Optional. "asc" or "desc". Default: "asc".
+    :type order: str
+    :returns A list of objects.
+    :rtype [Namespace]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/governance/proposals/{tx_hash}/{cert_index}/votes",
+        params=self.query_parameters(kwargs),
+        headers=self.default_headers
+    )
+
+
+@request_wrapper
+def governance_proposal_metadata(self, tx_hash: str, cert_index: int, **kwargs):
+    """
+    Return the metadata of a specific governance proposal.
+
+    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1proposals~1{tx_hash}~1{cert_index}~1metadata/get
+
+    :param tx_hash: The transaction hash of the proposal.
+    :type tx_hash: str
+    :param cert_index: The index of the certificate within the proposal transaction.
+    :type cert_index: int
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns object.
+    :rtype: Namespace
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/governance/proposals/{tx_hash}/{cert_index}/metadata",
         headers=self.default_headers
     )
