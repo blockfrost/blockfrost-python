@@ -57,7 +57,9 @@ class BlockFrostApi(Api):
         account_mirs, \
         account_addresses, \
         account_addresses_assets, \
-        account_addresses_total
+        account_addresses_total, \
+        account_utxos, \
+        account_transactions
     from .cardano.addresses import \
         address, \
         address_extended, \
@@ -75,12 +77,14 @@ class BlockFrostApi(Api):
     from .cardano.blocks import \
         block_latest, \
         block_latest_transactions, \
+        block_latest_transactions_cbor, \
         block, \
         block_slot, \
         block_epoch_slot, \
         blocks_next, \
         blocks_previous, \
         block_transactions, \
+        block_transactions_cbor, \
         blocks_addresses
     from .cardano.epochs import \
         epoch_latest, \
@@ -104,7 +108,8 @@ class BlockFrostApi(Api):
         metadata_label_json, \
         metadata_label_cbor
     from .cardano.network import \
-        network
+        network, \
+        network_eras
     from .cardano.pools import \
         pools, \
         pools_extended, \
@@ -131,6 +136,8 @@ class BlockFrostApi(Api):
         transaction_submit, \
         transaction_submit_cbor, \
         transaction_redeemers, \
+        transaction_required_signers, \
+        transaction_cbor, \
         transaction_evaluate, \
         transaction_evaluate_cbor, \
         transaction_evaluate_utxos
@@ -142,5 +149,18 @@ class BlockFrostApi(Api):
         script_redeemers, \
         script_datum, \
         script_datum_cbor
+    from .cardano.governance import \
+        governance_dreps, \
+        governance_drep, \
+        governance_drep_delegators, \
+        governance_drep_metadata, \
+        governance_drep_updates, \
+        governance_drep_votes, \
+        governance_proposals, \
+        governance_proposal, \
+        governance_proposal_parameters, \
+        governance_proposal_withdrawals, \
+        governance_proposal_votes, \
+        governance_proposal_metadata
     from .cardano.utils import \
         utils_addresses_xpub

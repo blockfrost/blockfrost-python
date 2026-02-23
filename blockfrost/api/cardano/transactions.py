@@ -245,6 +245,50 @@ def transaction_redeemers(self, hash: str, **kwargs):
     )
 
 
+@list_request_wrapper
+def transaction_required_signers(self, hash: str, **kwargs):
+    """
+    Obtain the required signers of a specific transaction.
+
+    https://docs.blockfrost.io/#tag/Cardano-Transactions/paths/~1txs~1{hash}~1required_signers/get
+
+    :param hash: Hash of the requested transaction.
+    :type hash: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns A list of objects.
+    :rtype [Namespace]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/txs/{hash}/required_signers",
+        headers=self.default_headers
+    )
+
+
+@request_wrapper
+def transaction_cbor(self, hash: str, **kwargs):
+    """
+    Obtain the transaction in CBOR format.
+
+    https://docs.blockfrost.io/#tag/Cardano-Transactions/paths/~1txs~1{hash}~1cbor/get
+
+    :param hash: Hash of the requested transaction.
+    :type hash: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns object.
+    :rtype: Namespace
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/txs/{hash}/cbor",
+        headers=self.default_headers
+    )
+
+
 @request_wrapper
 def transaction_submit(self, file_path: str, **kwargs):
     """

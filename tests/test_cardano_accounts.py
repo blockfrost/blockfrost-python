@@ -243,6 +243,61 @@ def test_integration_account_addresses_assets():
         assert api.account_addresses_assets(stake_address=stake_address) == []
 
 
+def test_account_utxos(requests_mock):
+    api = BlockFrostApi()
+    mock_data = [
+        {
+            "address": "addr1qx2kd28nq8ac5prwg32hhvudlwggpgfp8utlyqxu6wqgz62f79qsdmm5dsknt9ecr5w468r9ey0fxwkdrwh08ly3tu9sy0f4qd",
+            "tx_hash": "39a7a284c2a0c3a6d5f594f2bd150c2f13c6b2a1f8a1e3d5c0f3b2a1d0e9f8a7",
+            "output_index": 0,
+            "amount": [
+                {
+                    "unit": "lovelace",
+                    "quantity": "42000000"
+                }
+            ],
+            "block": "7eb8e27d18686c7db9a18f8bbcfe34e3fed6e047afaa2d969904d15e934847e6",
+            "data_hash": None,
+            "inline_datum": None,
+            "reference_script_hash": None
+        }
+    ]
+    requests_mock.get(f"{api.url}/accounts/{stake_address}/utxos", json=mock_data)
+    assert api.account_utxos(stake_address=stake_address) == convert_json_to_object(mock_data)
+
+
+def test_integration_account_utxos():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        api.account_utxos(stake_address=stake_address)
+
+
+def test_account_transactions(requests_mock):
+    api = BlockFrostApi()
+    mock_data = [
+        {
+            "tx_hash": "8788591983aa73981fc92d6cddbbe643959f5a784e84b8bee0db15823f575a5b",
+            "tx_index": 6,
+            "block_height": 69,
+            "block_time": 1635505891
+        },
+        {
+            "tx_hash": "52e748c4dec58b687b90b0b40d383b9fe1f24c1a833b7395cdf07dd67859f46f",
+            "tx_index": 9,
+            "block_height": 4547,
+            "block_time": 1635505987
+        }
+    ]
+    requests_mock.get(f"{api.url}/accounts/{stake_address}/transactions", json=mock_data)
+    assert api.account_transactions(stake_address=stake_address) == convert_json_to_object(mock_data)
+
+
+def test_integration_account_transactions():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        api.account_transactions(stake_address=stake_address)
+
+
 def test_account_addresses_total(requests_mock):
     api = BlockFrostApi()
     mock_data = {

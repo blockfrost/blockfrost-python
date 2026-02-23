@@ -361,6 +361,42 @@ def test_integration_transaction_redeemers():
         assert api.transaction_redeemers(hash=hash) == []
 
 
+def test_transaction_required_signers(requests_mock):
+    api = BlockFrostApi()
+    mock_data = [
+        {
+            "address": "ec26b89af41bef0f7585353831cb5da42b5b37185e0c8a526143b824"
+        }
+    ]
+    requests_mock.get(f"{api.url}/txs/{hash}/required_signers", json=mock_data)
+    assert api.transaction_required_signers(
+        hash=hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_transaction_required_signers():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv(
+            'BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.transaction_required_signers(hash=hash) == []
+
+
+def test_transaction_cbor(requests_mock):
+    api = BlockFrostApi()
+    mock_data = {
+        "cbor": "84a8008282582098483df1666d5af7c4aca7ef28f112d225b81a34ef20b0ad4775bab0e41dbb30"
+    }
+    requests_mock.get(f"{api.url}/txs/{hash}/cbor", json=mock_data)
+    assert api.transaction_cbor(
+        hash=hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_transaction_cbor():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv(
+            'BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.transaction_cbor(hash=hash)
+
+
 def test_transaction_submit(requests_mock):
     api = BlockFrostApi()
     mock_data = hash
@@ -376,7 +412,7 @@ def test_integration_transaction_submit_cbor():
 
         with pytest.raises(ApiError) as exc_info:
             api.transaction_submit_cbor(tx_cbor=tx_cbor)
-        assert exc_info.value.message.find("transaction submit error") > -1
+        assert exc_info.value.status_code == 400
         # Make sure that the tx cbor was correctly passed
         assert exc_info.value.message.find(
             "54bcb22a31a100080ffbf7edbac538b1517d99fa85ec77bfac089ab8249e2708") > -1
@@ -407,7 +443,8 @@ def test_integration_transaction_evaluate_cbor():
         # }
 
         # Response with an ogmios error about missing input
-        assert result.result.EvaluationFailure.CannotCreateEvaluationContext.reason.find(
+        script_failure = getattr(result.result.EvaluationFailure.ScriptFailures, 'spend:0')
+        assert script_failure.CannotCreateEvaluationContext.reason.find(
             'Unknown transaction input') > -1
 
 
