@@ -2,9 +2,11 @@ import os
 from blockfrost import BlockFrostApi, ApiError
 from blockfrost.utils import convert_json_to_object
 
-drep_id = 'drep1mvdu8slennngja7w4un6knwezufra70887zuxpprd64jxfveahn'
-tx_hash = 'f5ca33220afcc0340d1fa3cba9b0e1f3c3c6e1eab57d688ed700ae56bbce9170'
+drep_id = 'drep1yfaaaaa270yjt6tu5skndugekprf5ykv5jshanl0c6gqx5qpstskf'
+tx_hash = '51f495aa23f4b3b3aa90afde4a0e67823bb7ac4ac65f5ffbb138373b863f2f74'
 cert_index = 0
+# proposal with metadata (treasury_withdrawals type)
+metadata_tx_hash = '60ed6ab43c840ff888a8af30a1ed27b41e9f4a91a89822b2b63d1bfc52aeec45'
 
 
 def test_governance_dreps(requests_mock):
@@ -265,4 +267,4 @@ def test_governance_proposal_metadata(requests_mock):
 def test_integration_governance_proposal_metadata():
     if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
         api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
-        api.governance_proposal_metadata(tx_hash=tx_hash, cert_index=cert_index)
+        api.governance_proposal_metadata(tx_hash=metadata_tx_hash, cert_index=cert_index)
