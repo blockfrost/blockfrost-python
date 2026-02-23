@@ -242,8 +242,8 @@ def test_block_latest_transactions_cbor(requests_mock):
 def test_integration_block_latest_transactions_cbor():
     if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
         api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
-        assert (api.block_latest_transactions_cbor() or
-                api.block_latest_transactions_cbor() == [])
+        result = api.block_latest_transactions_cbor()
+        assert result or result == []
 
 
 def test_block_transactions_cbor(requests_mock):
