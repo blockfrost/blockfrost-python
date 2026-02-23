@@ -412,7 +412,7 @@ def test_integration_transaction_submit_cbor():
 
         with pytest.raises(ApiError) as exc_info:
             api.transaction_submit_cbor(tx_cbor=tx_cbor)
-        assert exc_info.value.message.find("transaction submit error") > -1
+        assert exc_info.value.status_code == 400
         # Make sure that the tx cbor was correctly passed
         assert exc_info.value.message.find(
             "54bcb22a31a100080ffbf7edbac538b1517d99fa85ec77bfac089ab8249e2708") > -1
@@ -443,7 +443,8 @@ def test_integration_transaction_evaluate_cbor():
         # }
 
         # Response with an ogmios error about missing input
-        assert result.result.EvaluationFailure.CannotCreateEvaluationContext.reason.find(
+        script_failure = getattr(result.result.EvaluationFailure.ScriptFailures, 'spend:0')
+        assert script_failure.CannotCreateEvaluationContext.reason.find(
             'Unknown transaction input') > -1
 
 
