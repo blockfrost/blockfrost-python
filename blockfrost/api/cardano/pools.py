@@ -179,7 +179,7 @@ def pool_metadata(self, pool_id: str, **kwargs):
     )
 
 
-@list_request_wrapper
+@request_wrapper
 def pool_relays(self, pool_id: str, **kwargs):
     """
     Relays of a stake pool.

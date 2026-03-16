@@ -1,6 +1,6 @@
 import requests
 from typing import Union
-from blockfrost.utils import request_wrapper, list_request_wrapper
+from blockfrost.utils import request_wrapper
 
 
 @request_wrapper
@@ -47,7 +47,7 @@ def transaction_utxos(self, hash: str, **kwargs):
     )
 
 
-@list_request_wrapper
+@request_wrapper
 def transaction_stakes(self, hash: str, **kwargs):
     """
     Obtain information about (de)registration of stake addresses within a transaction.
@@ -69,7 +69,7 @@ def transaction_stakes(self, hash: str, **kwargs):
     )
 
 
-@list_request_wrapper
+@request_wrapper
 def transaction_delegations(self, hash: str, **kwargs):
     """
     Obtain information about delegation certificates of a specific transaction.
@@ -91,7 +91,7 @@ def transaction_delegations(self, hash: str, **kwargs):
     )
 
 
-@list_request_wrapper
+@request_wrapper
 def transaction_withdrawals(self, hash: str, **kwargs):
     """
     Obtain information about withdrawals of a specific transaction.
@@ -113,7 +113,7 @@ def transaction_withdrawals(self, hash: str, **kwargs):
     )
 
 
-@list_request_wrapper
+@request_wrapper
 def transaction_mirs(self, hash: str, **kwargs):
     """
     Obtain information about Move Instantaneous Rewards (MIRs) of a specific transaction.
@@ -135,7 +135,7 @@ def transaction_mirs(self, hash: str, **kwargs):
     )
 
 
-@list_request_wrapper
+@request_wrapper
 def transaction_pool_updates(self, hash: str, **kwargs):
     """
     Obtain information about stake pool registration and update certificates of a specific transaction.
@@ -157,7 +157,7 @@ def transaction_pool_updates(self, hash: str, **kwargs):
     )
 
 
-@list_request_wrapper
+@request_wrapper
 def transaction_pool_retires(self, hash: str, **kwargs):
     """
     Obtain information about stake pool retirements within a specific transaction.
@@ -179,7 +179,7 @@ def transaction_pool_retires(self, hash: str, **kwargs):
     )
 
 
-@list_request_wrapper
+@request_wrapper
 def transaction_metadata(self, hash: str, **kwargs):
     """
     Obtain the transaction metadata.
@@ -201,7 +201,7 @@ def transaction_metadata(self, hash: str, **kwargs):
     )
 
 
-@list_request_wrapper
+@request_wrapper
 def transaction_metadata_cbor(self, hash: str, **kwargs):
     """
     Obtain the transaction metadata in CBOR.
@@ -223,7 +223,7 @@ def transaction_metadata_cbor(self, hash: str, **kwargs):
     )
 
 
-@list_request_wrapper
+@request_wrapper
 def transaction_redeemers(self, hash: str, **kwargs):
     """
     Obtain the transaction redeemers.

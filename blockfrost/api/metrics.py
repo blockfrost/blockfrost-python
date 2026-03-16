@@ -1,9 +1,9 @@
 import requests
 from dataclasses import dataclass
-from ..utils import list_request_wrapper
+from ..utils import request_wrapper
 
 
-@list_request_wrapper
+@request_wrapper
 def metrics(self, **kwargs):
     """
     History of your Blockfrost usage metrics in the past 30 days.
@@ -23,7 +23,7 @@ def metrics(self, **kwargs):
     )
 
 
-@list_request_wrapper
+@request_wrapper
 def metrics_endpoints(self, **kwargs):
     """
     History of your Blockfrost usage metrics per endpoint in the past 30 days.
