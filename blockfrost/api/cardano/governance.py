@@ -333,3 +333,131 @@ def governance_proposal_metadata(self, tx_hash: str, cert_index: int, **kwargs):
         url=f"{self.url}/governance/proposals/{tx_hash}/{cert_index}/metadata",
         headers=self.default_headers
     )
+
+
+@request_wrapper
+def governance_proposal_by_gov_action_id(self, gov_action_id: str, **kwargs):
+    """
+    Return information about a specific governance proposal by GovActionID.
+
+    https://docs.blockfrost.io/#tag/cardano--governance/GET/governance/proposals/{gov_action_id}
+
+    :param gov_action_id: Governance Action Identifier (CIP-0129).
+    :type gov_action_id: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns object.
+    :rtype: Namespace
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/governance/proposals/{gov_action_id}",
+        headers=self.default_headers
+    )
+
+
+@request_wrapper
+def governance_proposal_parameters_by_gov_action_id(self, gov_action_id: str, **kwargs):
+    """
+    Return the parameters of a specific governance proposal by GovActionID.
+
+    https://docs.blockfrost.io/#tag/cardano--governance/GET/governance/proposals/{gov_action_id}/parameters
+
+    :param gov_action_id: Governance Action Identifier (CIP-0129).
+    :type gov_action_id: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns object.
+    :rtype: Namespace
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/governance/proposals/{gov_action_id}/parameters",
+        headers=self.default_headers
+    )
+
+
+@list_request_wrapper
+def governance_proposal_withdrawals_by_gov_action_id(self, gov_action_id: str, **kwargs):
+    """
+    Return the withdrawals of a specific governance proposal by GovActionID.
+
+    https://docs.blockfrost.io/#tag/cardano--governance/GET/governance/proposals/{gov_action_id}/withdrawals
+
+    :param gov_action_id: Governance Action Identifier (CIP-0129).
+    :type gov_action_id: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
+    :type gather_pages: bool
+    :param count: Optional. Default: 100. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :param order: Optional. "asc" or "desc". Default: "asc".
+    :type order: str
+    :returns A list of objects.
+    :rtype [Namespace]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/governance/proposals/{gov_action_id}/withdrawals",
+        params=self.query_parameters(kwargs),
+        headers=self.default_headers
+    )
+
+
+@list_request_wrapper
+def governance_proposal_votes_by_gov_action_id(self, gov_action_id: str, **kwargs):
+    """
+    Return the votes of a specific governance proposal by GovActionID.
+
+    https://docs.blockfrost.io/#tag/cardano--governance/GET/governance/proposals/{gov_action_id}/votes
+
+    :param gov_action_id: Governance Action Identifier (CIP-0129).
+    :type gov_action_id: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :param gather_pages: Optional. Default: false. Will collect all pages into one return
+    :type gather_pages: bool
+    :param count: Optional. Default: 100. The number of results displayed on one page.
+    :type count: int
+    :param page: Optional. The page number for listing the results.
+    :type page: int
+    :param order: Optional. "asc" or "desc". Default: "asc".
+    :type order: str
+    :returns A list of objects.
+    :rtype [Namespace]
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/governance/proposals/{gov_action_id}/votes",
+        params=self.query_parameters(kwargs),
+        headers=self.default_headers
+    )
+
+
+@request_wrapper
+def governance_proposal_metadata_by_gov_action_id(self, gov_action_id: str, **kwargs):
+    """
+    Return the metadata of a specific governance proposal by GovActionID.
+
+    https://docs.blockfrost.io/#tag/cardano--governance/GET/governance/proposals/{gov_action_id}/metadata
+
+    :param gov_action_id: Governance Action Identifier (CIP-0129).
+    :type gov_action_id: str
+    :param return_type: Optional. "object", "json" or "pandas". Default: "object".
+    :type return_type: str
+    :returns object.
+    :rtype: Namespace
+    :raises ApiError: If API fails
+    :raises Exception: If the API response is somehow malformed.
+    """
+    return requests.get(
+        url=f"{self.url}/governance/proposals/{gov_action_id}/metadata",
+        headers=self.default_headers
+    )

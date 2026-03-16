@@ -121,7 +121,8 @@ class BlockFrostApi(Api):
         pool_relays, \
         pool_delegators, \
         pool_blocks, \
-        pool_updates
+        pool_updates, \
+        pool_votes
     from .cardano.transactions import \
         transaction, \
         transaction_utxos, \
@@ -161,6 +162,11 @@ class BlockFrostApi(Api):
         governance_proposal_parameters, \
         governance_proposal_withdrawals, \
         governance_proposal_votes, \
-        governance_proposal_metadata
+        governance_proposal_metadata, \
+        governance_proposal_by_gov_action_id, \
+        governance_proposal_parameters_by_gov_action_id, \
+        governance_proposal_withdrawals_by_gov_action_id, \
+        governance_proposal_votes_by_gov_action_id, \
+        governance_proposal_metadata_by_gov_action_id
     from .cardano.utils import \
         utils_addresses_xpub
