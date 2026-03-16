@@ -8,7 +8,7 @@ def mempool(self, **kwargs):
     Obtains transactions that are currently stored in Blockfrost mempool, waiting to be included in a newly minted block.
     Returns only transactions submitted via Blockfrost.io.
 
-    https://docs.blockfrost.io/#tag/Cardano-Mempool/paths/~1mempool/get
+    https://docs.blockfrost.io/#tag/cardano--mempool/GET/mempool
 
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
@@ -34,7 +34,7 @@ def mempool_tx(self, hash: str, **kwargs):
     """
     Obtains mempool transaction
 
-    https://docs.blockfrost.io/#tag/Cardano-Mempool/paths/~1mempool~1%7Bhash%7D/get
+    https://docs.blockfrost.io/#tag/cardano--mempool/GET/mempool/{hash}
 
     :param hash: Hash of the requested transaction.
     :type hash: str
@@ -63,7 +63,7 @@ def mempool_address(self, address: str, **kwargs):
     Obtains list of mempool transactions where at least one of the transaction inputs or outputs belongs to the address (paginated).
     Shows only transactions submitted via Blockfrost.io.
 
-    https://docs.blockfrost.io/#tag/Cardano-Mempool/paths/~1mempool~1addresses~1%7Baddress%7D/get
+    https://docs.blockfrost.io/#tag/cardano--mempool/GET/mempool/addresses/{address}
 
     :param address: Bech32 address.
     :type address: str

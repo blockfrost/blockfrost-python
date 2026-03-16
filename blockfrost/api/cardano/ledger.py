@@ -7,7 +7,7 @@ def genesis(self, **kwargs):
     """
     Return the information about blockchain genesis.
 
-    https://docs.blockfrost.io/#tag/Cardano-Ledger/paths/~1genesis/get
+    https://docs.blockfrost.io/#tag/cardano--ledger/GET/genesis
 
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str

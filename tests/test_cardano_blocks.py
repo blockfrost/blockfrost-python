@@ -223,6 +223,47 @@ def test_integration_block_transactions():
         assert api.block_transactions(hash_or_number=hash)
 
 
+def test_block_latest_transactions_cbor(requests_mock):
+    api = BlockFrostApi()
+    mock_data = [
+        {
+            "tx_hash": "8788591983aa73981fc92d6cddbbe643959f5a784e84b8bee0db15823f575a5b",
+            "cbor": "84a8008282582098483df1666d5af7c4aca7ef28f112d225b81a34ef20b0ad4775bab0e41dbb30"
+        },
+        {
+            "tx_hash": "4eef6bb7755d8afbeac526b799f3e32a624691d166657e9d862aaeb66682c036",
+            "cbor": "84a8008282582098483df1666d5af7c4aca7ef28f112d225b81a34ef20b0ad4775bab0e41dbb31"
+        }
+    ]
+    requests_mock.get(f"{api.url}/blocks/latest/txs/cbor", json=mock_data)
+    assert api.block_latest_transactions_cbor() == convert_json_to_object(mock_data)
+
+
+def test_integration_block_latest_transactions_cbor():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        result = api.block_latest_transactions_cbor()
+        assert result or result == []
+
+
+def test_block_transactions_cbor(requests_mock):
+    api = BlockFrostApi()
+    mock_data = [
+        {
+            "tx_hash": "8788591983aa73981fc92d6cddbbe643959f5a784e84b8bee0db15823f575a5b",
+            "cbor": "84a8008282582098483df1666d5af7c4aca7ef28f112d225b81a34ef20b0ad4775bab0e41dbb30"
+        }
+    ]
+    requests_mock.get(f"{api.url}/blocks/{hash}/txs/cbor", json=mock_data)
+    assert api.block_transactions_cbor(hash_or_number=hash) == convert_json_to_object(mock_data)
+
+
+def test_integration_block_transactions_cbor():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.block_transactions_cbor(hash_or_number=hash)
+
+
 def test_blocks_blocks_addresses(requests_mock):
     api = BlockFrostApi()
     mock_data = [

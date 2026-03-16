@@ -7,7 +7,7 @@ def address(self, address: str, **kwargs):
     """
     Obtain information about a specific address.
 
-    https://docs.blockfrost.io/#tag/Cardano-Addresses/paths/~1addresses~1{address}/get
+    https://docs.blockfrost.io/#tag/cardano--addresses/GET/addresses/{address}
 
     :param address: Bech32 address.
     :type address: str
@@ -29,7 +29,7 @@ def address_extended(self, address: str, **kwargs):
     """
     Obtain information about a specific address.
 
-    https://docs.blockfrost.io/#tag/Cardano-Addresses/paths/~1addresses~1{address}~1extended/get
+    https://docs.blockfrost.io/#tag/cardano--addresses/GET/addresses/{address}/extended
 
     :param address: Bech32 address.
     :type address: str
@@ -51,7 +51,7 @@ def address_total(self, address: str, **kwargs):
     """
     Obtain details about an address.
 
-    https://docs.blockfrost.io/#tag/Cardano-Addresses/paths/~1addresses~1{address}~1total/get
+    https://docs.blockfrost.io/#tag/cardano--addresses/GET/addresses/{address}/total
 
     :param address: Bech32 address.
     :type address: str
@@ -73,7 +73,7 @@ def address_utxos(self, address: str, **kwargs):
     """
     UTXOs of the address.
 
-    https://docs.blockfrost.io/#tag/Cardano-Addresses/paths/~1addresses~1{address}~1utxos/get
+    https://docs.blockfrost.io/#tag/cardano--addresses/GET/addresses/{address}/utxos
 
     :param address: Bech32 address.
     :type address: str
@@ -104,7 +104,7 @@ def address_utxos_asset(self, address: str, asset: str, **kwargs):
     """
     UTXOs of the address.
 
-    https://docs.blockfrost.io/#tag/Cardano-Addresses/paths/~1addresses~1{address}~1utxos~1{asset}/get
+    https://docs.blockfrost.io/#tag/cardano--addresses/GET/addresses/{address}/utxos/{asset}
 
     :param address: Bech32 address.
     :type address: str
@@ -138,7 +138,7 @@ def address_transactions(self, address: str, from_block: str = None, to_block: s
     """
     Transactions on the address.
 
-    https://docs.blockfrost.io/#tag/Cardano-Addresses/paths/~1addresses~1{address}~1transactions/get
+    https://docs.blockfrost.io/#tag/cardano--addresses/GET/addresses/{address}/transactions
 
     :param address: Bech32 address.
     :type address: str

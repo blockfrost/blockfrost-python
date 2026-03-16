@@ -281,3 +281,24 @@ def test_integration_pool_updates():
     if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
         api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
         assert api.pool_updates(pool_id=pool_id)
+
+
+def test_pool_votes(requests_mock):
+    api = BlockFrostApi()
+    mock_data = [
+        {
+            "tx_hash": "f5ca33220afcc0340d1fa3cba9b0e1f3c3c6e1eab57d688ed700ae56bbce9170",
+            "cert_index": 0,
+            "vote": "yes",
+            "proposal_tx_hash": "b302de9b2ed2bca4d65e40cae4ae6d0b8e7c0f1a2b3c4d5e6f7a8b9c0d1e2f3a",
+            "proposal_cert_index": 0
+        }
+    ]
+    requests_mock.get(f"{api.url}/pools/{pool_id}/votes", json=mock_data)
+    assert api.pool_votes(pool_id=pool_id) == convert_json_to_object(mock_data)
+
+
+def test_integration_pool_votes():
+    if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
+        api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
+        assert api.pool_votes(pool_id=pool_id) or api.pool_votes(pool_id=pool_id) == []

@@ -30,7 +30,7 @@ def nutlink_address_tickers(self, address: str, **kwargs):
     """
     List tickers for a specific metadata oracle
 
-    https://docs.blockfrost.io/#tag/Nut.link/paths/~1nutlink~1{address}~1tickers/get
+    https://docs.blockfrost.io/#tag/nut.link/GET/nutlink/{address}/tickers
 
     :param address: Address of a metadata oracle.
     :type address: str
@@ -61,7 +61,7 @@ def nutlink_address_ticker(self, address: str, ticker: str, **kwargs):
     """
     List of records of a specific ticker
 
-    https://docs.blockfrost.io/#tag/Nut.link/paths/~1nutlink~1{address}~1tickers~1{ticker}/get
+    https://docs.blockfrost.io/#tag/nut.link/GET/nutlink/{address}/tickers/{ticker}
 
     :param address: Address of a metadata oracle.
     :type address: str
@@ -94,7 +94,7 @@ def nutlink_ticker(self, ticker: str, **kwargs):
     """
     List of records of a specific ticker
 
-    https://docs.blockfrost.io/#tag/Nut.link/paths/~1nutlink~1tickers~1{ticker}/get
+    https://docs.blockfrost.io/#tag/nut.link/GET/nutlink/tickers/{ticker}
 
     :param ticker: Ticker for the pool record.
     :type ticker: str

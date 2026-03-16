@@ -7,7 +7,7 @@ def metadata_labels(self, **kwargs):
     """
     List of all used transaction metadata labels.
 
-    https://docs.blockfrost.io/#tag/Cardano-Metadata/paths/~1metadata~1txs~1labels/get
+    https://docs.blockfrost.io/#tag/cardano--metadata/GET/metadata/txs/labels
 
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
@@ -36,7 +36,7 @@ def metadata_label_json(self, label: str, **kwargs):
     """
     Transaction metadata per label.
 
-    https://docs.blockfrost.io/#tag/Cardano-Metadata/paths/~1metadata~1txs~1labels~1{label}/get
+    https://docs.blockfrost.io/#tag/cardano--metadata/GET/metadata/txs/labels/{label}
 
     :param label: Metadata label
     :type label: str
@@ -67,7 +67,7 @@ def metadata_label_cbor(self, label: str, **kwargs):
     """
     Transaction metadata per label.
 
-    https://docs.blockfrost.io/#tag/Cardano-Metadata/paths/~1metadata~1txs~1labels~1{label}~1cbor/get
+    https://docs.blockfrost.io/#tag/cardano--metadata/GET/metadata/txs/labels/{label}/cbor
 
     :param label: Metadata label
     :type label: str
