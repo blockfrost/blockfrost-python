@@ -301,4 +301,4 @@ def test_pool_votes(requests_mock):
 def test_integration_pool_votes():
     if os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'):
         api = BlockFrostApi(project_id=os.getenv('BLOCKFROST_PROJECT_ID_MAINNET'))
-        api.pool_votes(pool_id=pool_id)
+        assert api.pool_votes(pool_id=pool_id) or api.pool_votes(pool_id=pool_id) == []

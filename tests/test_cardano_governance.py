@@ -1,5 +1,5 @@
 import os
-from blockfrost import BlockFrostApi, ApiError
+from blockfrost import BlockFrostApi
 from blockfrost.utils import convert_json_to_object
 
 drep_id = 'drep1yfaaaaa270yjt6tu5skndugekprf5ykv5jshanl0c6gqx5qpstskf'
