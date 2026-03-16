@@ -245,12 +245,12 @@ def transaction_redeemers(self, hash: str, **kwargs):
     )
 
 
-@list_request_wrapper
+@request_wrapper
 def transaction_required_signers(self, hash: str, **kwargs):
     """
     Obtain the required signers of a specific transaction.
 
-    https://docs.blockfrost.io/#tag/Cardano-Transactions/paths/~1txs~1{hash}~1required_signers/get
+    https://docs.blockfrost.io/#tag/cardano--transactions/GET/txs/{hash}/required_signers
 
     :param hash: Hash of the requested transaction.
     :type hash: str

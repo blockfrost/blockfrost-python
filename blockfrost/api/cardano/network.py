@@ -1,5 +1,5 @@
 import requests
-from blockfrost.utils import request_wrapper, list_request_wrapper
+from blockfrost.utils import request_wrapper
 
 
 @request_wrapper
@@ -22,7 +22,7 @@ def network(self, **kwargs):
     )
 
 
-@list_request_wrapper
+@request_wrapper
 def network_eras(self, **kwargs):
     """
     Return the information about network eras.
