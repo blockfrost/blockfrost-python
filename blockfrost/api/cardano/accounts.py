@@ -7,7 +7,7 @@ def accounts(self, stake_address: str, **kwargs):
     """
     Obtain information about a specific networkStake account.
 
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}/get
+    https://docs.blockfrost.io/#tag/cardano--accounts/GET/accounts/{stake_address}
 
     :param stake_address: Bech32 stake address.
     :type stake_address: str
@@ -29,7 +29,7 @@ def account_rewards(self, stake_address: str, **kwargs):
     """
     Obtain information about the history of a specific account.
 
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}~1rewards/get
+    https://docs.blockfrost.io/#tag/cardano--accounts/GET/accounts/{stake_address}/rewards
 
     :param stake_address: Bech32 stake address.
     :type stake_address: str
@@ -60,7 +60,7 @@ def account_history(self, stake_address: str, **kwargs):
     """
     Obtain information about the history of a specific account.
 
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}~1history/get
+    https://docs.blockfrost.io/#tag/cardano--accounts/GET/accounts/{stake_address}/history
 
     :param stake_address: Bech32 stake address.
     :type stake_address: str
@@ -91,7 +91,7 @@ def account_delegations(self, stake_address: str, **kwargs):
     """
     Obtain information about the delegation of a specific account.
 
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}~1delegations/get
+    https://docs.blockfrost.io/#tag/cardano--accounts/GET/accounts/{stake_address}/delegations
 
     :param stake_address: Bech32 stake address.
     :type stake_address: str
@@ -122,7 +122,7 @@ def account_registrations(self, stake_address: str, **kwargs):
     """
     Obtain information about the registrations and deregistrations of a specific account.
 
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}~1registrations/get
+    https://docs.blockfrost.io/#tag/cardano--accounts/GET/accounts/{stake_address}/registrations
 
     :param stake_address: Bech32 stake address.
     :type stake_address: str
@@ -153,7 +153,7 @@ def account_withdrawals(self, stake_address: str, **kwargs):
     """
     Obtain information about the withdrawals of a specific account.
 
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}~1withdrawals/get
+    https://docs.blockfrost.io/#tag/cardano--accounts/GET/accounts/{stake_address}/withdrawals
 
     :param stake_address: Bech32 stake address.
     :type stake_address: str
@@ -184,7 +184,7 @@ def account_mirs(self, stake_address: str, **kwargs):
     """
     Obtain information about the MIRs of a specific account.
 
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}~1mirs/get
+    https://docs.blockfrost.io/#tag/cardano--accounts/GET/accounts/{stake_address}/mirs
 
     :param stake_address: Bech32 stake address.
     :type stake_address: str
@@ -215,7 +215,7 @@ def account_addresses(self, stake_address: str, **kwargs):
     """
     Obtain information about the addresses of a specific account.
 
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}~1addresses/get
+    https://docs.blockfrost.io/#tag/cardano--accounts/GET/accounts/{stake_address}/addresses
 
     :param stake_address: Bech32 stake address.
     :type stake_address: str
@@ -248,7 +248,7 @@ def account_addresses_assets(self, stake_address: str, **kwargs):
 
     Be careful, as an account could be part of a mangled address and does not necessarily mean the addresses are owned by user as the account.
 
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}~1addresses~1assets/get
+    https://docs.blockfrost.io/#tag/cardano--accounts/GET/accounts/{stake_address}/addresses/assets
 
     :param stake_address: Bech32 stake address.
     :type stake_address: str
@@ -279,7 +279,7 @@ def account_utxos(self, stake_address: str, **kwargs):
     """
     Obtain information about UTXOs of a specific account.
 
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}~1utxos/get
+    https://docs.blockfrost.io/#tag/cardano--accounts/GET/accounts/{stake_address}/utxos
 
     :param stake_address: Bech32 stake address.
     :type stake_address: str
@@ -310,7 +310,7 @@ def account_transactions(self, stake_address: str, **kwargs):
     """
     Obtain information about transactions associated with a specific account.
 
-    https://docs.blockfrost.io/#tag/Cardano-Accounts/paths/~1accounts~1{stake_address}~1transactions/get
+    https://docs.blockfrost.io/#tag/cardano--accounts/GET/accounts/{stake_address}/transactions
 
     :param stake_address: Bech32 stake address.
     :type stake_address: str
@@ -343,7 +343,7 @@ def account_addresses_total(self, stake_address: str, **kwargs):
 
     Be careful, as an account could be part of a mangled address and does not necessarily mean the addresses are owned by user as the account.
 
-    https://docs.blockfrost.io/#tag/Cardano-Addresses/paths/~1accounts~1{stake_address}~1addresses~1total/get
+    https://docs.blockfrost.io/#tag/cardano--addresses/GET/accounts/{stake_address}/addresses/total
 
     :param stake_address: Bech32 address.
     :type stake_address: str

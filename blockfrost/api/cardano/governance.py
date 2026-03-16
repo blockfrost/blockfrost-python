@@ -7,7 +7,7 @@ def governance_dreps(self, **kwargs):
     """
     Return the list of registered delegated representatives (DReps).
 
-    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1dreps/get
+    https://docs.blockfrost.io/#tag/cardano--governance/GET/governance/dreps
 
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
@@ -36,7 +36,7 @@ def governance_drep(self, drep_id: str, **kwargs):
     """
     Return information about a specific delegated representative (DRep).
 
-    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1dreps~1{drep_id}/get
+    https://docs.blockfrost.io/#tag/cardano--governance/GET/governance/dreps/{drep_id}
 
     :param drep_id: The DRep ID (Bech32 or hex encoded).
     :type drep_id: str
@@ -58,7 +58,7 @@ def governance_drep_delegators(self, drep_id: str, **kwargs):
     """
     Return the list of delegators to a specific DRep.
 
-    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1dreps~1{drep_id}~1delegators/get
+    https://docs.blockfrost.io/#tag/cardano--governance/GET/governance/dreps/{drep_id}/delegators
 
     :param drep_id: The DRep ID (Bech32 or hex encoded).
     :type drep_id: str
@@ -89,7 +89,7 @@ def governance_drep_metadata(self, drep_id: str, **kwargs):
     """
     Return the metadata of a specific DRep.
 
-    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1dreps~1{drep_id}~1metadata/get
+    https://docs.blockfrost.io/#tag/cardano--governance/GET/governance/dreps/{drep_id}/metadata
 
     :param drep_id: The DRep ID (Bech32 or hex encoded).
     :type drep_id: str
@@ -111,7 +111,7 @@ def governance_drep_updates(self, drep_id: str, **kwargs):
     """
     Return the list of certificate updates to a specific DRep.
 
-    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1dreps~1{drep_id}~1updates/get
+    https://docs.blockfrost.io/#tag/cardano--governance/GET/governance/dreps/{drep_id}/updates
 
     :param drep_id: The DRep ID (Bech32 or hex encoded).
     :type drep_id: str
@@ -142,7 +142,7 @@ def governance_drep_votes(self, drep_id: str, **kwargs):
     """
     Return the list of votes by a specific DRep.
 
-    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1dreps~1{drep_id}~1votes/get
+    https://docs.blockfrost.io/#tag/cardano--governance/GET/governance/dreps/{drep_id}/votes
 
     :param drep_id: The DRep ID (Bech32 or hex encoded).
     :type drep_id: str
@@ -173,7 +173,7 @@ def governance_proposals(self, **kwargs):
     """
     Return the list of governance proposals.
 
-    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1proposals/get
+    https://docs.blockfrost.io/#tag/cardano--governance/GET/governance/proposals
 
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
@@ -202,7 +202,7 @@ def governance_proposal(self, tx_hash: str, cert_index: int, **kwargs):
     """
     Return information about a specific governance proposal.
 
-    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1proposals~1{tx_hash}~1{cert_index}/get
+    https://docs.blockfrost.io/#tag/cardano--governance/GET/governance/proposals/{tx_hash}/{cert_index}
 
     :param tx_hash: The transaction hash of the proposal.
     :type tx_hash: str
@@ -226,7 +226,7 @@ def governance_proposal_parameters(self, tx_hash: str, cert_index: int, **kwargs
     """
     Return the parameters of a specific governance proposal.
 
-    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1proposals~1{tx_hash}~1{cert_index}~1parameters/get
+    https://docs.blockfrost.io/#tag/cardano--governance/GET/governance/proposals/{tx_hash}/{cert_index}/parameters
 
     :param tx_hash: The transaction hash of the proposal.
     :type tx_hash: str
@@ -250,7 +250,7 @@ def governance_proposal_withdrawals(self, tx_hash: str, cert_index: int, **kwarg
     """
     Return the withdrawals of a specific governance proposal.
 
-    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1proposals~1{tx_hash}~1{cert_index}~1withdrawals/get
+    https://docs.blockfrost.io/#tag/cardano--governance/GET/governance/proposals/{tx_hash}/{cert_index}/withdrawals
 
     :param tx_hash: The transaction hash of the proposal.
     :type tx_hash: str
@@ -283,7 +283,7 @@ def governance_proposal_votes(self, tx_hash: str, cert_index: int, **kwargs):
     """
     Return the votes of a specific governance proposal.
 
-    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1proposals~1{tx_hash}~1{cert_index}~1votes/get
+    https://docs.blockfrost.io/#tag/cardano--governance/GET/governance/proposals/{tx_hash}/{cert_index}/votes
 
     :param tx_hash: The transaction hash of the proposal.
     :type tx_hash: str
@@ -316,7 +316,7 @@ def governance_proposal_metadata(self, tx_hash: str, cert_index: int, **kwargs):
     """
     Return the metadata of a specific governance proposal.
 
-    https://docs.blockfrost.io/#tag/Cardano-Governance/paths/~1governance~1proposals~1{tx_hash}~1{cert_index}~1metadata/get
+    https://docs.blockfrost.io/#tag/cardano--governance/GET/governance/proposals/{tx_hash}/{cert_index}/metadata
 
     :param tx_hash: The transaction hash of the proposal.
     :type tx_hash: str

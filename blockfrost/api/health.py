@@ -7,7 +7,7 @@ def health(self, **kwargs):
     """
     Return backend status as a boolean. Your application should handle situations when backend for the given chain is unavailable.
 
-    https://docs.blockfrost.io/#tag/Health/paths/~1health/get
+    https://docs.blockfrost.io/#tag/health/GET/health
 
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
@@ -27,7 +27,7 @@ def clock(self, **kwargs):
     """
     This endpoint provides the current UNIX time. Your application might use this to verify if the client clock is not out of sync.
 
-    https://docs.blockfrost.io/#tag/Health/paths/~1health~1clock/get
+    https://docs.blockfrost.io/#tag/health/GET/health/clock
 
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str

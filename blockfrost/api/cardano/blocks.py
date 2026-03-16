@@ -7,7 +7,7 @@ def block_latest(self, **kwargs):
     """
     Return the latest block available to the backends, also known as the tip of the blockchain.
 
-    https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1latest/get
+    https://docs.blockfrost.io/#tag/cardano--blocks/GET/blocks/latest
 
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
@@ -27,7 +27,7 @@ def block_latest_transactions(self, **kwargs):
     """
     Return the transactions within the latest block.
 
-    https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1latest~1txs/get
+    https://docs.blockfrost.io/#tag/cardano--blocks/GET/blocks/latest/txs
 
     :param gather_pages: Optional. Default: false. Will collect all pages into one return
     :type gather_pages: bool
@@ -54,7 +54,7 @@ def block(self, hash_or_number: str, **kwargs):
     """
     Return the content of a requested block.
 
-    https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1{hash_or_number}/get
+    https://docs.blockfrost.io/#tag/cardano--blocks/GET/blocks/{hash_or_number}
 
     :param hash_or_number: Hash or number of the requested block.
     :type hash_or_number: str
@@ -76,7 +76,7 @@ def block_slot(self, slot_number: int, **kwargs):
     """
     Return the content of a requested block for a specific slot.
 
-    https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1slot~1{slot_number}/get
+    https://docs.blockfrost.io/#tag/cardano--blocks/GET/blocks/slot/{slot_number}
 
     :param slot_number: Slot position for requested block.
     :type slot_number: int
@@ -98,7 +98,7 @@ def block_epoch_slot(self, epoch_number: int, slot_number: int, **kwargs):
     """
     Return the content of a requested block for a specific slot in an epoch.
 
-    https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1epoch~1{epoch_number}~1slot~1{slot_number}/get
+    https://docs.blockfrost.io/#tag/cardano--blocks/GET/blocks/epoch/{epoch_number}/slot/{slot_number}
 
     :param epoch_number: Epoch for specific epoch slot.
     :type epoch_number: int
@@ -122,7 +122,7 @@ def blocks_next(self, hash_or_number: str, **kwargs):
     """
     Return the list of blocks following a specific block.
 
-    https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1{hash_or_number}~1next/get
+    https://docs.blockfrost.io/#tag/cardano--blocks/GET/blocks/{hash_or_number}/next
 
     :param hash_or_number: Hash or number of the requested block.
     :type hash_or_number: str
@@ -151,7 +151,7 @@ def blocks_previous(self, hash_or_number: str, **kwargs):
     """
     Return the list of blocks preceding a specific block.
 
-    https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1{hash_or_number}~1previous/get
+    https://docs.blockfrost.io/#tag/cardano--blocks/GET/blocks/{hash_or_number}/previous
 
     :param hash_or_number: Hash or number of the requested block.
     :type hash_or_number: str
@@ -180,7 +180,7 @@ def block_transactions(self, hash_or_number: str, **kwargs):
     """
     Return the transactions within the block.
 
-    https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1{hash_or_number}~1txs/get
+    https://docs.blockfrost.io/#tag/cardano--blocks/GET/blocks/{hash_or_number}/txs
 
     :param hash_or_number: Hash or number of the requested block.
     :type hash_or_number: str
@@ -209,7 +209,7 @@ def block_latest_transactions_cbor(self, **kwargs):
     """
     Return the transactions within the latest block in CBOR format.
 
-    https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1latest~1txs~1cbor/get
+    https://docs.blockfrost.io/#tag/cardano--blocks/GET/blocks/latest/txs/cbor
 
     :param gather_pages: Optional. Default: false. Will collect all pages into one return
     :type gather_pages: bool
@@ -236,7 +236,7 @@ def block_transactions_cbor(self, hash_or_number: str, **kwargs):
     """
     Return the transactions within the block in CBOR format.
 
-    https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1{hash_or_number}~1txs~1cbor/get
+    https://docs.blockfrost.io/#tag/cardano--blocks/GET/blocks/{hash_or_number}/txs/cbor
 
     :param hash_or_number: Hash or number of the requested block.
     :type hash_or_number: str
@@ -265,7 +265,7 @@ def blocks_addresses(self, hash_or_number: str, **kwargs):
     """
     Return list of addresses affected in the specified block with additional information, sorted by the bech32 address, ascending.
 
-    https://docs.blockfrost.io/#tag/Cardano-Blocks/paths/~1blocks~1{hash_or_number}~1addresses/get
+    https://docs.blockfrost.io/#tag/cardano--blocks/GET/blocks/{hash_or_number}/addresses
 
     :param hash_or_number: Hash or number of the requested block.
     :type hash_or_number: str

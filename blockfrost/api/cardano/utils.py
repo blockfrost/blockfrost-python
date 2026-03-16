@@ -7,7 +7,7 @@ def utils_addresses_xpub(self, xpub: str, role: int, index: int, **kwargs):
     """
     Derive Shelley address from an xpub
 
-    https://docs.blockfrost.io/#tag/Cardano-Utilities/paths/~1utils~1addresses~1xpub~1{xpub}~1{role}~1{index}/get
+    https://docs.blockfrost.io/#tag/cardano--utilities/GET/utils/addresses/xpub/{xpub}/{role}/{index}
 
     :param xpub: Hex xpub.
     :type xpub: str

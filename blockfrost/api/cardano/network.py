@@ -7,7 +7,7 @@ def network(self, **kwargs):
     """
     Return detailed network information.
 
-    https://docs.blockfrost.io/#tag/Cardano-Network/paths/~1network/get
+    https://docs.blockfrost.io/#tag/cardano--network/GET/network
 
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
@@ -27,7 +27,7 @@ def network_eras(self, **kwargs):
     """
     Return the information about network eras.
 
-    https://docs.blockfrost.io/#tag/Cardano-Network/paths/~1network~1eras/get
+    https://docs.blockfrost.io/#tag/cardano--network/GET/network/eras
 
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str

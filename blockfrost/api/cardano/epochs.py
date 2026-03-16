@@ -8,7 +8,7 @@ def epoch_latest(self, **kwargs):
     """
     Return the information about the latest, therefore current, epoch.
 
-    https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1latest/get
+    https://docs.blockfrost.io/#tag/cardano--epochs/GET/epochs/latest
 
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
@@ -28,7 +28,7 @@ def epoch_latest_parameters(self, **kwargs):
     """
     Return the protocol parameters for the latest epoch.
 
-    https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1latest~1parameters/get
+    https://docs.blockfrost.io/#tag/cardano--epochs/GET/epochs/latest/parameters
 
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
@@ -48,7 +48,7 @@ def epoch(self, number: int, **kwargs):
     """
     Return the content of the requested epoch.
 
-    https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1{number}/get
+    https://docs.blockfrost.io/#tag/cardano--epochs/GET/epochs/{number}
 
     :param number: Number of the epoch.
     :type number: int
@@ -70,7 +70,7 @@ def epochs_next(self, number: int, **kwargs):
     """
     Return the list of epochs following a specific epoch.
 
-    https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1{number}~1next/get
+    https://docs.blockfrost.io/#tag/cardano--epochs/GET/epochs/{number}/next
 
     :param number: Number of the epoch.
     :type number: int
@@ -99,7 +99,7 @@ def epochs_previous(self, number: int, **kwargs):
     """
     Return the list of epochs preceding a specific epoch.
 
-    https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1{number}~1previous/get
+    https://docs.blockfrost.io/#tag/cardano--epochs/GET/epochs/{number}/previous
 
     :param number: Number of the epoch.
     :type number: int
@@ -128,7 +128,7 @@ def epoch_stakes(self, number: int, **kwargs):
     """
     Return the active stake distribution for the specified epoch.
 
-    https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1{number}~1stakes/get
+    https://docs.blockfrost.io/#tag/cardano--epochs/GET/epochs/{number}/stakes
 
     :param number: Number of the epoch.
     :type number: int
@@ -157,7 +157,7 @@ def epoch_pool_stakes(self, number: int, pool_id: str, **kwargs):
     """
     Return the active stake distribution for the epoch specified by stake pool.
 
-    https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1{number}~1stakes~1{pool_id}/get
+    https://docs.blockfrost.io/#tag/cardano--epochs/GET/epochs/{number}/stakes/{pool_id}
 
     :param number: Number of the epoch.
     :type number: int
@@ -188,7 +188,7 @@ def epoch_blocks(self, number: int, **kwargs):
     """
     Return the blocks minted for the epoch specified.
 
-    https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1{number}~1blocks/get
+    https://docs.blockfrost.io/#tag/cardano--epochs/GET/epochs/{number}/blocks
 
     :param number: Number of the epoch.
     :type number: int
@@ -217,7 +217,7 @@ def epoch_pool_blocks(self, number: int, pool_id: str, **kwargs):
     """
     Return the block minted for the epoch specified by stake pool.
 
-    https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1{number}~1blocks~1{pool_id}/get
+    https://docs.blockfrost.io/#tag/cardano--epochs/GET/epochs/{number}/blocks/{pool_id}
 
     :param number: Number of the epoch.
     :type number: int
@@ -248,7 +248,7 @@ def epoch_protocol_parameters(self, number: int, **kwargs):
     """
     Return the protocol parameters for the epoch specified.
 
-    https://docs.blockfrost.io/#tag/Cardano-Epochs/paths/~1epochs~1{number}~1parameters/get
+    https://docs.blockfrost.io/#tag/cardano--epochs/GET/epochs/{number}/parameters
 
     :param number: Number of the epoch.
     :type number: int

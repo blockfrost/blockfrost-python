@@ -7,7 +7,7 @@ def scripts(self, **kwargs):
     """
     List of scripts.
 
-    https://docs.blockfrost.io/#tag/Cardano-Scripts/paths/~1scripts/get
+    https://docs.blockfrost.io/#tag/cardano--scripts/GET/scripts
 
     :param return_type: Optional. "object", "json" or "pandas". Default: "object".
     :type return_type: str
@@ -36,7 +36,7 @@ def script(self, script_hash: str, **kwargs):
     """
     Information about a specific script.
 
-    https://docs.blockfrost.io/#tag/Cardano-Scripts/paths/~1scripts~1{script_hash}/get
+    https://docs.blockfrost.io/#tag/cardano--scripts/GET/scripts/{script_hash}
 
     :param script_hash: Hash of the script.
     :type script_hash: str
@@ -58,7 +58,7 @@ def script_json(self, script_hash: str, **kwargs):
     """
     JSON representation of a timelock script.
 
-    https://docs.blockfrost.io/#tag/Cardano-Scripts/paths/~1scripts~1{script_hash}~1json/get
+    https://docs.blockfrost.io/#tag/cardano--scripts/GET/scripts/{script_hash}/json
 
     :param script_hash: Hash of the script.
     :type script_hash: str
@@ -80,7 +80,7 @@ def script_cbor(self, script_hash: str, **kwargs):
     """
     CBOR representation of a plutus script
 
-    https://docs.blockfrost.io/#tag/Cardano-Scripts/paths/~1scripts~1{script_hash}~1cbor/get
+    https://docs.blockfrost.io/#tag/cardano--scripts/GET/scripts/{script_hash}/cbor
 
     :param script_hash: Hash of the script.
     :type script_hash: str
@@ -102,7 +102,7 @@ def script_redeemers(self, script_hash: str, **kwargs):
     """
     List of redeemers of a specific script.
 
-    https://docs.blockfrost.io/#tag/Cardano-Scripts/paths/~1scripts~1{script_hash}~1redeemers/get
+    https://docs.blockfrost.io/#tag/cardano--scripts/GET/scripts/{script_hash}/redeemers
 
     :param script_hash: Hash of the script.
     :type script_hash: str
@@ -133,7 +133,7 @@ def script_datum(self, datum_hash: str, **kwargs):
     """
     Query JSON value of a datum by its hash.
 
-    https://docs.blockfrost.io/#tag/Cardano-Scripts/paths/~1scripts~1datum~1{datum_hash}/get
+    https://docs.blockfrost.io/#tag/cardano--scripts/GET/scripts/datum/{datum_hash}
 
     :param datum_hash: Hash of the datum.
     :type datum_hash: str
@@ -154,7 +154,7 @@ def script_datum_cbor(self, datum_hash: str, **kwargs):
     """
     Query CBOR value of a datum by its hash.
 
-    https://docs.blockfrost.io/#tag/Cardano-Scripts/paths/~1scripts~1datum~1{datum_hash}~1cbor/get
+    https://docs.blockfrost.io/#tag/cardano--scripts/GET/scripts/datum/{datum_hash}/cbor
 
     :param datum_hash: Hash of the datum.
     :type datum_hash: str
